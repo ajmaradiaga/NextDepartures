@@ -156,7 +156,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timetable" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="timetable" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="Next Departures" id="d2S-hO-8uL">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jmQ-gQ-Je7"/>
                         <barButtonItem key="rightBarButtonItem" image="refresh" id="25b-Yb-5dW">
@@ -336,7 +336,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="vHJ-Uo-6MR" secondAttribute="trailing" constant="-16" id="qvC-ei-aZO"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="zUa-js-wbP"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="timetable" id="zUa-js-wbP"/>
                     <navigationItem key="navigationItem" title="8" id="pbb-oC-WSb"/>
                     <connections>
                         <outlet property="routeMap" destination="vHJ-Uo-6MR" id="VnX-7R-43k"/>
@@ -348,7 +348,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
         <image name="location" width="24" height="24"/>
         <image name="refresh" width="24" height="26"/>
         <image name="timetable" width="26" height="21"/>
