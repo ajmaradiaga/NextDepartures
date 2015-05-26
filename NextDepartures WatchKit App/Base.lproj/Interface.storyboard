@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Next Departures-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Next Departures" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="NextDepartures_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <imageView alignment="center" verticalAlignment="center" hidden="YES" image="spinner1" id="mqa-ik-7bZ"/>
+                        <table alignment="left" id="dGg-ly-6A1">
+                            <items>
+                                <tableRow identifier="TimetableRow" id="nBX-jW-bDU" customClass="TimetableRow" customModule="NextDepartures_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="72.5" alignment="left" layout="vertical" id="q6r-Jh-b97">
+                                        <items>
+                                            <group width="1" alignment="left" id="GQq-QJ-NV8">
+                                                <items>
+                                                    <imageView width="33" height="30" alignment="left" id="Yfe-bw-YF1"/>
+                                                    <label width="136" height="30" alignment="left" text="Label" id="Hy8-bS-cF9">
+                                                        <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <label alignment="left" text="Label" id="IOL-o3-KeP">
+                                                <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            </label>
+                                            <label alignment="left" text="Label" minimumScaleFactor="0.50000000000000011" id="BfV-s7-SmD">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="mainLabel" destination="Hy8-bS-cF9" id="Ted-Wk-KUj"/>
+                                        <outlet property="secondarySubLabel" destination="BfV-s7-SmD" id="smx-Yb-UYJ"/>
+                                        <outlet property="subLabel" destination="IOL-o3-KeP" id="bEh-3T-eFU"/>
+                                        <outlet property="transportImage" destination="Yfe-bw-YF1" id="nK9-I0-6zb"/>
+                                        <segue destination="zRh-4a-bOP" kind="push" identifier="TimetableDetailSegue" id="s5a-fc-RaV"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="activityIndicatorImage" destination="mqa-ik-7bZ" id="KaT-Qk-emx"/>
+                        <outlet property="timetableTable" destination="dGg-ly-6A1" id="nyS-5v-pQG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="347"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="NextDepartures_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" layout="vertical" id="t8f-Gd-c4y">
+                            <items>
+                                <group width="1" height="29" alignment="left" id="dDC-9S-RFR">
+                                    <items>
+                                        <imageView width="30" height="30" alignment="left" id="N2e-PZ-xYH"/>
+                                        <label width="136" height="32" alignment="left" numberOfLines="2" id="nQl-CZ-qcZ">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="left" minimumScaleFactor="0.80000000000000004" id="uQT-mZ-bc5">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group alignment="left" id="uCw-4Q-Ouw">
+                            <items>
+                                <map height="100" alignment="left" id="9sb-48-uz2"/>
+                            </items>
+                        </group>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="glanceMapView" destination="9sb-48-uz2" id="T4O-1C-lgn"/>
+                        <outlet property="mainTextLabel" destination="nQl-CZ-qcZ" id="4jk-lI-n5Y"/>
+                        <outlet property="subTextLabel" destination="uQT-mZ-bc5" id="vJC-1l-4uC"/>
+                        <outlet property="transportTypeImageView" destination="N2e-PZ-xYH" id="wKV-CV-RR8"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="672"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="NextDepartures_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+        <!--Timetable Detail Interface Controller-->
+        <scene sceneID="Hr2-J2-SbY">
+            <objects>
+                <controller id="zRh-4a-bOP" customClass="TimetableDetailInterfaceController" customModule="NextDepartures_WatchKit_Extension">
+                    <items>
+                        <group width="136" height="49" alignment="left" layout="vertical" id="Mf5-rT-AqP">
+                            <items>
+                                <group width="1" height="29" alignment="left" id="kh6-aW-CyP">
+                                    <items>
+                                        <imageView width="30" height="30" alignment="left" id="p6A-72-m2m"/>
+                                        <label width="136" height="32" alignment="left" numberOfLines="2" id="qLz-DZ-IqK">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="left" minimumScaleFactor="0.80000000000000004" id="Jxa-t9-JFl">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group alignment="left" id="Qb7-jz-5WW">
+                            <items>
+                                <map height="100" alignment="left" id="GqY-bj-MiE"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="detailMapView" destination="GqY-bj-MiE" id="VYM-gN-kDb"/>
+                        <outlet property="mainTextLabel" destination="qLz-DZ-IqK" id="Xyc-7J-UVq"/>
+                        <outlet property="subTextLabel" destination="Jxa-t9-JFl" id="ZOD-ES-vn4"/>
+                        <outlet property="transportTypeImageView" destination="p6A-72-m2m" id="9y7-gP-URf"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="525" y="192"/>
+        </scene>
+    </scenes>
+</document>

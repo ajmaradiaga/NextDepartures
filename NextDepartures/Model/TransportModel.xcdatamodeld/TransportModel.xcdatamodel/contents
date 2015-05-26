@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Direction" representedClassName="Direction" syncable="YES">
+        <attribute name="directionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="directionName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lineDirectionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="directions" inverseEntity="Line" syncable="YES"/>
+        <relationship name="runs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Timetable" inverseName="lineDirection" inverseEntity="Timetable" syncable="YES"/>
+    </entity>
+    <entity name="Line" representedClassName="Line" syncable="YES">
+        <attribute name="lineId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lineName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lineNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transportType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="directions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Direction" inverseName="line" inverseEntity="Direction" syncable="YES"/>
+        <relationship name="runs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Timetable" inverseName="line" inverseEntity="Timetable" syncable="YES"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Stops" inverseName="line" inverseEntity="Stops" syncable="YES"/>
+    </entity>
+    <entity name="Stops" representedClassName="Stops" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stopId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="suburb" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transportType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="stops" inverseEntity="Line" syncable="YES"/>
+        <relationship name="timetable" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Timetable" inverseName="stop" inverseEntity="Timetable" syncable="YES"/>
+        <relationship name="trackingStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackingStop" inverseName="stop" inverseEntity="TrackingStop" syncable="YES"/>
+    </entity>
+    <entity name="Timetable" representedClassName="Timetable" syncable="YES">
+        <attribute name="destinationId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="destinationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="runId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timeUTC" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="transportType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="runs" inverseEntity="Line" syncable="YES"/>
+        <relationship name="lineDirection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Direction" inverseName="runs" inverseEntity="Direction" syncable="YES"/>
+        <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stops" inverseName="timetable" inverseEntity="Stops" syncable="YES"/>
+    </entity>
+    <entity name="TrackingStop" representedClassName="TrackingStop" syncable="YES">
+        <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="trackingDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stops" inverseName="trackingStop" inverseEntity="Stops" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Direction" positionX="-54" positionY="81" width="128" height="120"/>
+        <element name="Line" positionX="-36" positionY="81" width="128" height="150"/>
+        <element name="Stops" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Timetable" positionX="-54" positionY="36" width="128" height="165"/>
+        <element name="TrackingStop" positionX="-54" positionY="90" width="128" height="90"/>
+    </elements>
+</model>

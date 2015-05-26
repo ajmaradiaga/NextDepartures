@@ -7,13 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B4811301B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */; };
+		6B4811351B119A2200FD4A7F /* TimetableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4811341B119A2200FD4A7F /* TimetableRow.swift */; };
 		6B9BE2671B103EDE001A135B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2661B103EDE001A135B /* AppDelegate.swift */; };
-		6B9BE2691B103EDE001A135B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2681B103EDE001A135B /* FirstViewController.swift */; };
-		6B9BE26B1B103EDE001A135B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE26A1B103EDE001A135B /* SecondViewController.swift */; };
 		6B9BE26E1B103EDE001A135B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE26C1B103EDE001A135B /* Main.storyboard */; };
 		6B9BE2701B103EDE001A135B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE26F1B103EDE001A135B /* Images.xcassets */; };
 		6B9BE2731B103EDE001A135B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE2711B103EDE001A135B /* LaunchScreen.xib */; };
 		6B9BE27F1B103EDE001A135B /* NextDeparturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE27E1B103EDE001A135B /* NextDeparturesTests.swift */; };
+		6B9BE2A21B103EFA001A135B /* StopRouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2891B103EFA001A135B /* StopRouteDetailsViewController.swift */; };
+		6B9BE2A31B103EFA001A135B /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE28A1B103EFA001A135B /* TimetableViewController.swift */; };
+		6B9BE2A41B103EFA001A135B /* TrackingStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE28B1B103EFA001A135B /* TrackingStopsViewController.swift */; };
+		6B9BE2A51B103EFA001A135B /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE28F1B103EFA001A135B /* NetworkHelper.swift */; };
+		6B9BE2A61B103EFA001A135B /* PTVClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2911B103EFA001A135B /* PTVClient.swift */; };
+		6B9BE2A71B103EFA001A135B /* PTVConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2921B103EFA001A135B /* PTVConstants.swift */; };
+		6B9BE2A81B103EFA001A135B /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2931B103EFA001A135B /* CoreDataStackManager.swift */; };
+		6B9BE2A91B103EFA001A135B /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2941B103EFA001A135B /* Direction.swift */; };
+		6B9BE2AA1B103EFA001A135B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2951B103EFA001A135B /* Helper.swift */; };
+		6B9BE2AB1B103EFA001A135B /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2961B103EFA001A135B /* Line.swift */; };
+		6B9BE2AC1B103EFA001A135B /* Stops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2971B103EFA001A135B /* Stops.swift */; };
+		6B9BE2AD1B103EFA001A135B /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2981B103EFA001A135B /* Timetable.swift */; };
+		6B9BE2AE1B103EFA001A135B /* TrackingStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2991B103EFA001A135B /* TrackingStop.swift */; };
+		6B9BE2AF1B103EFA001A135B /* TransportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE29A1B103EFA001A135B /* TransportManager.swift */; };
+		6B9BE2B01B103EFA001A135B /* TransportModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE29B1B103EFA001A135B /* TransportModel.xcdatamodeld */; };
+		6B9BE2B11B103EFA001A135B /* DepartureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE29E1B103EFA001A135B /* DepartureTableViewCell.swift */; };
+		6B9BE2B21B103EFA001A135B /* StopAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE29F1B103EFA001A135B /* StopAnnotation.swift */; };
+		6B9BE2B31B103EFA001A135B /* TrackingStopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2A01B103EFA001A135B /* TrackingStopTableViewCell.swift */; };
+		6B9BE2B41B103EFA001A135B /* HMACAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2A11B103EFA001A135B /* HMACAlgorithm.swift */; };
+		6B9BE2BF1B103F19001A135B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2BE1B103F19001A135B /* InterfaceController.swift */; };
+		6B9BE2C11B103F19001A135B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2C01B103F19001A135B /* NotificationController.swift */; };
+		6B9BE2C31B103F19001A135B /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2C21B103F19001A135B /* GlanceController.swift */; };
+		6B9BE2C51B103F19001A135B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE2C41B103F19001A135B /* Images.xcassets */; };
+		6B9BE2C91B103F19001A135B /* NextDepartures WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE2C81B103F19001A135B /* NextDepartures WatchKit App.app */; };
+		6B9BE2D11B103F19001A135B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE2CF1B103F19001A135B /* Interface.storyboard */; };
+		6B9BE2D31B103F19001A135B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9BE2D21B103F19001A135B /* Images.xcassets */; };
+		6B9BE2D61B103F19001A135B /* NextDepartures WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6B9BE2B91B103F19001A135B /* NextDepartures WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6BB799A31B12E0EB0094E733 /* NextDeparturesFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; };
+		6BB799AC1B12E0EB0094E733 /* NextDeparturesFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799AB1B12E0EB0094E733 /* NextDeparturesFrameworkTests.swift */; };
+		6BB799AF1B12E0EB0094E733 /* NextDeparturesFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; };
+		6BB799B11B12E0EB0094E733 /* NextDeparturesFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6BB799B91B12E1390094E733 /* TimetableCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799B81B12E1390094E733 /* TimetableCommon.swift */; };
+		6BB799BA1B12E27A0094E733 /* NextDeparturesFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; };
+		6BB799BE1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799BD1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift */; };
+		6BB799C01B1436600094E733 /* DataExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799BF1B1436600094E733 /* DataExchange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,20 +59,127 @@
 			remoteGlobalIDString = 6B9BE2601B103EDE001A135B;
 			remoteInfo = NextDepartures;
 		};
+		6B9BE2CA1B103F19001A135B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B9BE2C71B103F19001A135B;
+			remoteInfo = "NextDepartures WatchKit App";
+		};
+		6B9BE2D41B103F19001A135B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B9BE2B81B103F19001A135B;
+			remoteInfo = "NextDepartures WatchKit Extension";
+		};
+		6BB799A41B12E0EB0094E733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BB799971B12E0EB0094E733;
+			remoteInfo = NextDeparturesFramework;
+		};
+		6BB799A61B12E0EB0094E733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B9BE2601B103EDE001A135B;
+			remoteInfo = NextDepartures;
+		};
+		6BB799AD1B12E0EB0094E733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BB799971B12E0EB0094E733;
+			remoteInfo = NextDeparturesFramework;
+		};
+		6BB799BB1B12E2840094E733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B9BE2591B103EDE001A135B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BB799971B12E0EB0094E733;
+			remoteInfo = NextDeparturesFramework;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6B9BE2DD1B103F19001A135B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6B9BE2D61B103F19001A135B /* NextDepartures WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB799B01B12E0EB0094E733 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6BB799B11B12E0EB0094E733 /* NextDeparturesFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MelbourneCBDtoStKilda.gpx; sourceTree = "<group>"; };
+		6B4811331B1053AF00FD4A7F /* MelbourneCBD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MelbourneCBD.gpx; sourceTree = "<group>"; };
+		6B4811341B119A2200FD4A7F /* TimetableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableRow.swift; sourceTree = "<group>"; };
 		6B9BE2611B103EDE001A135B /* NextDepartures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextDepartures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9BE2651B103EDE001A135B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B9BE2661B103EDE001A135B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6B9BE2681B103EDE001A135B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		6B9BE26A1B103EDE001A135B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		6B9BE26D1B103EDE001A135B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B9BE26F1B103EDE001A135B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6B9BE2721B103EDE001A135B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		6B9BE2781B103EDE001A135B /* NextDeparturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextDeparturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9BE27D1B103EDE001A135B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B9BE27E1B103EDE001A135B /* NextDeparturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextDeparturesTests.swift; sourceTree = "<group>"; };
+		6B9BE2891B103EFA001A135B /* StopRouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopRouteDetailsViewController.swift; sourceTree = "<group>"; };
+		6B9BE28A1B103EFA001A135B /* TimetableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		6B9BE28B1B103EFA001A135B /* TrackingStopsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingStopsViewController.swift; sourceTree = "<group>"; };
+		6B9BE28C1B103EFA001A135B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
+		6B9BE28F1B103EFA001A135B /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		6B9BE2911B103EFA001A135B /* PTVClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTVClient.swift; sourceTree = "<group>"; };
+		6B9BE2921B103EFA001A135B /* PTVConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTVConstants.swift; sourceTree = "<group>"; };
+		6B9BE2931B103EFA001A135B /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		6B9BE2941B103EFA001A135B /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		6B9BE2951B103EFA001A135B /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		6B9BE2961B103EFA001A135B /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		6B9BE2971B103EFA001A135B /* Stops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stops.swift; sourceTree = "<group>"; };
+		6B9BE2981B103EFA001A135B /* Timetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
+		6B9BE2991B103EFA001A135B /* TrackingStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingStop.swift; sourceTree = "<group>"; };
+		6B9BE29A1B103EFA001A135B /* TransportManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportManager.swift; sourceTree = "<group>"; };
+		6B9BE29C1B103EFA001A135B /* TransportModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransportModel.xcdatamodel; sourceTree = "<group>"; };
+		6B9BE29E1B103EFA001A135B /* DepartureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTableViewCell.swift; sourceTree = "<group>"; };
+		6B9BE29F1B103EFA001A135B /* StopAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopAnnotation.swift; sourceTree = "<group>"; };
+		6B9BE2A01B103EFA001A135B /* TrackingStopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingStopTableViewCell.swift; sourceTree = "<group>"; };
+		6B9BE2A11B103EFA001A135B /* HMACAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACAlgorithm.swift; sourceTree = "<group>"; };
+		6B9BE2B91B103F19001A135B /* NextDepartures WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "NextDepartures WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9BE2BC1B103F19001A135B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B9BE2BD1B103F19001A135B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		6B9BE2BE1B103F19001A135B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		6B9BE2C01B103F19001A135B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		6B9BE2C21B103F19001A135B /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		6B9BE2C41B103F19001A135B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6B9BE2C81B103F19001A135B /* NextDepartures WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NextDepartures WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9BE2CE1B103F19001A135B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B9BE2D01B103F19001A135B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		6B9BE2D21B103F19001A135B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NextDeparturesFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BB7999B1B12E0EB0094E733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BB799A21B12E0EB0094E733 /* NextDeparturesFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextDeparturesFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BB799AA1B12E0EB0094E733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BB799AB1B12E0EB0094E733 /* NextDeparturesFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextDeparturesFrameworkTests.swift; sourceTree = "<group>"; };
+		6BB799B81B12E1390094E733 /* TimetableCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCommon.swift; sourceTree = "<group>"; };
+		6BB799BD1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableDetailInterfaceController.swift; sourceTree = "<group>"; };
+		6BB799BF1B1436600094E733 /* DataExchange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExchange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BB799AF1B12E0EB0094E733 /* NextDeparturesFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,14 +198,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6B9BE2B61B103F19001A135B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB799BA1B12E27A0094E733 /* NextDeparturesFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB799941B12E0EB0094E733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB7999F1B12E0EB0094E733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB799A31B12E0EB0094E733 /* NextDeparturesFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6B9BE2581B103EDE001A135B = {
 			isa = PBXGroup;
 			children = (
+				6B4811331B1053AF00FD4A7F /* MelbourneCBD.gpx */,
+				6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */,
 				6B9BE2631B103EDE001A135B /* NextDepartures */,
 				6B9BE27B1B103EDE001A135B /* NextDeparturesTests */,
+				6B9BE2BA1B103F19001A135B /* NextDepartures WatchKit Extension */,
+				6B9BE2CC1B103F19001A135B /* NextDepartures WatchKit App */,
+				6BB799991B12E0EB0094E733 /* NextDeparturesFramework */,
+				6BB799A81B12E0EB0094E733 /* NextDeparturesFrameworkTests */,
 				6B9BE2621B103EDE001A135B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +244,10 @@
 			children = (
 				6B9BE2611B103EDE001A135B /* NextDepartures.app */,
 				6B9BE2781B103EDE001A135B /* NextDeparturesTests.xctest */,
+				6B9BE2B91B103F19001A135B /* NextDepartures WatchKit Extension.appex */,
+				6B9BE2C81B103F19001A135B /* NextDepartures WatchKit App.app */,
+				6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */,
+				6BB799A21B12E0EB0094E733 /* NextDeparturesFrameworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,9 +255,12 @@
 		6B9BE2631B103EDE001A135B /* NextDepartures */ = {
 			isa = PBXGroup;
 			children = (
+				6B9BE2881B103EFA001A135B /* Controller */,
+				6B9BE28D1B103EFA001A135B /* Model */,
+				6B9BE29D1B103EFA001A135B /* View */,
+				6B9BE2A11B103EFA001A135B /* HMACAlgorithm.swift */,
+				6B9BE28C1B103EFA001A135B /* -Bridging-Header.h */,
 				6B9BE2661B103EDE001A135B /* AppDelegate.swift */,
-				6B9BE2681B103EDE001A135B /* FirstViewController.swift */,
-				6B9BE26A1B103EDE001A135B /* SecondViewController.swift */,
 				6B9BE26C1B103EDE001A135B /* Main.storyboard */,
 				6B9BE26F1B103EDE001A135B /* Images.xcassets */,
 				6B9BE2711B103EDE001A135B /* LaunchScreen.xib */,
@@ -115,7 +294,148 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6B9BE2881B103EFA001A135B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2891B103EFA001A135B /* StopRouteDetailsViewController.swift */,
+				6B9BE28A1B103EFA001A135B /* TimetableViewController.swift */,
+				6B9BE28B1B103EFA001A135B /* TrackingStopsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6B9BE28D1B103EFA001A135B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE28E1B103EFA001A135B /* Clients */,
+				6B9BE2931B103EFA001A135B /* CoreDataStackManager.swift */,
+				6B9BE2941B103EFA001A135B /* Direction.swift */,
+				6B9BE2951B103EFA001A135B /* Helper.swift */,
+				6B9BE2961B103EFA001A135B /* Line.swift */,
+				6B9BE2971B103EFA001A135B /* Stops.swift */,
+				6B9BE2981B103EFA001A135B /* Timetable.swift */,
+				6B9BE2991B103EFA001A135B /* TrackingStop.swift */,
+				6B9BE29A1B103EFA001A135B /* TransportManager.swift */,
+				6B9BE29B1B103EFA001A135B /* TransportModel.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B9BE28E1B103EFA001A135B /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE28F1B103EFA001A135B /* NetworkHelper.swift */,
+				6B9BE2901B103EFA001A135B /* PTV */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		6B9BE2901B103EFA001A135B /* PTV */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2911B103EFA001A135B /* PTVClient.swift */,
+				6B9BE2921B103EFA001A135B /* PTVConstants.swift */,
+			);
+			path = PTV;
+			sourceTree = "<group>";
+		};
+		6B9BE29D1B103EFA001A135B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE29E1B103EFA001A135B /* DepartureTableViewCell.swift */,
+				6B9BE29F1B103EFA001A135B /* StopAnnotation.swift */,
+				6B9BE2A01B103EFA001A135B /* TrackingStopTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B9BE2BA1B103F19001A135B /* NextDepartures WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2BE1B103F19001A135B /* InterfaceController.swift */,
+				6B9BE2C01B103F19001A135B /* NotificationController.swift */,
+				6B9BE2C21B103F19001A135B /* GlanceController.swift */,
+				6B9BE2C41B103F19001A135B /* Images.xcassets */,
+				6B9BE2BB1B103F19001A135B /* Supporting Files */,
+				6B4811341B119A2200FD4A7F /* TimetableRow.swift */,
+				6BB799BD1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift */,
+			);
+			path = "NextDepartures WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		6B9BE2BB1B103F19001A135B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2BC1B103F19001A135B /* Info.plist */,
+				6B9BE2BD1B103F19001A135B /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B9BE2CC1B103F19001A135B /* NextDepartures WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2CF1B103F19001A135B /* Interface.storyboard */,
+				6B9BE2D21B103F19001A135B /* Images.xcassets */,
+				6B9BE2CD1B103F19001A135B /* Supporting Files */,
+			);
+			path = "NextDepartures WatchKit App";
+			sourceTree = "<group>";
+		};
+		6B9BE2CD1B103F19001A135B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BE2CE1B103F19001A135B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6BB799991B12E0EB0094E733 /* NextDeparturesFramework */ = {
+			isa = PBXGroup;
+			children = (
+				6BB7999A1B12E0EB0094E733 /* Supporting Files */,
+				6BB799B81B12E1390094E733 /* TimetableCommon.swift */,
+				6BB799BF1B1436600094E733 /* DataExchange.swift */,
+			);
+			path = NextDeparturesFramework;
+			sourceTree = "<group>";
+		};
+		6BB7999A1B12E0EB0094E733 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6BB7999B1B12E0EB0094E733 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6BB799A81B12E0EB0094E733 /* NextDeparturesFrameworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				6BB799AB1B12E0EB0094E733 /* NextDeparturesFrameworkTests.swift */,
+				6BB799A91B12E0EB0094E733 /* Supporting Files */,
+			);
+			path = NextDeparturesFrameworkTests;
+			sourceTree = "<group>";
+		};
+		6BB799A91B12E0EB0094E733 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6BB799AA1B12E0EB0094E733 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6BB799951B12E0EB0094E733 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		6B9BE2601B103EDE001A135B /* NextDepartures */ = {
@@ -125,10 +445,14 @@
 				6B9BE25D1B103EDE001A135B /* Sources */,
 				6B9BE25E1B103EDE001A135B /* Frameworks */,
 				6B9BE25F1B103EDE001A135B /* Resources */,
+				6B9BE2DD1B103F19001A135B /* Embed App Extensions */,
+				6BB799B01B12E0EB0094E733 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6B9BE2D51B103F19001A135B /* PBXTargetDependency */,
+				6BB799AE1B12E0EB0094E733 /* PBXTargetDependency */,
 			);
 			name = NextDepartures;
 			productName = NextDepartures;
@@ -153,6 +477,77 @@
 			productReference = 6B9BE2781B103EDE001A135B /* NextDeparturesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6B9BE2B81B103F19001A135B /* NextDepartures WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B9BE2DA1B103F19001A135B /* Build configuration list for PBXNativeTarget "NextDepartures WatchKit Extension" */;
+			buildPhases = (
+				6B9BE2B51B103F19001A135B /* Sources */,
+				6B9BE2B61B103F19001A135B /* Frameworks */,
+				6B9BE2B71B103F19001A135B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6BB799BC1B12E2840094E733 /* PBXTargetDependency */,
+				6B9BE2CB1B103F19001A135B /* PBXTargetDependency */,
+			);
+			name = "NextDepartures WatchKit Extension";
+			productName = "NextDepartures WatchKit Extension";
+			productReference = 6B9BE2B91B103F19001A135B /* NextDepartures WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		6B9BE2C71B103F19001A135B /* NextDepartures WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B9BE2D71B103F19001A135B /* Build configuration list for PBXNativeTarget "NextDepartures WatchKit App" */;
+			buildPhases = (
+				6B9BE2C61B103F19001A135B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NextDepartures WatchKit App";
+			productName = "NextDepartures WatchKit App";
+			productReference = 6B9BE2C81B103F19001A135B /* NextDepartures WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+		6BB799971B12E0EB0094E733 /* NextDeparturesFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BB799B21B12E0EB0094E733 /* Build configuration list for PBXNativeTarget "NextDeparturesFramework" */;
+			buildPhases = (
+				6BB799931B12E0EB0094E733 /* Sources */,
+				6BB799941B12E0EB0094E733 /* Frameworks */,
+				6BB799951B12E0EB0094E733 /* Headers */,
+				6BB799961B12E0EB0094E733 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NextDeparturesFramework;
+			productName = NextDeparturesFramework;
+			productReference = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6BB799A11B12E0EB0094E733 /* NextDeparturesFrameworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BB799B51B12E0EB0094E733 /* Build configuration list for PBXNativeTarget "NextDeparturesFrameworkTests" */;
+			buildPhases = (
+				6BB7999E1B12E0EB0094E733 /* Sources */,
+				6BB7999F1B12E0EB0094E733 /* Frameworks */,
+				6BB799A01B12E0EB0094E733 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6BB799A51B12E0EB0094E733 /* PBXTargetDependency */,
+				6BB799A71B12E0EB0094E733 /* PBXTargetDependency */,
+			);
+			name = NextDeparturesFrameworkTests;
+			productName = NextDeparturesFrameworkTests;
+			productReference = 6BB799A21B12E0EB0094E733 /* NextDeparturesFrameworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -164,8 +559,29 @@
 				TargetAttributes = {
 					6B9BE2601B103EDE001A135B = {
 						CreatedOnToolsVersion = 6.3.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					6B9BE2771B103EDE001A135B = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 6B9BE2601B103EDE001A135B;
+					};
+					6B9BE2B81B103F19001A135B = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					6B9BE2C71B103F19001A135B = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					6BB799971B12E0EB0094E733 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					6BB799A11B12E0EB0094E733 = {
 						CreatedOnToolsVersion = 6.3.2;
 						TestTargetID = 6B9BE2601B103EDE001A135B;
 					};
@@ -186,6 +602,10 @@
 			targets = (
 				6B9BE2601B103EDE001A135B /* NextDepartures */,
 				6B9BE2771B103EDE001A135B /* NextDeparturesTests */,
+				6B9BE2B81B103F19001A135B /* NextDepartures WatchKit Extension */,
+				6B9BE2C71B103F19001A135B /* NextDepartures WatchKit App */,
+				6BB799971B12E0EB0094E733 /* NextDeparturesFramework */,
+				6BB799A11B12E0EB0094E733 /* NextDeparturesFrameworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -198,10 +618,43 @@
 				6B9BE26E1B103EDE001A135B /* Main.storyboard in Resources */,
 				6B9BE2731B103EDE001A135B /* LaunchScreen.xib in Resources */,
 				6B9BE2701B103EDE001A135B /* Images.xcassets in Resources */,
+				6B4811301B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6B9BE2761B103EDE001A135B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B9BE2B71B103F19001A135B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B9BE2C91B103F19001A135B /* NextDepartures WatchKit App.app in Resources */,
+				6B9BE2C51B103F19001A135B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B9BE2C61B103F19001A135B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B9BE2D11B103F19001A135B /* Interface.storyboard in Resources */,
+				6B9BE2D31B103F19001A135B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB799961B12E0EB0094E733 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB799A01B12E0EB0094E733 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -215,9 +668,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B9BE26B1B103EDE001A135B /* SecondViewController.swift in Sources */,
+				6B9BE2B11B103EFA001A135B /* DepartureTableViewCell.swift in Sources */,
+				6B9BE2A51B103EFA001A135B /* NetworkHelper.swift in Sources */,
+				6B9BE2AC1B103EFA001A135B /* Stops.swift in Sources */,
+				6B9BE2A71B103EFA001A135B /* PTVConstants.swift in Sources */,
+				6B9BE2B21B103EFA001A135B /* StopAnnotation.swift in Sources */,
+				6B9BE2A81B103EFA001A135B /* CoreDataStackManager.swift in Sources */,
+				6B9BE2A21B103EFA001A135B /* StopRouteDetailsViewController.swift in Sources */,
+				6B9BE2AE1B103EFA001A135B /* TrackingStop.swift in Sources */,
+				6B9BE2A61B103EFA001A135B /* PTVClient.swift in Sources */,
+				6B9BE2A91B103EFA001A135B /* Direction.swift in Sources */,
+				6B9BE2AB1B103EFA001A135B /* Line.swift in Sources */,
+				6B9BE2B41B103EFA001A135B /* HMACAlgorithm.swift in Sources */,
+				6B9BE2B31B103EFA001A135B /* TrackingStopTableViewCell.swift in Sources */,
+				6B9BE2A31B103EFA001A135B /* TimetableViewController.swift in Sources */,
+				6B9BE2B01B103EFA001A135B /* TransportModel.xcdatamodeld in Sources */,
+				6B9BE2AF1B103EFA001A135B /* TransportManager.swift in Sources */,
+				6B9BE2A41B103EFA001A135B /* TrackingStopsViewController.swift in Sources */,
+				6B9BE2AD1B103EFA001A135B /* Timetable.swift in Sources */,
 				6B9BE2671B103EDE001A135B /* AppDelegate.swift in Sources */,
-				6B9BE2691B103EDE001A135B /* FirstViewController.swift in Sources */,
+				6B9BE2AA1B103EFA001A135B /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +699,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6B9BE2B51B103F19001A135B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B4811351B119A2200FD4A7F /* TimetableRow.swift in Sources */,
+				6B9BE2C11B103F19001A135B /* NotificationController.swift in Sources */,
+				6B9BE2BF1B103F19001A135B /* InterfaceController.swift in Sources */,
+				6BB799BE1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift in Sources */,
+				6B9BE2C31B103F19001A135B /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB799931B12E0EB0094E733 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB799C01B1436600094E733 /* DataExchange.swift in Sources */,
+				6BB799B91B12E1390094E733 /* TimetableCommon.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BB7999E1B12E0EB0094E733 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB799AC1B12E0EB0094E733 /* NextDeparturesFrameworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -236,6 +735,36 @@
 			isa = PBXTargetDependency;
 			target = 6B9BE2601B103EDE001A135B /* NextDepartures */;
 			targetProxy = 6B9BE2791B103EDE001A135B /* PBXContainerItemProxy */;
+		};
+		6B9BE2CB1B103F19001A135B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B9BE2C71B103F19001A135B /* NextDepartures WatchKit App */;
+			targetProxy = 6B9BE2CA1B103F19001A135B /* PBXContainerItemProxy */;
+		};
+		6B9BE2D51B103F19001A135B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B9BE2B81B103F19001A135B /* NextDepartures WatchKit Extension */;
+			targetProxy = 6B9BE2D41B103F19001A135B /* PBXContainerItemProxy */;
+		};
+		6BB799A51B12E0EB0094E733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BB799971B12E0EB0094E733 /* NextDeparturesFramework */;
+			targetProxy = 6BB799A41B12E0EB0094E733 /* PBXContainerItemProxy */;
+		};
+		6BB799A71B12E0EB0094E733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B9BE2601B103EDE001A135B /* NextDepartures */;
+			targetProxy = 6BB799A61B12E0EB0094E733 /* PBXContainerItemProxy */;
+		};
+		6BB799AE1B12E0EB0094E733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BB799971B12E0EB0094E733 /* NextDeparturesFramework */;
+			targetProxy = 6BB799AD1B12E0EB0094E733 /* PBXContainerItemProxy */;
+		};
+		6BB799BC1B12E2840094E733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BB799971B12E0EB0094E733 /* NextDeparturesFramework */;
+			targetProxy = 6BB799BB1B12E2840094E733 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -254,6 +783,14 @@
 				6B9BE2721B103EDE001A135B /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		6B9BE2CF1B103F19001A135B /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9BE2D01B103F19001A135B /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -299,6 +836,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/antoniomaradiaga/Documents/Code/Udacity/FinalProject/NextDepartures/NextDepartures/-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -336,6 +874,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/antoniomaradiaga/Documents/Code/Udacity/FinalProject/NextDepartures/NextDepartures/-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -394,6 +933,139 @@
 			};
 			name = Release;
 		};
+		6B9BE2D81B103F19001A135B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = NextDepartures_WatchKit_Extension;
+				INFOPLIST_FILE = "NextDepartures WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		6B9BE2D91B103F19001A135B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = NextDepartures_WatchKit_Extension;
+				INFOPLIST_FILE = "NextDepartures WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		6B9BE2DB1B103F19001A135B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NextDepartures WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6B9BE2DC1B103F19001A135B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "NextDepartures WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6BB799B31B12E0EB0094E733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NextDeparturesFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6BB799B41B12E0EB0094E733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = NextDeparturesFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6BB799B61B12E0EB0094E733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NextDeparturesFrameworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextDepartures.app/NextDepartures";
+			};
+			name = Debug;
+		};
+		6BB799B71B12E0EB0094E733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NextDeparturesFrameworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextDepartures.app/NextDepartures";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -413,6 +1085,7 @@
 				6B9BE2841B103EDE001A135B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6B9BE2851B103EDE001A135B /* Build configuration list for PBXNativeTarget "NextDeparturesTests" */ = {
 			isa = XCConfigurationList;
@@ -421,8 +1094,58 @@
 				6B9BE2871B103EDE001A135B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B9BE2D71B103F19001A135B /* Build configuration list for PBXNativeTarget "NextDepartures WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B9BE2D81B103F19001A135B /* Debug */,
+				6B9BE2D91B103F19001A135B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B9BE2DA1B103F19001A135B /* Build configuration list for PBXNativeTarget "NextDepartures WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B9BE2DB1B103F19001A135B /* Debug */,
+				6B9BE2DC1B103F19001A135B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BB799B21B12E0EB0094E733 /* Build configuration list for PBXNativeTarget "NextDeparturesFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BB799B31B12E0EB0094E733 /* Debug */,
+				6BB799B41B12E0EB0094E733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BB799B51B12E0EB0094E733 /* Build configuration list for PBXNativeTarget "NextDeparturesFrameworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BB799B61B12E0EB0094E733 /* Debug */,
+				6BB799B71B12E0EB0094E733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6B9BE29B1B103EFA001A135B /* TransportModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6B9BE29C1B103EFA001A135B /* TransportModel.xcdatamodel */,
+			);
+			currentVersion = 6B9BE29C1B103EFA001A135B /* TransportModel.xcdatamodel */;
+			path = TransportModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6B9BE2591B103EDE001A135B /* Project object */;
 }

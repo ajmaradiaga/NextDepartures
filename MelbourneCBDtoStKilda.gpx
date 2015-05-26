@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx
+xmlns="http://www.topografix.com/GPX/1/1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+version="1.1" 
+creator="gpx-poi.com">
+   <wpt lat="-37.814" lon="144.96332">
+      <name>Melbourne CBD</name>
+   </wpt>
+
+<!-- <wpt lat="" lon=""></wpt> -->
+
+    <wpt lat="-37.816692" lon="144.967132"></wpt>
+   <wpt lat="-37.818760" lon="144.968183"></wpt>
+   <wpt lat="-37.821235" lon="144.969320"></wpt>
+   <wpt lat="-37.825439" lon="144.971166"></wpt>
+   <wpt lat="-37.829201" lon="144.971423"></wpt>
+   
+   <wpt lat="-37.832286" lon="144.971638">
+       <name>Domain Interchange</name>
+   </wpt>
+   <wpt lat="-37.834489" lon="144.974213"></wpt>
+   <wpt lat="-37.839098" lon="144.976702"></wpt>
+   <wpt lat="-37.844656" lon="144.978633"></wpt>
+   <wpt lat="-37.847910" lon="144.979749"></wpt>
+   <wpt lat="-37.851773" lon="144.981208"></wpt>
+   <wpt lat="-37.855398" lon="144.982624">
+      <name>St. Kilda</name>
+   </wpt>
+</gpx>
