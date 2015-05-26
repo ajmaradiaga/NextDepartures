@@ -5,11 +5,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Timetable-->
+        <!--Map-->
         <scene sceneID="CyL-Nb-ddV">
             <objects>
                 <navigationController id="hAo-vc-f1j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Timetable" image="first" id="i8Z-s5-oIx"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="timetable" id="i8Z-s5-oIx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZX0-as-WsP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -179,7 +179,7 @@
         <scene sceneID="dUM-Sw-yDE">
             <objects>
                 <navigationController id="Sc4-Bn-Lex" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tracking" image="second" id="4y7-sO-0M0"/>
+                    <tabBarItem key="tabBarItem" title="Tracking" image="trackingStops" id="4y7-sO-0M0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WJR-zT-FEB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -280,7 +280,7 @@
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="zRf-mL-8Mc" secondAttribute="bottom" constant="-49" id="zln-om-i7D"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tracking" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Tracking" image="trackingStops" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Tracking Stops" id="rGO-Tf-5zq"/>
                     <connections>
                         <outlet property="trackingTableView" destination="zRf-mL-8Mc" id="0TG-L8-oag"/>
@@ -351,7 +351,8 @@
         <image name="first" width="30" height="30"/>
         <image name="location" width="24" height="24"/>
         <image name="refresh" width="24" height="26"/>
-        <image name="second" width="30" height="30"/>
+        <image name="timetable" width="26" height="21"/>
+        <image name="trackingStops" width="10" height="20"/>
         <image name="tram" width="88" height="120"/>
     </resources>
 </document>
