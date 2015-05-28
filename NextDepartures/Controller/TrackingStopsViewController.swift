@@ -112,8 +112,6 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
                 switch type {
                 case .Insert:
                     println("Insert item")
-                    //addPinToMap(location)
-                    //self.nextDeparturesTable.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
                 case .Update:
                     println("Update item")
                 case .Delete:

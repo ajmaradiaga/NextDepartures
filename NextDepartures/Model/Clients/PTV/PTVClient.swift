@@ -110,19 +110,12 @@ class PTVClient: NSObject{
                 var stopsResult = [Stops]()
                 
                 if let parsedResult: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) {
-                
-                var index = 0
-                self.stopsProcessed = 0
-                
-                for element in parsedResult  as! [NSDictionary] {
+                    var index = 0
+                    self.stopsProcessed = 0
                     
-                    if let result = element[Keys.Result] as? NSDictionary {
-                        /*
+                    for element in parsedResult  as! [NSDictionary] {
                         
-                        if TransportMode.Bus == TransportMode.transportModeFromString(result[Keys.TransportType] as! String) {
-                          */
-                           // println((result[Keys.Suburb] as! String) + " | " + (result[Keys.StopId] as! NSNumber).stringValue + " | " + (result[Keys.LocationName] as! String) + " | " + (result[Keys.TransportType] as! String))
-                            
+                        if let result = element[Keys.Result] as? NSDictionary {
                             index += 1
                             
                             let stopInformation: [String: AnyObject?] = [
@@ -139,7 +132,7 @@ class PTVClient: NSObject{
                             //println(location.distanceFromLocation(stop.location!))
                             
                             CoreDataStackManager.sharedInstance().saveContext()
-                        
+                            
                             stopsResult.append(stop)
                             
                             self.nextDeparturesForStop(stop, limit: 5, completionHandler: { (result, error) -> Void in
@@ -147,23 +140,20 @@ class PTVClient: NSObject{
                                 self.stopsProcessed += 1
                                 
                                 if self.stopsProcessed > 9 {
-                                        NSNotificationCenter.defaultCenter().postNotificationName("timeTableComplete", object: stop)
+                                    NSNotificationCenter.defaultCenter().postNotificationName("timeTableComplete", object: stop)
                                 } else {
                                     NSNotificationCenter.defaultCenter().postNotificationName("timeTablePartial", object: self.stopsProcessed)
                                 }
                             })
-                        /*} else {
-                            println("Ignoring \(result[Keys.TransportType] as! String)")
-                        }*/
-                    }
-                    if index > 9 {
-                        
-                        println("Finished processing all stops and timeTables")
-                        completionHandler(result: stopsResult, error: nil)
-                        return
+                        }
+                        if index > 9 {
+                            
+                            println("Finished processing all stops and timetables")
+                            completionHandler(result: stopsResult, error: nil)
+                            return
+                        }
                     }
                 }
-                } 
                 
                 if parsingError != nil {
                     completionHandler(result: nil, error: parsingError)
@@ -355,19 +345,15 @@ class PTVClient: NSObject{
         
         var fullURLString = "\(Constants.BaseURL)\(methodWithDevId)&signature=\(urlSignature.uppercaseString)"
         
-        println(fullURLString)
+        //println(fullURLString)
         
         return NSURL(string: fullURLString)!
     }
     
-    
+    //2014-02-28T05:24:25Z
+    //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     func currentDateInUTCString() -> String {
-        //let dateFormatter = NSDateFormatter()
-        //2014-02-28T05:24:25Z
-        //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        //dateFormatter.timeZone = NSTimeZone(name: "UTC")
         var currentDate = "\(Helper.currentDateFormatter.stringFromDate(NSDate()))Z"
-        
         return currentDate.stringByReplacingOccurrencesOfString(" ", withString: "T", options: nil, range: nil)
     }
     

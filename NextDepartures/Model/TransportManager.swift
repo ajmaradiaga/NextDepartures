@@ -134,7 +134,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         let fetchRequest = self.stopFetchRequest
         
-        println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
+        //println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -157,7 +157,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         let fetchRequest = self.trackingStopFetchRequest
         
-        println("Objects in Tracking Stop: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
+        //println("Objects in Tracking Stop: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -200,7 +200,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         var error: NSError? = nil
         
-        println("Objects in Timetable: \(self.sharedContext.countForFetchRequest(fetchRequest, error:&error))")
+        //println("Objects in Timetable: \(self.sharedContext.countForFetchRequest(fetchRequest, error:&error))")
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,

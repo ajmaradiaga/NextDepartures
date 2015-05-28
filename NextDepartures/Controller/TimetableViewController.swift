@@ -36,6 +36,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     var isRefreshingData : Bool = false
     var fetchForFirstTime : Bool = false
     
+    var alertVC: UIAlertController?
+    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
     }
@@ -161,7 +163,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         var mapRect = MKMapRectMake(Double(rect.origin.x), Double(rect.origin.y), Double(rect.width), Double(rect.height))
         
-        println("Stops in Map \(self.stopsMapView.annotationsInMapRect(stopsMapView.visibleMapRect).count)")
+        //println("Stops in Map \(self.stopsMapView.annotationsInMapRect(stopsMapView.visibleMapRect).count)")
         
         var annotationsInMap = self.stopsMapView.annotationsInMapRect(stopsMapView.visibleMapRect)
         
@@ -246,6 +248,11 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             fetchForFirstTime = true
             Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
             self.sharedTransport.fetchDataForLocation(.Default, location: location, andStops:nil, completionHandler: { (result, error) -> Void in
+                if error != nil {
+                    self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                }
             })
         }
     }
@@ -253,6 +260,11 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func fetchData(sender:AnyObject) {
         Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
         self.sharedTransport.fetchDataForLocation(.Default, location: CLLocation(latitude: stopsMapView.centerCoordinate.latitude, longitude: stopsMapView.centerCoordinate.longitude), andStops: stopsShownInMap()) { (result, error) -> Void in
+            if error != nil {
+                self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                    self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
         }
     }
     
@@ -319,7 +331,12 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         if self.sharedTransport.sortedTimeTable?.count == 0 {
             Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
             self.sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
-                println("Retrieving data for Selected stop")
+                //println("Retrieving data for Selected stop")
+                if error != nil {
+                    self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                }
             })
         }
         

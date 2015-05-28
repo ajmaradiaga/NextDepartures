@@ -46,7 +46,6 @@
 		6BB799AF1B12E0EB0094E733 /* NextDeparturesFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; };
 		6BB799B11B12E0EB0094E733 /* NextDeparturesFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6BB799B91B12E1390094E733 /* TimetableCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799B81B12E1390094E733 /* TimetableCommon.swift */; };
-		6BB799BA1B12E27A0094E733 /* NextDeparturesFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB799981B12E0EB0094E733 /* NextDeparturesFramework.framework */; };
 		6BB799BE1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799BD1B12FA5E0094E733 /* TimetableDetailInterfaceController.swift */; };
 		6BB799C01B1436600094E733 /* DataExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB799BF1B1436600094E733 /* DataExchange.swift */; };
 /* End PBXBuildFile section */
@@ -202,7 +201,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BB799BA1B12E27A0094E733 /* NextDeparturesFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,6 +52,12 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
                 }
             }
             
+            if error != nil {
+                self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                    self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+            
         })
         
     }
@@ -160,32 +166,9 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-                if fetchForFirstTime == false {
-        //self.routeMap.setRegion(region, animated: true)
-                    fetchForFirstTime = true
+        if fetchForFirstTime == false {
+            fetchForFirstTime = true
         }
-        
-        /*
-        if self.trackingStops.count > 0 {
-        
-            for index in 1...self.trackingStops.count {
-                var tempStop = trackingStops[index-1]
-                
-                var distance = location.distanceFromLocation(tempStop.location)
-                
-                if distance < 500 {
-                    //Raise alert and remove from Notifications
-                    Helper.raiseNotification("You are \(distance) meters away from \(tempStop.stopName)", completionHandler: { () -> Void in
-                        self.trackingStops.removeAtIndex(index-1)
-                        return
-                    })
-                }
-                
-                //println("Distance: \(distance)")
-            }
-        
-        }
-        */
     }
     
     //MARK: CoreData
@@ -209,7 +192,7 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         
         let fetchRequest = self.stopFetchRequest
         
-        println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
+        //println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
