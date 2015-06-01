@@ -834,7 +834,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/antoniomaradiaga/Documents/Code/Udacity/FinalProject/NextDepartures/NextDepartures/-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextDepartures/-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -872,7 +872,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/antoniomaradiaga/Documents/Code/Udacity/FinalProject/NextDepartures/NextDepartures/-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextDepartures/-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
