@@ -413,7 +413,9 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             cell = DepartureTableViewCell()
         }
         
-        cell.updateInformationWithTimetable(item, FromLocation: sharedTransport.userCurrentLocation!)
+        if sharedTransport.userCurrentLocation != nil {
+            cell.updateInformationWithTimetable(item, FromLocation: sharedTransport.userCurrentLocation!)
+        }
         
         return cell
     }

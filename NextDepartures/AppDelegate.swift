@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import NextDeparturesFramework
+import Fabric
+import Crashlytics
 
 let IS_OS_8_OR_LATER  = ((UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0)
 
@@ -22,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Fabric.with([Crashlytics()])
         
         //Register notifications handle by Application
         var notificationTypes : UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound;
