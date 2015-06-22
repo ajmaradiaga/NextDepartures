@@ -127,6 +127,12 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         
     }
     
+    @IBAction func setMapToUserLocation(sender: AnyObject) {
+        if sharedTransport.userCurrentLocation != nil {
+            Helper.setMapRegion(self.routeMap, withCoordinates: sharedTransport.userCurrentLocation!.coordinate, delta: nil, animated: true)
+        }
+    }
+    
     func showStopOptions(sender: AnyObject) {
         
         stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)

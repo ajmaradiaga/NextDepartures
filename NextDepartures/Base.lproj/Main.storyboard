@@ -333,10 +333,19 @@
                                     <outlet property="delegate" destination="yrE-d9-jlR" id="d67-dk-ixe"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppw-Po-oBY">
+                                <rect key="frame" x="16" y="501" width="24" height="24"/>
+                                <state key="normal" image="location"/>
+                                <connections>
+                                    <action selector="setMapToUserLocation:" destination="yrE-d9-jlR" eventType="touchUpInside" id="4Oz-uv-Ch6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vHJ-Uo-6MR" firstAttribute="leading" secondItem="Cf2-lB-61g" secondAttribute="leadingMargin" constant="-16" id="4HP-aW-7mf"/>
+                            <constraint firstItem="vHJ-Uo-6MR" firstAttribute="leading" secondItem="Ppw-Po-oBY" secondAttribute="trailing" constant="-40" id="7yZ-Md-DJm"/>
+                            <constraint firstItem="Ppw-Po-oBY" firstAttribute="top" secondItem="vHJ-Uo-6MR" secondAttribute="bottom" constant="-50" id="9RV-KU-Zsz"/>
                             <constraint firstItem="vHJ-Uo-6MR" firstAttribute="top" secondItem="kPJ-AU-JnD" secondAttribute="bottom" id="BBt-a5-DP8"/>
                             <constraint firstItem="dT8-ZD-NiO" firstAttribute="top" secondItem="vHJ-Uo-6MR" secondAttribute="bottom" id="dQ1-vN-SXY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vHJ-Uo-6MR" secondAttribute="trailing" constant="-16" id="qvC-ei-aZO"/>
