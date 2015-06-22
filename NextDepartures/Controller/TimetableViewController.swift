@@ -31,6 +31,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     var selectedIndex : NSIndexPath?
     var tableRefreshControl = UIRefreshControl()
     
+    lazy var melbourneCBDLocation = CLLocation(latitude: -37.8140000, longitude: 144.9633200)
+    
     var scheduledTimer = NSTimer()
     
     var isRefreshingData : Bool = false
@@ -230,6 +232,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
         
         if fetchForFirstTime == false {
+            self.fetchForFirstTime = true
+            
             var deltaValue : Double? = nil
             
             //Set delta value selected by user if a delta has been set.
@@ -237,22 +241,42 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
                 deltaValue = NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LatitudeDelta)
             }
             
-            Helper.setMapRegion(self.stopsMapView, withCoordinates: location.coordinate, delta: deltaValue, animated: true)
-        }
-        
-        var distance = sharedTransport.centerLocation?.distanceFromLocation(location)
-        
-        //println("Distance: \(distance)")
-        
-        if (0 < distance && distance < 100 && fetchForFirstTime == false) {
-            fetchForFirstTime = true
-            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
-            self.sharedTransport.fetchDataForLocation(.Default, location: location, andStops:nil, completionHandler: { (result, error) -> Void in
-                if error != nil {
-                    self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
-                        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
-                    })
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                
+                var mapLocation = location
+                
+                if error == nil {
+                    
+                    for item in placemarks
+                    {
+                        var placemark = item as! CLPlacemark
+                        
+                        if placemark.country != "Australia" && placemark.administrativeArea != "VIC" {
+                            mapLocation = self.melbourneCBDLocation
+                        }
+                    }
+                    
                 }
+                
+                Helper.setMapRegion(self.stopsMapView, withCoordinates: mapLocation.coordinate, delta: deltaValue, animated: true)
+                
+                var distance = self.sharedTransport.centerLocation?.distanceFromLocation(location)
+                
+                //println("Distance: \(distance)")
+                
+                //if (0 < distance && distance < 100) {// && self.fetchForFirstTime == false) {
+                    
+                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+                self.sharedTransport.fetchDataForLocation(.Default, location: mapLocation, andStops:nil, completionHandler: { (result, error) -> Void in
+                    if error != nil {
+                        self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                            self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                        })
+                    }
+                })
+                
+                //}
+                
             })
         }
     }
@@ -308,39 +332,42 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         println("Select annotation")
         
-        //Grab the stop associated to the annotation
-        var selectedStop = (view.annotation as! StopAnnotation).stop
-        
-        self.sharedTransport.timeTableStops = [NSNumber(int: selectedStop.stopId)]
-        sharedTransport.requestFetchMode = TransportManager.TimetableFetchMode.UniqueStop
-        
-        //Refresh data in FetchRequestController based on the Stop selected
-        var auxDelegate = self.sharedTransport.timeTableFetchedResultsController.delegate
-        
-        self.sharedTransport.timeTableFetchedResultsController = self.sharedTransport.refreshTimeTableFetchedResultsController()
-        
-        self.sharedTransport.timeTableFetchedResultsController.delegate = auxDelegate
-        
-        var error:NSError?
-        
-        self.sharedTransport.timeTableFetchedResultsController.performFetch(&error)
-        
-        self.sharedTransport.sortedTimeTable = self.sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
-        
-        //If there is no data for the Stop, retrieve it from the API
-        if self.sharedTransport.sortedTimeTable?.count == 0 {
-            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
-            self.sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
-                //println("Retrieving data for Selected stop")
-                if error != nil {
-                    self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
-                        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
-                    })
-                }
-            })
+        //Check that the annotation is of type StopAnnotation
+        if view.annotation is StopAnnotation {
+            //Grab the stop associated to the annotation
+            var selectedStop = (view.annotation as! StopAnnotation).stop
+            
+            self.sharedTransport.timeTableStops = [NSNumber(int: selectedStop.stopId)]
+            sharedTransport.requestFetchMode = TransportManager.TimetableFetchMode.UniqueStop
+            
+            //Refresh data in FetchRequestController based on the Stop selected
+            var auxDelegate = self.sharedTransport.timeTableFetchedResultsController.delegate
+            
+            self.sharedTransport.timeTableFetchedResultsController = self.sharedTransport.refreshTimeTableFetchedResultsController()
+            
+            self.sharedTransport.timeTableFetchedResultsController.delegate = auxDelegate
+            
+            var error:NSError?
+            
+            self.sharedTransport.timeTableFetchedResultsController.performFetch(&error)
+            
+            self.sharedTransport.sortedTimeTable = self.sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
+            
+            //If there is no data for the Stop, retrieve it from the API
+            if self.sharedTransport.sortedTimeTable?.count == 0 {
+                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+                self.sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
+                    //println("Retrieving data for Selected stop")
+                    if error != nil {
+                        self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
+                            self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                        })
+                    }
+                })
+            }
+            
+            self.updateTableData()
         }
-        
-        self.updateTableData()
     }
     
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
