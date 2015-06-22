@@ -63,6 +63,7 @@ extension PTVClient {
         static let HealthCheck: String = "healthcheck"
         static let NextDeparturesForStop: String = "mode/%i/stop/%i/departures/by-destination/limit/%i"
         static let StopsForLine: String = "mode/%i/line/%i/stops-for-line"
+        static let StoppingPattern: String = "mode/%i/run/%i/stop/%i/stopping-pattern"
     }
 
 }

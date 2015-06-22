@@ -37,11 +37,19 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
 
         Helper.setMapRegion(routeMap, withCoordinates: timeTable.stop.location!.coordinate, delta: 0.01, animated: true)
         
+        timeTable.stop.patternType = .Present
+        
         Helper.addStopPin(timeTable.stop, ToMap: routeMap)
         
         self.fetchedResultsController.performFetch(nil)
         
-        PTVClient.sharedInstance().stopsOnLine(timeTable.line, completionHandler: { (result, error) -> Void in
+        /*
+        PTVClient.sharedInstance().stoppingPattern(timeTable, completionHandler: { (result, error) -> Void in
+            println("Called Stopping Pattern")
+        })*/
+        
+        //PTVClient.sharedInstance().stopsOnLine(timeTable.line, completionHandler: { (result, error) -> Void in
+        PTVClient.sharedInstance().stoppingPattern(timeTable, completionHandler: { (result, error) -> Void in
             println("Refreshed stops on Line")
             
             if result != nil {
@@ -92,10 +100,22 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
             var disclosureButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
             disclosureButton.addTarget(self, action: Selector("showStopOptions:"), forControlEvents: UIControlEvents.TouchUpInside)
             
-            
+            /*
             if (annotation as! StopAnnotation).stop.stopId == timeTable.stop.stopId {
                 pinView!.pinColor = MKPinAnnotationColor.Green
+            }*/
+            
+            var pinStop = (annotation as! StopAnnotation).stop
+            
+            switch pinStop.patternType {
+            case .Past:
+                pinView!.pinColor = MKPinAnnotationColor.Red
+            case .Present:
+                pinView!.pinColor = MKPinAnnotationColor.Purple
+            default:
+                pinView!.pinColor = MKPinAnnotationColor.Green
             }
+            
             
             pinView!.rightCalloutAccessoryView = disclosureButton
             pinView!.canShowCallout = true
@@ -138,7 +158,7 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         
-        stopActions.addAction(UIAlertAction(title: "\(TransportManager.Constants.MinimumDistanceFromStop) away", style: .Default) { (alertAction) -> Void in
+        stopActions.addAction(UIAlertAction(title: "\(Int(TransportManager.Constants.MinimumDistanceFromStop))m away", style: .Default) { (alertAction) -> Void in
             self.handleDistanceSelected(TransportManager.Constants.MinimumDistanceFromStop)
             })
         stopActions.addAction(UIAlertAction(title: "500m away", style: .Default) { (alertAction) -> Void in

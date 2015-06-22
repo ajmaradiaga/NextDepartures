@@ -19,6 +19,7 @@ class PTVClient: NSObject{
         static let TransportType = "transport_type"
         static let LocationName = "location_name"
         static let StopId = "stop_id"
+        static let Stop = "stop"
         static let Latitude = "lat"
         static let Longitude = "lon"
         static let Distance = "distance"
@@ -51,6 +52,10 @@ class PTVClient: NSObject{
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
+    
+    var scratchSharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().scratchManagedObjectContext!
     }
     
     func serviceHealthCheck(completionHandler: CompletionHandler) -> NSURLSessionDataTask {
@@ -337,6 +342,88 @@ class PTVClient: NSObject{
         return task
     }
     
+    func stoppingPattern(timeTable: Timetable, completionHandler: CompletionHandler) -> NSURLSessionDataTask {
+        //get /v2/mode/{mode}/run/{run}/stop/{stop}/stopping-pattern
+        
+        var methodString = NSString(format: Methods.StoppingPattern, TransportMode.transportModeFromString(timeTable.line.transportType).rawValue, timeTable.runId,timeTable.stop.stopId) as String
+        
+        var urlString = "/" + Constants.Version + "/" + methodString
+        
+        let url = generateURL(forMethod: urlString)
+        let request = NSURLRequest(URL: url)
+        
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            if let error = downloadError {
+                println("Could not complete the request \(error)")
+                completionHandler(result: nil, error: error)
+            } else {
+                var parsingError: NSError? = nil
+                
+                let result = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
+                if parsingError == nil {
+                    
+                    if let values = result[Keys.Values] as? [[String:AnyObject]] {
+                        
+                        //Validate that values contain data
+                        if values.count > 0 {
+                            
+                            var resultStops = [Stops]()
+                            var foundPresentStop = false
+                            
+                            //Iterate through all the elements of the JSON
+                            for index in 1...values.count {
+                                
+                                var value = values[index-1] as [String:AnyObject]
+                                
+                                if let platform = value[Keys.Platform] as? NSDictionary {
+                                    
+                                    if let stop = platform[Keys.Stop] as? NSDictionary {
+                                        
+                                        let stopInformation: [String: AnyObject?] = [
+                                            Stops.Keys.Latitude : stop[Keys.Latitude],
+                                            Stops.Keys.LocationName : stop[Keys.LocationName],
+                                            Stops.Keys.Longitude : stop[Keys.Longitude],
+                                            Stops.Keys.StopId : stop[Keys.StopId],
+                                            Stops.Keys.Suburb : stop[Keys.Suburb],
+                                            Stops.Keys.TransportType : stop[Keys.TransportType]
+                                        ]
+                                        
+                                        var _patternType : Stops.StopPatternType = .Past
+                                        
+                                        if foundPresentStop == false && timeTable.stop.stopId == (stop[Keys.StopId] as! NSNumber).intValue {
+                                            foundPresentStop = true
+                                            _patternType = .Present
+                                        } else if foundPresentStop == true {
+                                            _patternType = .Future
+                                        }
+                                        
+                                        var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
+                                        
+                                        stop.line = timeTable.line
+                                        stop.patternType = _patternType
+                                        
+                                        resultStops.append(stop)
+                                        
+                                    }
+                                }
+                            }
+                            
+                           completionHandler(result: resultStops, error: nil)
+                        }
+                    }
+                    
+                } else {
+                    completionHandler(result: nil, error: parsingError)
+                }
+            }
+        }
+        
+        task.resume()
+        
+        return task
+    }
+    
     func generateURL(forMethod method:String) -> NSURL {
         
         var methodWithDevId = method + (method.rangeOfString("?") != nil ? "&" : "?") + "devid=\(Constants.DeveloperID)"
@@ -345,7 +432,7 @@ class PTVClient: NSObject{
         
         var fullURLString = "\(Constants.BaseURL)\(methodWithDevId)&signature=\(urlSignature.uppercaseString)"
         
-        //println(fullURLString)
+        println(fullURLString)
         
         return NSURL(string: fullURLString)!
     }

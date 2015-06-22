@@ -45,6 +45,14 @@ class Stops: NSManagedObject {
         }
     }
     
+    var patternType : StopPatternType = .Past
+    
+    enum StopPatternType : Int32 {
+        case Past = 0,
+        Present = 1,
+        Future = 2
+    }
+    
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
