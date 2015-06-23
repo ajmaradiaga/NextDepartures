@@ -39,6 +39,7 @@ class PTVClient: NSObject{
         static let DestinationName = "destination_name"
         static let DestinationId = "destination_id"
         static let TimetableUTC = "time_timetable_utc"
+        static let RealTimeUTC = "time_realtime_utc"
     }
     
     /* Shared session */
@@ -139,19 +140,21 @@ class PTVClient: NSObject{
                             CoreDataStackManager.sharedInstance().saveContext()
                             
                             stopsResult.append(stop)
-                            
-                            self.nextDeparturesForStop(stop, limit: 5, completionHandler: { (result, error) -> Void in
-                                //println("Finished nextDepartures: \(stop.stopId)")
-                                self.stopsProcessed += 1
-                                
-                                if self.stopsProcessed > 9 {
-                                    NSNotificationCenter.defaultCenter().postNotificationName("timeTableComplete", object: stop)
-                                } else {
-                                    NSNotificationCenter.defaultCenter().postNotificationName("timeTablePartial", object: self.stopsProcessed)
-                                }
-                            })
                         }
                         if index > 9 {
+                            
+                            for stopItem in stopsResult {
+                                self.nextDeparturesForStop(stopItem, limit: 5, completionHandler: { (result, error) -> Void in
+                                    //println("Finished nextDepartures: \(stop.stopId)")
+                                    self.stopsProcessed += 1
+                                    
+                                    if self.stopsProcessed > 9 {
+                                        NSNotificationCenter.defaultCenter().postNotificationName("timeTableComplete", object: stopItem)
+                                    } else {
+                                        NSNotificationCenter.defaultCenter().postNotificationName("timeTablePartial", object: self.stopsProcessed)
+                                    }
+                                })
+                            }
                             
                             println("Finished processing all stops and timetables")
                             completionHandler(result: stopsResult, error: nil)
@@ -242,12 +245,18 @@ class PTVClient: NSObject{
                                 }
                                 
                                 if let run = value[Keys.Run] as? NSDictionary {
+                                    var time: AnyObject? = value[Keys.RealTimeUTC]
+                                    
+                                    if time is NSNull {
+                                        time = value[Keys.TimetableUTC]
+                                    }
+                                    
                                     let runInformation : [String:AnyObject?] = [
                                         Timetable.Keys.TransportType : run[Keys.TransportType],
                                         Timetable.Keys.RunId : run[Keys.RunId],
                                         Timetable.Keys.DestinationId : run[Keys.DestinationId],
                                         Timetable.Keys.DestinationName : run[Keys.DestinationName],
-                                        Timetable.Keys.TimeUTC : value[Keys.TimetableUTC],
+                                        Timetable.Keys.TimeUTC : time,
                                         Timetable.Keys.LineDirection : lineDirection,
                                         Timetable.Keys.StopId : NSNumber(int: stop.stopId)
                                     ]
@@ -398,7 +407,7 @@ class PTVClient: NSObject{
                                             _patternType = .Future
                                         }
                                         
-                                        var stop = Stops.retrieveStop(stopInformation, context: self.scratchSharedContext)
+                                        var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
                                         
                                         //stop.line = timeTable.line
                                         stop.patternType = _patternType
@@ -432,7 +441,7 @@ class PTVClient: NSObject{
         
         var fullURLString = "\(Constants.BaseURL)\(methodWithDevId)&signature=\(urlSignature.uppercaseString)"
         
-        //println(fullURLString)
+        println(fullURLString)
         
         return NSURL(string: fullURLString)!
     }

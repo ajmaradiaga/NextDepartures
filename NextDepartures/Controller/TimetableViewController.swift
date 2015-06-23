@@ -363,10 +363,12 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
                             self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
                         })
                     }
+                    
+                    self.updateTableData()
                 })
+            } else {
+                self.updateTableData()
             }
-            
-            self.updateTableData()
         }
     }
     

@@ -82,13 +82,6 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        /*
-        if sessionTask != nil {
-            if sessionTask!.state != .Completed {
-                println("Cancelling Session Task")
-                sessionTask!.cancel()
-            }
-        }*/
     }
     
     func setRouteMap () {

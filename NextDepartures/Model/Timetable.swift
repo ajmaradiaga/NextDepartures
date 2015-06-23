@@ -88,18 +88,18 @@ class Timetable: NSManagedObject, Printable {
         var timeDescription : String = "secs"
         
         if timeSince < 60 && timeSince > 0 {
-            timeValue = timeSince
+            displayTime = "\(Int(timeSince)) secs"
         } else if timeSince > 60 && timeSince < 3600 {
-            timeValue = timeSince / 60
-            timeDescription = "mins"
-        } else if timeSince > 3600 {
-            timeValue = timeSince / 3600
-            timeDescription = "hours"
+            displayTime = "\(Int(timeSince / 60)) mins"
+        } else if timeSince > 3600 && timeSince < 7200 {
+            displayTime = String(format:"%.1f", timeSince / 3600)
+            displayTime += " hr"
+        }else if timeSince > 3600 {
+            displayTime = String(format:"%.1f", timeSince / 3600)
+            displayTime += " hr"
         } else {
-            displayTime = "0"
+            displayTime = "0 secs"
         }
-        
-        displayTime = String(format: "%0.0f %@", timeValue, timeDescription)
         
         return displayTime
     }
