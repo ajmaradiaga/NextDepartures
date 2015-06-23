@@ -340,6 +340,10 @@
                                     <action selector="setMapToUserLocation:" destination="yrE-d9-jlR" eventType="touchUpInside" id="4Oz-uv-Ch6"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hKU-83-xT0">
+                                <rect key="frame" x="281" y="282" width="37" height="37"/>
+                                <color key="color" red="0.043137254899999998" green="0.2156862745" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -347,13 +351,16 @@
                             <constraint firstItem="vHJ-Uo-6MR" firstAttribute="leading" secondItem="Ppw-Po-oBY" secondAttribute="trailing" constant="-40" id="7yZ-Md-DJm"/>
                             <constraint firstItem="Ppw-Po-oBY" firstAttribute="top" secondItem="vHJ-Uo-6MR" secondAttribute="bottom" constant="-50" id="9RV-KU-Zsz"/>
                             <constraint firstItem="vHJ-Uo-6MR" firstAttribute="top" secondItem="kPJ-AU-JnD" secondAttribute="bottom" id="BBt-a5-DP8"/>
+                            <constraint firstAttribute="centerY" secondItem="hKU-83-xT0" secondAttribute="centerY" constant="-0.5" id="LOC-Fs-RsS"/>
                             <constraint firstItem="dT8-ZD-NiO" firstAttribute="top" secondItem="vHJ-Uo-6MR" secondAttribute="bottom" id="dQ1-vN-SXY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vHJ-Uo-6MR" secondAttribute="trailing" constant="-16" id="qvC-ei-aZO"/>
+                            <constraint firstAttribute="centerX" secondItem="hKU-83-xT0" secondAttribute="centerX" constant="0.5" id="sbb-AA-nvz"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="timetable" id="zUa-js-wbP"/>
                     <navigationItem key="navigationItem" title="8" id="pbb-oC-WSb"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="hKU-83-xT0" id="Vj5-Tu-NnS"/>
                         <outlet property="routeMap" destination="vHJ-Uo-6MR" id="VnX-7R-43k"/>
                     </connections>
                 </viewController>

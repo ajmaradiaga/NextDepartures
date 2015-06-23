@@ -19,6 +19,10 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
     var alertVC : UIAlertController?
     var fetchForFirstTime = false
     
+    var sessionTask : NSURLSessionTask?
+    
+    var stopsOnLine : [Stops]?
+    
     var stopActions : UIAlertController!
     
     var sharedTransport : TransportManager {
@@ -26,6 +30,7 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
     }
     
     @IBOutlet weak var routeMap: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var currentLocation : CLLocation?
     
@@ -41,23 +46,19 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         
         Helper.addStopPin(timeTable.stop, ToMap: routeMap)
         
-        self.fetchedResultsController.performFetch(nil)
-        
-        /*
-        PTVClient.sharedInstance().stoppingPattern(timeTable, completionHandler: { (result, error) -> Void in
-            println("Called Stopping Pattern")
-        })*/
-        
-        //PTVClient.sharedInstance().stopsOnLine(timeTable.line, completionHandler: { (result, error) -> Void in
-        PTVClient.sharedInstance().stoppingPattern(timeTable, completionHandler: { (result, error) -> Void in
+        sessionTask = PTVClient.sharedInstance().stoppingPattern(timeTable, completionHandler: { (result, error) -> Void in
             println("Refreshed stops on Line")
             
             if result != nil {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.stopsOnLine = result as? [Stops]
                     for item in (result as! [Stops]) {
                         Helper.addStopPin(item, ToMap: self.routeMap)
                     }
                 }
+            }
+            dispatch_async(dispatch_get_main_queue()) {
+                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
             }
             
             if error != nil {
@@ -68,6 +69,26 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
             
         })
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        dispatch_async(dispatch_get_main_queue()) {
+            if self.stopsOnLine == nil {
+                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+            }
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        /*
+        if sessionTask != nil {
+            if sessionTask!.state != .Completed {
+                println("Cancelling Session Task")
+                sessionTask!.cancel()
+            }
+        }*/
     }
     
     func setRouteMap () {
@@ -100,28 +121,22 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
             var disclosureButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
             disclosureButton.addTarget(self, action: Selector("showStopOptions:"), forControlEvents: UIControlEvents.TouchUpInside)
             
-            /*
-            if (annotation as! StopAnnotation).stop.stopId == timeTable.stop.stopId {
-                pinView!.pinColor = MKPinAnnotationColor.Green
-            }*/
-            
-            var pinStop = (annotation as! StopAnnotation).stop
-            
-            switch pinStop.patternType {
-            case .Past:
-                pinView!.pinColor = MKPinAnnotationColor.Red
-            case .Present:
-                pinView!.pinColor = MKPinAnnotationColor.Purple
-            default:
-                pinView!.pinColor = MKPinAnnotationColor.Green
-            }
-            
-            
             pinView!.rightCalloutAccessoryView = disclosureButton
             pinView!.canShowCallout = true
         }
         else {
             pinView!.annotation = annotation
+        }
+        
+        var pinStop = (annotation as! StopAnnotation).stop
+        
+        switch pinStop.patternType {
+        case .Past:
+            pinView!.pinColor = MKPinAnnotationColor.Red
+        case .Present:
+            pinView!.pinColor = MKPinAnnotationColor.Purple
+        default:
+            pinView!.pinColor = MKPinAnnotationColor.Green
         }
         
         return pinView
@@ -137,7 +152,7 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
             if view is MKPinAnnotationView {
                 var enableDisclosureButton = true
                 
-                if distance < TransportManager.Constants.MinimumDistanceFromStop {
+                if distance < TransportManager.Constants.MinimumDistanceFromStop || selectedAnnotation.stop.patternType != .Future {
                     enableDisclosureButton = false
                 }
                 
@@ -202,7 +217,7 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
     }
-    
+    /*
     lazy var stopFetchRequest : NSFetchRequest = {
         let fetchRequest = NSFetchRequest(entityName: "Stops")
         
@@ -244,10 +259,10 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
             default:
                 return
             }
-    }
+    }*/
     
     //MARK: TableViewDataSource
-    
+    /*
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.sharedContext.countForFetchRequest(stopFetchRequest, error: nil) > 0 {
             return self.fetchedResultsController.fetchedObjects!.count
@@ -300,5 +315,5 @@ class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLoc
         cell.rightTextLabel.text = String(format:"%.1f m", distance)
         
         return cell
-    }
+    }*/
 }

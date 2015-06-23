@@ -398,9 +398,9 @@ class PTVClient: NSObject{
                                             _patternType = .Future
                                         }
                                         
-                                        var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
+                                        var stop = Stops.retrieveStop(stopInformation, context: self.scratchSharedContext)
                                         
-                                        stop.line = timeTable.line
+                                        //stop.line = timeTable.line
                                         stop.patternType = _patternType
                                         
                                         resultStops.append(stop)
@@ -432,7 +432,7 @@ class PTVClient: NSObject{
         
         var fullURLString = "\(Constants.BaseURL)\(methodWithDevId)&signature=\(urlSignature.uppercaseString)"
         
-        println(fullURLString)
+        //println(fullURLString)
         
         return NSURL(string: fullURLString)!
     }

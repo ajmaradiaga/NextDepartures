@@ -58,17 +58,16 @@ class Stops: NSManagedObject {
     }
     
     init(dictionary: [String : AnyObject?], context: NSManagedObjectContext) {
-        
-        let entity =  NSEntityDescription.entityForName("Stops", inManagedObjectContext: context)!
-        
-        super.init(entity: entity,insertIntoManagedObjectContext: context)
-        
-        self.suburb = dictionary[Keys.Suburb] as! String
-        self.transportType = dictionary[Keys.TransportType] as! String
-        self.locationName = dictionary[Keys.LocationName] as! String
-        self.stopId = (dictionary[Keys.StopId] as! NSNumber).intValue
-        self.latitude = (dictionary[Keys.Latitude] as! NSNumber).doubleValue
-        self.longitude = (dictionary[Keys.Longitude] as! NSNumber).doubleValue
+            let entity =  NSEntityDescription.entityForName("Stops", inManagedObjectContext: context)!
+            
+            super.init(entity: entity,insertIntoManagedObjectContext: context)
+            
+            self.suburb = dictionary[Keys.Suburb] as! String
+            self.transportType = dictionary[Keys.TransportType] as! String
+            self.locationName = dictionary[Keys.LocationName] as! String
+            self.stopId = (dictionary[Keys.StopId] as! NSNumber).intValue
+            self.latitude = (dictionary[Keys.Latitude] as! NSNumber).doubleValue
+            self.longitude = (dictionary[Keys.Longitude] as! NSNumber).doubleValue
     }
     
     class func retrieveStop(dictionary: [String : AnyObject?], context: NSManagedObjectContext) -> Stops {
@@ -78,14 +77,17 @@ class Stops: NSManagedObject {
         
         fetchRequest.predicate = NSPredicate(format: "\(Keys.StopId) == %i and \(Keys.TransportType) == %@", (dictionary[Stops.Keys.StopId] as! NSNumber).intValue, dictionary[Stops.Keys.TransportType] as! String)
         
-        //println(context.countForFetchRequest(fetchRequest, error: &error))
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "\(Keys.StopId)", ascending: true)]
         
-        if context.countForFetchRequest(fetchRequest, error: &error) > 0 {
-            var stop = context.executeFetchRequest(fetchRequest, error: &error)!.last as! Stops
-            return stop
-        } else {
-            return Stops(dictionary: dictionary, context: context)
+        var elements : [AnyObject]?
+        elements = context.executeFetchRequest(fetchRequest, error: &error)
+        if elements != nil {
+            if elements!.count > 0 {
+                var stop = elements!.last as! Stops
+                return stop
+            }
         }
+        return Stops(dictionary: dictionary, context: context)
     }
     
     class func stopIdsInArray(stopsArray : NSArray) -> NSArray {
