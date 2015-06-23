@@ -39,6 +39,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     var fetchForFirstTime : Bool = false
     
     var alertVC: UIAlertController?
+    var raiseAlertVC: UIAlertController?
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
@@ -292,14 +293,6 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
     }
     
-    func updateTableData() {
-        dispatch_async(dispatch_get_main_queue()) {
-            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
-            self.nextDeparturesTable.reloadData()
-            self.tableRefreshControl.endRefreshing()
-        }
-    }
-    
     // MARK: MKMapViewDelegate
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -447,6 +440,100 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
         
         return cell
+    }
+    
+    //MARK: TableViewDelegate
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        /*
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+
+            let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
+            
+            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            
+            shareMenu.addAction(twitterAction)
+            shareMenu.addAction(cancelAction)
+            
+            
+            self.presentViewController(shareMenu, animated: true, completion: nil)
+        })
+*/
+        
+        var actions = NSMutableArray()
+        
+            
+            var reminderAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Reminder" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                
+                var timeTableItem = self.sharedTransport.sortedTimeTable![indexPath.row]
+                
+                var timeDifference = timeTableItem.timeFromNow()
+                
+                if timeDifference > 360 {
+                    self.alertVC = UIAlertController(title: nil, message: "Notify Me", preferredStyle: .ActionSheet)
+                    
+                    let fiveMinutesAction = UIAlertAction(title: "5 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                        self.setReminder(timeTableItem, seconds: 300)
+                    }
+                    let fifteenMinutesAction = UIAlertAction(title: "15 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                        self.setReminder(timeTableItem, seconds: 900)
+                    }
+                    
+                    let thirtyMinutesAction = UIAlertAction(title: "30 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                        self.setReminder(timeTableItem, seconds: 1800)
+                    }
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alertAction) -> Void in
+                        self.nextDeparturesTable.editing = false
+                    })
+                    
+                    self.alertVC!.addAction(fiveMinutesAction)
+                    
+                    if timeDifference > 900 {
+                        self.alertVC!.addAction(fifteenMinutesAction)
+                    }
+                    
+                    if timeDifference > 1800 {
+                        self.alertVC!.addAction(thirtyMinutesAction)
+                    }
+                    self.alertVC!.addAction(cancelAction)
+                    
+                    
+                    self.presentViewController(self.alertVC!, animated: true, completion: nil)
+                } else {
+                    Helper.raiseNotification("You should be @ \(timeTableItem.stop.stopName) in \(timeTableItem.displayTimeFromNow())", withTitle: "Get Ready", completionHandler: { () -> Void in
+                        self.nextDeparturesTable.editing = false
+                    })
+                }
+            })
+            
+            reminderAction.backgroundColor = UIColor.blueColor()
+            
+            actions.addObject(reminderAction)
+        
+        
+        return actions as [AnyObject]?
+    }
+    
+    func setReminder(timeTableItem: Timetable, seconds: Int32) {
+        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+        println("Set Reminder: \(seconds) before.")
+        TransportManager.sharedInstance().addTrackingService(timeTableItem, withSeconds: seconds)
+        self.nextDeparturesTable.editing = false
+    }
+    
+    
+    func updateTableData() {
+        dispatch_async(dispatch_get_main_queue()) {
+            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
+            self.nextDeparturesTable.reloadData()
+            self.tableRefreshControl.endRefreshing()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

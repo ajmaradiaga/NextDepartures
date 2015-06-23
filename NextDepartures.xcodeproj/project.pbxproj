@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B288B271B39742100480108 /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B261B39742100480108 /* TrackingService.swift */; };
 		6B4811301B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */; };
 		6B4811351B119A2200FD4A7F /* TimetableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4811341B119A2200FD4A7F /* TimetableRow.swift */; };
 		6B9BE2671B103EDE001A135B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2661B103EDE001A135B /* AppDelegate.swift */; };
@@ -130,6 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B288B261B39742100480108 /* TrackingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MelbourneCBDtoStKilda.gpx; sourceTree = "<group>"; };
 		6B4811331B1053AF00FD4A7F /* MelbourneCBD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MelbourneCBD.gpx; sourceTree = "<group>"; };
 		6B4811341B119A2200FD4A7F /* TimetableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableRow.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				6B9BE2971B103EFA001A135B /* Stops.swift */,
 				6B9BE2981B103EFA001A135B /* Timetable.swift */,
 				6B9BE2991B103EFA001A135B /* TrackingStop.swift */,
+				6B288B261B39742100480108 /* TrackingService.swift */,
 				6B9BE29A1B103EFA001A135B /* TransportManager.swift */,
 				6B9BE29B1B103EFA001A135B /* TransportModel.xcdatamodeld */,
 			);
@@ -698,6 +701,7 @@
 				6B9BE2A51B103EFA001A135B /* NetworkHelper.swift in Sources */,
 				6B9BE2AC1B103EFA001A135B /* Stops.swift in Sources */,
 				6B9BE2A71B103EFA001A135B /* PTVConstants.swift in Sources */,
+				6B288B271B39742100480108 /* TrackingService.swift in Sources */,
 				6B9BE2B21B103EFA001A135B /* StopAnnotation.swift in Sources */,
 				6B9BE2A81B103EFA001A135B /* CoreDataStackManager.swift in Sources */,
 				6B9BE2A21B103EFA001A135B /* StopRouteDetailsViewController.swift in Sources */,

@@ -33,6 +33,8 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     var sortedTimeTable : [Timetable]?
     var trackingStops : [TrackingStop] = [TrackingStop]()
     
+    var scheduledTimer = NSTimer()
+    
     var requestFetchMode : TimetableFetchMode = .Default
     
     enum TimetableFetchMode : Int32 {
@@ -58,11 +60,17 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     }
     
     func setupTransportManager() {
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         trackingStopFetchedResultsController.delegate = self
         trackingStopFetchedResultsController.performFetch(nil)
+        
+        trackingServiceFetchedResultsController.delegate = self
+        trackingServiceFetchedResultsController.performFetch(nil)
+        
+        self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("checkTrackingService:"), userInfo: nil, repeats: true)
         
         if(CLLocationManager.locationServicesEnabled()) {
             if (IS_OS_8_OR_LATER) {
@@ -158,6 +166,29 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         let fetchRequest = self.trackingStopFetchRequest
         
         //println("Objects in Tracking Stop: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+        }()
+    
+    lazy var trackingServiceFetchRequest : NSFetchRequest = {
+        let fetchRequest = NSFetchRequest(entityName: "TrackingService")
+        
+        fetchRequest.predicate = NSPredicate(format: "\(TrackingService.Keys.Enabled) == true")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "\(TrackingService.Keys.Timetable).\(Timetable.Keys.RunId)", ascending: true)]
+        
+        return fetchRequest
+        }()
+    
+    lazy var trackingServiceFetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = self.trackingServiceFetchRequest
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -296,6 +327,21 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         return false
     }
     
+    func addTrackingService(timeTable: Timetable, withSeconds seconds: Int32) -> TrackingService {
+        let trackingServiceInformation: [String: AnyObject?] = [
+            TrackingService.Keys.Timetable : timeTable,
+            TrackingService.Keys.TimeInSecs : NSNumber(int: seconds)
+        ]
+        
+        var newTrackingSvc = TrackingService.retrieveTrackingService(trackingServiceInformation, context: sharedContext)
+        
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        trackingServiceFetchedResultsController.performFetch(nil)
+        
+        return newTrackingSvc
+    }
+    
     func addTrackingStop(stop: Stops, withDistance distance: Double) -> TrackingStop {
         let trackingStopInformation: [String: AnyObject?] = [
             TrackingStop.Keys.Stop : stop,
@@ -310,6 +356,25 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         trackingStopFetchedResultsController.performFetch(nil)
         
         return newTrackingStop
+    }
+    
+    func checkTrackingService(timer:NSTimer) {
+        if self.trackingServiceFetchedResultsController.fetchedObjects!.count > 0 {
+            for index in 1...self.trackingServiceFetchedResultsController.fetchedObjects!.count {
+                
+                var item = self.trackingServiceFetchedResultsController.objectAtIndexPath(NSIndexPath(forRow: index - 1, inSection: 0)) as! TrackingService
+                
+                if Int32(item.timeTable.timeFromNow()) < item.timeInSecs {
+                    item.enabled = false
+                    println("\(item.timeTable.timeFromNow()) - \(item.timeInSecs)")
+                    Helper.raiseNotification("You should be @ \(item.timeTable.stop.stopName) in < \(item.timeInSecs / 60) mins", withTitle: "Get Ready", completionHandler: { () -> Void in
+                    })
+                }
+            }
+            
+            CoreDataStackManager.sharedInstance().saveContext()
+            trackingServiceFetchedResultsController.performFetch(nil)
+        }
     }
     
     var sharedContext: NSManagedObjectContext {
