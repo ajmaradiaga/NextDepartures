@@ -15,7 +15,7 @@ class DepartureTableViewCell: UITableViewCell {
     @IBOutlet weak var subTextLabel: UILabel!
     @IBOutlet weak var upperRightTextLabel: UILabel!
     @IBOutlet weak var rightTextLabel: UILabel!
-    @IBOutlet weak var transportationImageView: UIImageView!
+    @IBOutlet weak var serviceNumber: UILabel!
     
     var timetableItem : Timetable?
     
@@ -31,23 +31,24 @@ class DepartureTableViewCell: UITableViewCell {
     }
     
     func updateInformationWithTimetable(item: Timetable, FromLocation location: CLLocation) {
-        //lineNumberLabel.text = item.line.lineNumber
+        serviceNumber.text = item.line.lineNumber
         
-        subTextLabel.text = String(item.stop.stopId) + " - " + item.stop.locationName
-        mainTextLabel.text = String(item.line.lineNumber) + " - " + item.lineDirection.directionName
+        subTextLabel.text = item.line.lineName
+        mainTextLabel.text = item.lineDirection.directionName
         
-        transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))
+        //transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))
         
         timetableItem = item
         
-        var displayTime = item.displayTimeFromNow()
+        var timeValues = Helper.formatTime(item.timeFromNow())
         
         
-        upperRightTextLabel.text = displayTime
+        upperRightTextLabel.text = timeValues.timeValue
+        
         
         let distance = item.stop.location!.distanceFromLocation(location)
         
-        rightTextLabel.text = Helper.formatDistanceToString(distance)
+        rightTextLabel.text = timeValues.timeUOM//Helper.formatDistanceToString(distance)
     }
     
     func refreshInformationWithLocation(location:CLLocation) {

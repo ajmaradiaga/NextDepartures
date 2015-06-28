@@ -371,8 +371,8 @@
         <!--Stop Details-->
         <scene sceneID="uqP-VQ-Gtk">
             <objects>
-                <tableViewController id="UuP-k3-9Ms" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z2-tW-23C">
+                <tableViewController id="UuP-k3-9Ms" customClass="StopDetailsViewController" customModule="NextDepartures" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z2-tW-23C">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -415,6 +415,9 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="GWZ-ZH-D3W">
                                             <rect key="frame" x="16" y="18" width="42.5" height="31.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42.5" id="pkz-zX-pef"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -430,6 +433,7 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="edB-y7-Tid" secondAttribute="bottom" constant="11" id="ahT-VT-e8P"/>
                                         <constraint firstAttribute="centerY" secondItem="GWZ-ZH-D3W" secondAttribute="centerY" constant="3.5" id="e92-n3-WME"/>
                                         <constraint firstItem="edB-y7-Tid" firstAttribute="top" secondItem="nTc-id-qsB" secondAttribute="bottom" id="gSF-fB-SWz"/>
+                                        <constraint firstItem="GWZ-ZH-D3W" firstAttribute="leading" secondItem="SOp-sP-aQe" secondAttribute="leadingMargin" constant="8" id="lmv-wo-8fG"/>
                                         <constraint firstItem="tbQ-BN-pZb" firstAttribute="leading" secondItem="SOp-sP-aQe" secondAttribute="leading" constant="66" id="u4e-Q3-out"/>
                                         <constraint firstItem="ykR-rV-kCm" firstAttribute="top" secondItem="SOp-sP-aQe" secondAttribute="topMargin" constant="6" id="v59-q3-PF6"/>
                                         <constraint firstItem="tbQ-BN-pZb" firstAttribute="leading" secondItem="ykR-rV-kCm" secondAttribute="leading" id="vXe-ES-62e"/>
@@ -446,7 +450,9 @@
                                 <connections>
                                     <outlet property="mainTextLabel" destination="ykR-rV-kCm" id="5zy-1I-mcV"/>
                                     <outlet property="rightTextLabel" destination="edB-y7-Tid" id="dni-Iv-Vke"/>
+                                    <outlet property="serviceNumber" destination="GWZ-ZH-D3W" id="Uce-Ns-t1O"/>
                                     <outlet property="subTextLabel" destination="tbQ-BN-pZb" id="Mqb-Ek-ICg"/>
+                                    <outlet property="upperRightTextLabel" destination="nTc-id-qsB" id="EGZ-lA-KJO"/>
                                     <segue destination="yrE-d9-jlR" kind="show" identifier="showRouteDetail" id="Oej-td-JSr"/>
                                 </connections>
                             </tableViewCell>
@@ -464,8 +470,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="0N2-ao-jpw" id="Wua-dL-XyK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUd-6T-ubN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="0N2-ao-jpw">
+                    <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="color" red="0.043137254899999998" green="0.2156862745" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="1603" y="379"/>
         </scene>

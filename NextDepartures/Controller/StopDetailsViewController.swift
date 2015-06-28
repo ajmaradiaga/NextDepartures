@@ -80,6 +80,22 @@ class StopDetailsViewController: UITableViewController {
                     self.updateTableData()
                 }
             })
+        } else {
+            self.timetableElements = sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
+        }
+    }
+    
+    func refreshTableViewCells(timer:NSTimer) {
+        if sharedTransport.centerLocation == nil {
+            return
+        }
+        
+        for cell in self.tableView.visibleCells() {
+            if cell is DepartureTableViewCell {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    (cell as! DepartureTableViewCell).refreshInformationWithLocation(self.sharedTransport.userCurrentLocation!)
+                })
+            }
         }
     }
     

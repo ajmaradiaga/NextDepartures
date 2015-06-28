@@ -555,12 +555,12 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showStopRouteDetails" {
-            selectedIndex = nextDeparturesTable.indexPathForCell((sender as! DepartureTableViewCell))
+        if segue.identifier == "showStopDetails" {
+            selectedIndex = nextDeparturesTable.indexPathForCell((sender as! StopTableViewCell))
             
-            var srdVC = segue.destinationViewController as! RouteDetailsViewController
+            var sdVC = segue.destinationViewController as! StopDetailsViewController
             
-            srdVC.timeTable = sharedTransport.sortedTimeTable![selectedIndex!.row]
+            sdVC.selectedStop = sharedTransport.sortedStops![selectedIndex!.row]
             
         }
     }

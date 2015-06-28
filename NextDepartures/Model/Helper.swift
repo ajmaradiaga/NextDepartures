@@ -104,4 +104,28 @@ class Helper: NSObject {
         return (distanceString, distanceUOM, String(format:"%@ %@", distanceString, distanceUOM))
     }
     
+    class func formatTime(var time: NSTimeInterval) -> (timeValue: String, timeUOM: String, formattedTime: String) {
+        var timeSince = time
+        var displayTime = ""
+        
+        var timeValue : String = "0"
+        var timeUOM : String = "secs"
+        
+        if timeSince < 60 && timeSince > 0 {
+            timeValue = "\(Int(timeSince))"
+        } else if timeSince > 60 && timeSince < 3600 {
+            timeValue = "\(Int(timeSince / 60))"
+            timeUOM = "mins"
+        } else if timeSince > 3600 && timeSince < 7200 {
+            timeValue = String(format:"%.1f", timeSince / 3600)
+            timeUOM = "hr"
+        }else if timeSince > 3600 {
+            timeValue = String(format:"%.1f", timeSince / 3600)
+            timeUOM = "hr"
+        }
+        
+        
+        return (timeValue, timeUOM, timeValue + " " + timeUOM)
+    }
+    
 }
