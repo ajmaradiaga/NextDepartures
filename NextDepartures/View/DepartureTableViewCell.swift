@@ -33,6 +33,8 @@ class DepartureTableViewCell: UITableViewCell {
     func updateInformationWithTimetable(item: Timetable, FromLocation location: CLLocation) {
         serviceNumber.text = item.line.lineNumber
         
+        serviceNumber.textColor = PTVClient.TransportMode.colorForTransportType(item.transportType)
+        
         subTextLabel.text = item.line.lineName
         mainTextLabel.text = item.lineDirection.directionName
         

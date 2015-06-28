@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Antonio Maradiaga. All rights reserved.
 //
 
+import UIKit
+
 extension PTVClient {
 
     // MARK: - Constants
@@ -54,6 +56,23 @@ extension PTVClient {
                 return "train"
             default:
                 return "tram"
+            }
+        }
+        
+        static func colorForTransportType(value : String) -> UIColor {
+            switch value {
+            case "tram":
+                return UIColor(red: 48/255, green: 185/255, blue: 114/255, alpha: 1)
+            case "bus":
+                return UIColor(red: 253/255, green: 160/255, blue: 34/255, alpha: 1)
+            case "nightrider":
+                return UIColor(red: 253/255, green: 160/255, blue: 34/255, alpha: 1)
+            case "train":
+                return UIColor(red: 20/255, green: 155/255, blue: 234/255, alpha: 1)
+            case "vline":
+                return UIColor.brownColor()
+            default:
+                return UIColor.greenColor()
             }
         }
     }

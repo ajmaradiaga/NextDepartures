@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 import CoreData
+import UIKit
 
 class PTVClient: NSObject{
     

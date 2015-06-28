@@ -216,6 +216,10 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 221/255, green: 66/255, blue: 46/255, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         if selectedIndex != nil {
             self.nextDeparturesTable.deselectRowAtIndexPath(selectedIndex!, animated: false)
         }

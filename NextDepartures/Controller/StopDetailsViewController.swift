@@ -44,13 +44,29 @@ class StopDetailsViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        /*
         NSNotificationCenter.defaultCenter().addObserverForName("timeTableComplete", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.handleTimeTableCompleteNotification(notification)
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("timeTablePartial", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.handleTimeTableCompleteNotification(notification)
-        }
+        }*/
+        
+        // Do any additional setup after loading the view.
+        self.navigationItem.title = String(format: "%@", selectedStop.locationName)
+        
+        var transportMode = PTVClient.TransportMode.transportModeFromString(selectedStop.transportType)
+        
+        var color = PTVClient.TransportMode.colorForTransportType(selectedStop.transportType)
+        
+        self.navigationController?.navigationBar.barTintColor = color
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        //[self.navigationController.navigationBar
+         //   setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         //Drag to refresh control of the TableView
         tableRefreshControl.addTarget(self, action:"fetchData:", forControlEvents: UIControlEvents.ValueChanged)
@@ -62,6 +78,8 @@ class StopDetailsViewController: UITableViewController {
         sharedTransport.requestFetchMode = .UniqueStop
         sharedTransport.timeTableStops = [selectedStop]
         
+        sharedTransport.timeTableFetchedResultsController = sharedTransport.refreshTimeTableFetchedResultsController()
+
         sharedTransport.timeTableFetchedResultsController.performFetch(nil)
         
         if sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count == 0 {
