@@ -31,6 +31,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     var fetchForFirstTime : Bool = false
     
     var sortedTimeTable : [Timetable]?
+    var sortedStops : [Stops]?
     var trackingStops : [TrackingStop] = [TrackingStop]()
     
     var scheduledTimer = NSTimer()
@@ -242,7 +243,17 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     }
     
     func fetchDataForStop(stop:Stops, completionHandler: CompletionHandler) {
-        fetchDataForLocation(TimetableFetchMode.UniqueStop, location: stop.location, andStops: [NSNumber(int: stop.stopId)], completionHandler: completionHandler)
+        self.requestFetchMode = .UniqueStop
+        self.timeTableStops = [stop]
+        
+        PTVClient.sharedInstance().nextDeparturesForStop(stop, limit: 20) { (result, error) -> Void in
+            if error != nil {
+                completionHandler(result: nil, error: error)
+            } else {
+                self.timeTableFetchedResultsController.performFetch(nil)
+                completionHandler(result: result, error: nil)
+            }
+        }
     }
     
     func fetchDataForLocation(requestMode: TimetableFetchMode,var location:CLLocation?, andStops stops:NSArray?, completionHandler: CompletionHandler) {

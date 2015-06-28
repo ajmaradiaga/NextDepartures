@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import MapKit
 
-class StopRouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     var timeTable : Timetable!
     var selectedAnnotation : StopAnnotation!

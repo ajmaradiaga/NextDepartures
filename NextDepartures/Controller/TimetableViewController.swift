@@ -56,6 +56,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
+        /*
+        
         NSNotificationCenter.defaultCenter().addObserverForName("timeTableComplete", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.handleTimeTableCompleteNotification(notification)
         }
@@ -63,6 +65,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         NSNotificationCenter.defaultCenter().addObserverForName("timeTablePartial", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.handleTimeTableCompleteNotification(notification)
         }
+*/
     
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
@@ -94,13 +97,14 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             }
         }
         
-        sharedTransport.timeTableFetchedResultsController.performFetch(nil)
+        //sharedTransport.timeTableFetchedResultsController.performFetch(nil)
         
         if NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Latitude) != 0 {
             stopsMapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Latitude), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Longitude)), MKCoordinateSpanMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LatitudeDelta), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LongitudeDelta))), animated: false)
         }
     }
     
+    /*
     func handleTimeTableCompleteNotification(notification: NSNotification) -> Void {
         //println("Notification received")
         if self.sharedTransport.timeTableStops.count == 0 && self.sharedTransport.requestFetchMode == .Default {
@@ -133,7 +137,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         if stopProcessed < 4 {
             handleTimeTableCompleteNotification(notification)
         }
-    }
+    }*/
     
     @IBAction func refreshTimetable(sender: AnyObject) {
         fetchData(sender)
@@ -178,9 +182,9 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             }
         }
         
-        if annotationsInMap.count < 10 {
+        /*if annotationsInMap.count < 10 {
             return Stops.stopIdsInArray(stopsArray)
-        }
+        }*/
         
         stopsArray.sortUsingComparator { (a, b) -> NSComparisonResult in
             var a1 = a as! Stops
@@ -196,6 +200,12 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             }
             
             return NSComparisonResult.OrderedDescending
+        }
+        
+        sharedTransport.sortedStops = stopsArray as NSArray as? [Stops]
+        
+        if annotationsInMap.count < 10 {
+            return Stops.stopIdsInArray(stopsArray)
         }
         
         return Stops.stopIdsInArray(stopsArray.subarrayWithRange(NSMakeRange(0, min(10,stopsArray.count))))
@@ -273,6 +283,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
                         self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
                             self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
                         })
+                    } else {
+                        self.updateTableData()
                     }
                 })
                 
@@ -285,10 +297,13 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func fetchData(sender:AnyObject) {
         Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
         self.sharedTransport.fetchDataForLocation(.Default, location: CLLocation(latitude: stopsMapView.centerCoordinate.latitude, longitude: stopsMapView.centerCoordinate.longitude), andStops: stopsShownInMap()) { (result, error) -> Void in
+            self.sharedTransport.timeTableStops = self.stopsShownInMap()
             if error != nil {
                 self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
                     self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
                 })
+            }else {
+                self.updateTableData()
             }
         }
     }
@@ -330,6 +345,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             //Grab the stop associated to the annotation
             var selectedStop = (view.annotation as! StopAnnotation).stop
             
+            /*
             self.sharedTransport.timeTableStops = [NSNumber(int: selectedStop.stopId)]
             sharedTransport.requestFetchMode = TransportManager.TimetableFetchMode.UniqueStop
             
@@ -362,6 +378,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             } else {
                 self.updateTableData()
             }
+            */
         }
     }
     
@@ -413,8 +430,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     //MARK: TableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedTransport.sortedTimeTable != nil && sharedTransport.centerLocation != nil {
-            return sharedTransport.sortedTimeTable!.count
+        if sharedTransport.sortedStops != nil && sharedTransport.centerLocation != nil {
+            return sharedTransport.sortedStops!.count
         }
         
         return 0
@@ -422,21 +439,21 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var item = sharedTransport.sortedTimeTable![indexPath.row]
+        var item = sharedTransport.sortedStops![indexPath.row]
         
-        let reuseIdentifier = "DepartureCell"
+        let reuseIdentifier = "StopTableCell"
         
-        var cell : DepartureTableViewCell
+        var cell : StopTableViewCell
         
-        if let tempCell: DepartureTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? DepartureTableViewCell {
+        if let tempCell: StopTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? StopTableViewCell {
             
             cell = tempCell
         } else {
-            cell = DepartureTableViewCell()
+            cell = StopTableViewCell()
         }
         
         if sharedTransport.userCurrentLocation != nil {
-            cell.updateInformationWithTimetable(item, FromLocation: sharedTransport.userCurrentLocation!)
+            cell.updateInformationWithStop(item, FromLocation: sharedTransport.userCurrentLocation!)
         }
         
         return cell
@@ -530,6 +547,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     func updateTableData() {
         dispatch_async(dispatch_get_main_queue()) {
+            self.stopsShownInMap()
             Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
             self.nextDeparturesTable.reloadData()
             self.tableRefreshControl.endRefreshing()
@@ -540,7 +558,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         if segue.identifier == "showStopRouteDetails" {
             selectedIndex = nextDeparturesTable.indexPathForCell((sender as! DepartureTableViewCell))
             
-            var srdVC = segue.destinationViewController as! StopRouteDetailsViewController
+            var srdVC = segue.destinationViewController as! RouteDetailsViewController
             
             srdVC.timeTable = sharedTransport.sortedTimeTable![selectedIndex!.row]
             

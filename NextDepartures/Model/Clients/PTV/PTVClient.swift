@@ -141,6 +141,7 @@ class PTVClient: NSObject{
                             
                             stopsResult.append(stop)
                         }
+                        /*
                         if index > 9 {
                             
                             for stopItem in stopsResult {
@@ -159,13 +160,15 @@ class PTVClient: NSObject{
                             println("Finished processing all stops and timetables")
                             completionHandler(result: stopsResult, error: nil)
                             return
-                        }
+                        }*/
                     }
                 }
                 
                 if parsingError != nil {
+                    println("Finished processing all stops - ERROR")
                     completionHandler(result: nil, error: parsingError)
                 } else {
+                    println("Finished processing all stops")
                     completionHandler(result: stopsResult, error: nil)
                 }
                 
@@ -202,6 +205,8 @@ class PTVClient: NSObject{
                         
                         //Validate that values contain data
                         if values.count > 0 {
+                            
+                            var nextRuns = [Timetable]()
                             
                             //Iterate through all the elements of the JSON
                             for index in 1...values.count {
@@ -273,15 +278,23 @@ class PTVClient: NSObject{
                                     //println("Run \(run.runId) -> " + String(run.destinationId) + " | " + run.destinationName + lineDetails)
                                     
                                     CoreDataStackManager.sharedInstance().saveContext()
+                                    
+                                    nextRuns.append(runTT)
                                 }
                                 
                                 CoreDataStackManager.sharedInstance().saveContext()
                             }
+                            completionHandler(result: nextRuns, error: nil)
+                        } else {
+                            //No values found
+                            completionHandler(result: nil, error: self.PTVClientError("No values contained in values substructure in JSON response."))
                         }
-                        completionHandler(result: result, error: nil)
+                        
+                    } else {
+                        //No values tag found in result
+                        completionHandler(result: nil, error: self.PTVClientError("No values element found in JSON response."))
+                        //completionHandler(result: nil, error: self.PTVClientError("No values element found in JSON response."))
                     }
-                    
-                    
                 } else {
                     completionHandler(result: nil, error: parsingError)
                 }
@@ -292,6 +305,12 @@ class PTVClient: NSObject{
         task.resume()
         
         return task
+    }
+    
+    func PTVClientError(failureReason: String) -> NSError {
+        return NSError(domain: "PTVClient", code: 303, userInfo: [NSLocalizedDescriptionKey: "Operation was unsuccessful",
+            NSLocalizedFailureReasonErrorKey: failureReason,
+            NSLocalizedRecoverySuggestionErrorKey: "Try again later."])
     }
     
     func stopsOnLine(line: Line, completionHandler: CompletionHandler) -> NSURLSessionDataTask {

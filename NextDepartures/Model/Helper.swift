@@ -91,4 +91,17 @@ class Helper: NSObject {
         return String(format:"%.1f %@", distance, distanceUOM)
     }
     
+    class func formatDistance(var distance : Double) -> (distance:String, distanceUOM: String, formattedDistance: String) {
+        var distanceUOM = "meters"
+        var distanceString = String(format:"%.0f", distance)
+        
+        if (distance > 999) {
+            distanceUOM = "kms."
+            distance = distance / 1000
+            distanceString = String(format:"%.1f", distance)
+        }
+        
+        return (distanceString, distanceUOM, String(format:"%@ %@", distanceString, distanceUOM))
+    }
+    
 }
