@@ -13,6 +13,8 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBOutlet weak var trackingTableView: UITableView!
     
+    var IS_IPHONE_5_OR_LESS = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone) && max(UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height) <= 568.0
+    
     var scheduledTimer = NSTimer()
     var trackingActions : UIAlertController!
     var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
@@ -54,7 +56,9 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
         
         var item = sharedTransport.trackingStopFetchedResultsController.objectAtIndexPath(indexPath) as! TrackingStop
         
-        let reuseIdentifier = "TrackingStopCell"
+        
+        
+        let reuseIdentifier = IS_IPHONE_5_OR_LESS ? "TrackingStopCell_Small" : "TrackingStopCell"
         
         var cell : TrackingStopTableViewCell
         
