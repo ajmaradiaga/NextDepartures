@@ -15,10 +15,15 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
     
     var scheduledTimer = NSTimer()
     var trackingActions : UIAlertController!
+    var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        self.navigationController?.navigationBar.barTintColor = trackingColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         sharedTransport.trackingStopFetchedResultsController.delegate = self
         sharedTransport.trackingStopFetchedResultsController.performFetch(nil)

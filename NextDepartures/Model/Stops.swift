@@ -23,6 +23,7 @@ class Stops: NSManagedObject {
         static let Longitude = "longitude"
         static let Timetable = "timetable"
         static let Line = "line"
+        static let ServicesList = "servicesList"
     }
     
     @NSManaged var suburb: String
@@ -33,6 +34,7 @@ class Stops: NSManagedObject {
     @NSManaged var longitude: Double
     @NSManaged var timetable: NSSet
     @NSManaged var line: Line
+    @NSManaged var servicesList: String?
     
     
     var location: CLLocation? {
@@ -84,6 +86,7 @@ class Stops: NSManagedObject {
         if elements != nil {
             if elements!.count > 0 {
                 var stop = elements!.last as! Stops
+                
                 return stop
             }
         }

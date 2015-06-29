@@ -52,7 +52,9 @@ class Direction: NSManagedObject {
         //println(context.countForFetchRequest(fetchRequest, error: &error))
         
         if context.countForFetchRequest(fetchRequest, error: &error) > 0 {
-            return context.executeFetchRequest(fetchRequest, error: &error)!.last as! Direction
+            var retVal = context.executeFetchRequest(fetchRequest, error: &error)!.last as! Direction
+            retVal.directionName = dictionary[Keys.DirectionName] as! String
+            return retVal
         } else {
             return Direction(dictionary: dictionary, context: context)
         }

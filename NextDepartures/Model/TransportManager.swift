@@ -212,7 +212,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
                 fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) IN %@ )", NSDate(), timeTableStops)
             }
         } else if requestFetchMode == .UniqueStop || requestFetchMode == .Watch {
-            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) IN %@ )", NSDate(), timeTableStops)
+            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) == %i )", NSDate(), (timeTableStops.objectAtIndex(0) as! Stops).stopId)
         }
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Timetable.Keys.TimeUTC, ascending: true)]
@@ -353,11 +353,12 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         return newTrackingSvc
     }
     
-    func addTrackingStop(stop: Stops, withDistance distance: Double) -> TrackingStop {
+    func addTrackingStop(stop: Stops, forService service: Timetable, withDistance distance: Double) -> TrackingStop {
         let trackingStopInformation: [String: AnyObject?] = [
             TrackingStop.Keys.Stop : stop,
             TrackingStop.Keys.TrackingDistance : distance,
-            TrackingStop.Keys.Enabled : true
+            TrackingStop.Keys.Enabled : true,
+            TrackingStop.Keys.Timetable : service
         ]
         
         var newTrackingStop = TrackingStop.retrieveTrackingStop(trackingStopInformation, context: sharedContext)

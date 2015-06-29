@@ -16,9 +16,11 @@ class TrackingStop : NSManagedObject, Printable {
     struct Keys {
         static let Stop = "stop"
         static let TrackingDistance = "trackingDistance"
+        static let Timetable = "timetable"
         static let Enabled = "enabled"
     }
     
+    @NSManaged var timetable : Timetable
     @NSManaged var stop : Stops
     @NSManaged var trackingDistance : Double
     @NSManaged var enabled : Bool
@@ -36,6 +38,7 @@ class TrackingStop : NSManagedObject, Printable {
         self.trackingDistance = (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue
         self.enabled = (dictionary[Keys.Enabled] as! Bool)
         self.stop = dictionary[Keys.Stop] as! Stops
+        self.timetable = dictionary[Keys.Timetable] as! Timetable
     }
     
     class func retrieveTrackingStop(dictionary: [String : AnyObject?], context: NSManagedObjectContext) -> TrackingStop {
@@ -48,7 +51,10 @@ class TrackingStop : NSManagedObject, Printable {
         //println(context.countForFetchRequest(fetchRequest, error: &error))
         
         if context.countForFetchRequest(fetchRequest, error: &error) > 0 {
-            return context.executeFetchRequest(fetchRequest, error: &error)!.last as! TrackingStop
+            var retVal = context.executeFetchRequest(fetchRequest, error: &error)!.last as! TrackingStop
+            retVal.timetable = dictionary[Keys.Timetable] as! Timetable
+            retVal.enabled = (dictionary[Keys.Enabled] as! Bool)
+            return retVal
         } else {
             return TrackingStop(dictionary: dictionary, context: context)
         }

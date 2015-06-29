@@ -33,7 +33,7 @@ class StopTableViewCell: UITableViewCell {
     func updateInformationWithStop(item: Stops, FromLocation location: CLLocation) {
         //lineNumberLabel.text = item.line.lineNumber
         
-        subTextLabel.text = String(item.stopId)
+        subTextLabel.text = item.servicesList != nil ? item.servicesList : ""
         mainTextLabel.text = item.locationName
         
         transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))

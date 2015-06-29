@@ -55,6 +55,7 @@ class StopDetailsViewController: UITableViewController {
         
         // Do any additional setup after loading the view.
         self.navigationItem.title = String(format: "%@", selectedStop.locationName)
+        self.navigationItem.titleView = Helper.titleViewWithText(selectedStop.locationName, andSubtitle: String(selectedStop.suburb))
         
         var transportMode = PTVClient.TransportMode.transportModeFromString(selectedStop.transportType)
         
@@ -73,34 +74,56 @@ class StopDetailsViewController: UITableViewController {
         self.tableView.addSubview(tableRefreshControl)
         
         //Timer that refresh the time value in the TableView
-        self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
+        self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
         
         sharedTransport.requestFetchMode = .UniqueStop
         sharedTransport.timeTableStops = [selectedStop]
         
         sharedTransport.timeTableFetchedResultsController = sharedTransport.refreshTimeTableFetchedResultsController()
-
         sharedTransport.timeTableFetchedResultsController.performFetch(nil)
         
-        if sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count == 0 {
-            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
-            sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
-                if error != nil {
-                    self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
-                        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
-                    })
-                } else {
-                    //Process the timetable elements. result contains an array of Timetable
-                    
-                    self.timetableElements = result as? [Timetable]
-                    
-                    //sharedTransport.timeTableFetchedResultsController contains all the timeTableElements recently fetch
-                    self.updateTableData()
-                }
-            })
+        if sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count < 25 {
+            fetchData(nil)
         } else {
             self.timetableElements = sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
         }
+    }
+    
+    func fetchData(sender:AnyObject?) {
+        Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+        sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
+            if error != nil {
+                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
+                self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.localizedFailureReason!, completionHandler: { (alertAction) -> Void in
+                    self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+                })
+            } else {
+                //Process the timetable elements. result contains an array of Timetable
+                
+                self.sharedTransport.timeTableFetchedResultsController = self.sharedTransport.refreshTimeTableFetchedResultsController()
+                self.sharedTransport.timeTableFetchedResultsController.performFetch(nil)
+                
+                self.timetableElements = self.sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
+                
+                var uniqueStops : Set<String> = []
+                
+                if self.selectedStop.servicesList == nil {
+                    for item in self.timetableElements! {
+                        uniqueStops.insert(String(item.line.lineNumber))
+                    }
+                    
+                    var uniqueStopsArray = Array(uniqueStops)
+                    uniqueStopsArray.sort({ first, second in return first < second })
+                    
+                    self.selectedStop.servicesList = ", ".join(uniqueStopsArray)
+                    
+                    self.sharedContext.save(nil)
+                }
+                
+                //sharedTransport.timeTableFetchedResultsController contains all the timeTableElements recently fetch
+                self.updateTableData()
+            }
+        })
     }
     
     func refreshTableViewCells(timer:NSTimer) {
@@ -216,7 +239,7 @@ class StopDetailsViewController: UITableViewController {
         
         var reminderAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Reminder" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
-            var timeTableItem = self.sharedTransport.sortedTimeTable![indexPath.row]
+            var timeTableItem = self.timetableElements![indexPath.row]
             
             var timeDifference = timeTableItem.timeFromNow()
             
@@ -258,10 +281,19 @@ class StopDetailsViewController: UITableViewController {
             }
         })
         
-        reminderAction.backgroundColor = UIColor.blueColor()
+        reminderAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)
         
+        var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            var timeTableItem = self.timetableElements![indexPath.row]
+            
+            self.performSegueWithIdentifier("showRouteDetails", sender: self.tableView.cellForRowAtIndexPath(indexPath))
+        })
+
+        setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
+
+        actions.addObject(setDestinationAction)
         actions.addObject(reminderAction)
-        
         
         return actions as [AnyObject]?
     }
@@ -309,14 +341,21 @@ class StopDetailsViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showRouteDetails" {
+            selectedIndex = self.tableView.indexPathForCell((sender as! DepartureTableViewCell))
+            
+            var sdVC = segue.destinationViewController as! RouteDetailsViewController
+            
+            sdVC.timeTable = timetableElements![selectedIndex!.row]
+            
+        }
     }
-    */
+
 
 }

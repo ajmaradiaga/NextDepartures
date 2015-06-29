@@ -128,4 +128,39 @@ class Helper: NSObject {
         return (timeValue, timeUOM, timeValue + " " + timeUOM)
     }
     
+    class func titleViewWithText(text: String, andSubtitle subtitle:String) -> UIView {
+        
+        var titleLabel = UILabel(frame: CGRectMake(0, 0, 0, 0))
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.font = UIFont.boldSystemFontOfSize(14)
+        titleLabel.text = text
+        titleLabel.sizeToFit()
+        
+        var subTitleLabel = UILabel(frame: CGRectMake(0,20, 0, 0))
+        subTitleLabel.backgroundColor = UIColor.clearColor()
+        subTitleLabel.textColor = UIColor.whiteColor()
+        subTitleLabel.font = UIFont.boldSystemFontOfSize(10)
+        subTitleLabel.text = subtitle
+        subTitleLabel.sizeToFit()
+        
+        var newTitleView = UIView(frame: CGRectMake(0,0,max(subTitleLabel.frame.size.width,titleLabel.frame.size.width),30))
+        newTitleView.addSubview(titleLabel)
+        newTitleView.addSubview(subTitleLabel)
+        
+        var widthDiff = subTitleLabel.frame.size.width - titleLabel.frame.size.width
+        
+        if widthDiff > 0 {
+            var frame = titleLabel.frame
+            frame.origin.x = widthDiff / 2
+            titleLabel.frame = CGRectIntegral(frame)
+        } else {
+            var frame = subTitleLabel.frame
+            frame.origin.x = abs(widthDiff) / 2
+            subTitleLabel.frame = CGRectIntegral(frame)
+        }
+        
+        return newTitleView
+    }
+    
 }

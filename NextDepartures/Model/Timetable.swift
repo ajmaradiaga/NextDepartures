@@ -66,6 +66,7 @@ class Timetable: NSManagedObject, Printable {
         if context.countForFetchRequest(fetchRequest, error: &error) > 0 {
             var aux = context.executeFetchRequest(fetchRequest, error: &error)!.last as! Timetable
             aux.setTimeUTCFromStringValue(dictionary[Keys.TimeUTC] as! String)
+            aux.destinationName = dictionary[Keys.DestinationName] as! String
             
             return aux
         } else {

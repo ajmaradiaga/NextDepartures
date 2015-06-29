@@ -12,6 +12,7 @@ class TrackingStopTableViewCell: UITableViewCell {
 
     @IBOutlet weak var enabledSwitch : UISwitch!
     
+    @IBOutlet weak var serviceNumberLabel: UILabel!
     @IBOutlet weak var stopDetailsLabel : UILabel!
     @IBOutlet weak var trackingDistanceLabel : UILabel!
     
@@ -35,6 +36,13 @@ class TrackingStopTableViewCell: UITableViewCell {
         trackingStop = item
         enabledSwitch.on = item.enabled
         stopDetailsLabel.text = item.stop.stopName
+        
+        //var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
+        
+        //enabledSwitch.tintColor = trackingColor
+        
+        serviceNumberLabel.text = item.timetable.line.lineNumber
+        serviceNumberLabel.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable.transportType)
         
         var currentDistanceString =  ""
         

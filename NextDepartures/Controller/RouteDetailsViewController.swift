@@ -38,7 +38,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = String(format: "%@ - %@", timeTable.line.lineNumber, timeTable.lineDirection.directionName)
+        
+        self.navigationItem.titleView = Helper.titleViewWithText(String(format: "%@ - %@", timeTable.line.lineNumber, timeTable.lineDirection.directionName), andSubtitle: "Select your destination")
 
         Helper.setMapRegion(routeMap, withCoordinates: timeTable.stop.location!.coordinate, delta: 0.01, animated: true)
         
@@ -188,7 +189,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         var userLocation = routeMap.userLocation.location
         
-            sharedTransport.addTrackingStop(selectedAnnotation.stop, withDistance: distance)
+        sharedTransport.addTrackingStop(selectedAnnotation.stop, forService: self.timeTable!, withDistance: distance)
             
             println("Added \(selectedAnnotation.stop.stopName) stop to trackingStops")
         routeMap.deselectAnnotation(selectedAnnotation, animated: false)

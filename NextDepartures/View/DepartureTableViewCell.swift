@@ -35,7 +35,7 @@ class DepartureTableViewCell: UITableViewCell {
         
         serviceNumber.textColor = PTVClient.TransportMode.colorForTransportType(item.transportType)
         
-        subTextLabel.text = item.line.lineName
+        subTextLabel.text = String(format:"to \(item.destinationName)")
         mainTextLabel.text = item.lineDirection.directionName
         
         //transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))

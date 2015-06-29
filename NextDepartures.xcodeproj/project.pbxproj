@@ -136,6 +136,9 @@
 		6B288B261B39742100480108 /* TrackingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		6B288B281B3C9F9E00480108 /* StopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTableViewCell.swift; sourceTree = "<group>"; };
 		6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDetailsViewController.swift; sourceTree = "<group>"; };
+		6B288B2C1B414B9100480108 /* GothamBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBold.ttf; sourceTree = "<group>"; };
+		6B288B2D1B414B9100480108 /* GothamBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBook.ttf; sourceTree = "<group>"; };
+		6B288B2E1B414B9100480108 /* GothamMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.ttf; sourceTree = "<group>"; };
 		6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MelbourneCBDtoStKilda.gpx; sourceTree = "<group>"; };
 		6B4811331B1053AF00FD4A7F /* MelbourneCBD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MelbourneCBD.gpx; sourceTree = "<group>"; };
 		6B4811341B119A2200FD4A7F /* TimetableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableRow.swift; sourceTree = "<group>"; };
@@ -284,6 +287,9 @@
 		6B9BE2641B103EDE001A135B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6B288B2C1B414B9100480108 /* GothamBold.ttf */,
+				6B288B2D1B414B9100480108 /* GothamBook.ttf */,
+				6B288B2E1B414B9100480108 /* GothamMedium.ttf */,
 				6B9BE2651B103EDE001A135B /* Info.plist */,
 			);
 			name = "Supporting Files";

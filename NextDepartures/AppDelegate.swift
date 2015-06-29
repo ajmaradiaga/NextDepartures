@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics()])
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         //Register notifications handle by Application
         var notificationTypes : UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound;
         var settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
