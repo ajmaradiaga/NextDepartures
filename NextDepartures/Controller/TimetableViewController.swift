@@ -156,9 +156,10 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
         
         for cell in nextDeparturesTable.visibleCells() {
-            if cell is DepartureTableViewCell {
+            if cell is StopTableViewCell {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    (cell as! DepartureTableViewCell).refreshInformationWithLocation(self.sharedTransport.userCurrentLocation!)
+                    var stopCell = cell as! StopTableViewCell
+                    stopCell.updateInformationWithStop(stopCell.stopItem!, FromLocation: self.sharedTransport.userCurrentLocation!)
                 })
             }
         }
@@ -464,10 +465,11 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     }
     
     //MARK: TableViewDelegate
+    /*
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-    }
-    
+    }*/
+    /*
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         /*
@@ -539,7 +541,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         
         return actions as [AnyObject]?
-    }
+    }*/
     
     func setReminder(timeTableItem: Timetable, seconds: Int32) {
         self.alertVC!.dismissViewControllerAnimated(true, completion: nil)

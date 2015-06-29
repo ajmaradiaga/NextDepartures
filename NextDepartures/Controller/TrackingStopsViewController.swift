@@ -117,10 +117,13 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
                 switch type {
                 case .Insert:
                     println("Insert item")
+                    break
                 case .Update:
                     println("Update item")
+                    break
                 case .Delete:
                     self.trackingTableView.reloadData()
+                    break
                 default:
                     return
                 }

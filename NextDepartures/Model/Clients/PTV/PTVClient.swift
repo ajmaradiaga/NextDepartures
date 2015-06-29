@@ -429,16 +429,16 @@ class PTVClient: NSObject{
                                         
                                         var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
                                         
-                                        //stop.line = timeTable.line
+                                        stop.line = timeTable.line
                                         stop.patternType = _patternType
                                         
                                         resultStops.append(stop)
-                                        
                                     }
                                 }
                             }
                             
-                           completionHandler(result: resultStops, error: nil)
+                            CoreDataStackManager.sharedInstance().saveContext()
+                            completionHandler(result: resultStops, error: nil)
                         }
                     }
                     

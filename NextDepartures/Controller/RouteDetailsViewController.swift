@@ -183,13 +183,15 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     }
     
     func handleDistanceSelected(distance: Double) -> Void{
-        stopActions.dismissViewControllerAnimated(true, completion: nil)
+        //stopActions.dismissViewControllerAnimated(true, completion: nil)
         
         var targetStopLocation = selectedAnnotation.stop.location
         
         var userLocation = routeMap.userLocation.location
         
         sharedTransport.addTrackingStop(selectedAnnotation.stop, forService: self.timeTable!, withDistance: distance)
+        
+        CoreDataStackManager.sharedInstance().saveContext()
             
             println("Added \(selectedAnnotation.stop.stopName) stop to trackingStops")
         routeMap.deselectAnnotation(selectedAnnotation, animated: false)

@@ -46,7 +46,7 @@ class TrackingStop : NSManagedObject, Printable {
         let fetchRequest = NSFetchRequest(entityName: "TrackingStop")
         var error : NSError?
         
-        fetchRequest.predicate = NSPredicate(format: "\(Keys.TrackingDistance) == %f and \(Keys.Stop).\(Stops.Keys.StopId) == %i", (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue,(dictionary[Keys.Stop] as! Stops).stopId)
+        fetchRequest.predicate = NSPredicate(format: "\(Keys.TrackingDistance) == %f and \(Keys.Stop).\(Stops.Keys.StopId) == %i and \(Keys.Timetable).\(Timetable.Keys.RunId) == %i", (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue,(dictionary[Keys.Stop] as! Stops).stopId, (dictionary[Keys.Timetable] as! Timetable).runId)
         
         //println(context.countForFetchRequest(fetchRequest, error: &error))
         
@@ -54,6 +54,8 @@ class TrackingStop : NSManagedObject, Printable {
             var retVal = context.executeFetchRequest(fetchRequest, error: &error)!.last as! TrackingStop
             retVal.timetable = dictionary[Keys.Timetable] as! Timetable
             retVal.enabled = (dictionary[Keys.Enabled] as! Bool)
+            retVal.stop = (dictionary[Keys.Stop] as! Stops)
+        
             return retVal
         } else {
             return TrackingStop(dictionary: dictionary, context: context)

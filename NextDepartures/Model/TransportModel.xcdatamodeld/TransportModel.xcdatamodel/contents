@@ -26,7 +26,7 @@
         <attribute name="transportType" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="stops" inverseEntity="Line" syncable="YES"/>
         <relationship name="timetable" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Timetable" inverseName="stop" inverseEntity="Timetable" syncable="YES"/>
-        <relationship name="trackingStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackingStop" inverseName="stop" inverseEntity="TrackingStop" syncable="YES"/>
+        <relationship name="trackingStop" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackingStop" inverseName="stop" inverseEntity="TrackingStop" syncable="YES"/>
     </entity>
     <entity name="Timetable" representedClassName="Timetable" syncable="YES">
         <attribute name="destinationId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -37,8 +37,8 @@
         <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="runs" inverseEntity="Line" syncable="YES"/>
         <relationship name="lineDirection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Direction" inverseName="runs" inverseEntity="Direction" syncable="YES"/>
         <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stops" inverseName="timetable" inverseEntity="Stops" syncable="YES"/>
-        <relationship name="trackingService" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackingService" inverseName="timeTable" inverseEntity="TrackingService" syncable="YES"/>
-        <relationship name="trackingStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackingStop" inverseName="timetable" inverseEntity="TrackingStop" syncable="YES"/>
+        <relationship name="trackingService" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackingService" inverseName="timeTable" inverseEntity="TrackingService" syncable="YES"/>
+        <relationship name="trackingStop" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackingStop" inverseName="timetable" inverseEntity="TrackingStop" syncable="YES"/>
     </entity>
     <entity name="TrackingService" representedClassName="TrackingService" syncable="YES">
         <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
