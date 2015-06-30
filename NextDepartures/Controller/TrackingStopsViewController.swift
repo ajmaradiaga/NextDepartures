@@ -41,6 +41,15 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        refreshDataInView()
+    }
+    
+    func refreshDataInView() {
+        if sharedTransport.trackingStopFetchedResultsController.fetchedObjects!.count == 0 {
+            self.trackingTableView.hidden = true
+        } else {
+            self.trackingTableView.hidden = false
+        }
         trackingTableView.reloadData()
     }
     
@@ -58,15 +67,18 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         
-        let reuseIdentifier = IS_IPHONE_5_OR_LESS ? "TrackingStopCell_Small" : "TrackingStopCell"
+        let reuseIdentifier = "TrackingStopCell"
         
         var cell : TrackingStopTableViewCell
         
         if let tempCell: TrackingStopTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? TrackingStopTableViewCell {
-            
             cell = tempCell
+            if cell.enabledSwitch == nil {
+                cell.prepareSwitch()
+            }
         } else {
             cell = TrackingStopTableViewCell()
+            cell.prepareSwitch()
         }
         
         cell.updateInformationWithTrackingStop(item)
@@ -126,7 +138,7 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
                     println("Update item")
                     break
                 case .Delete:
-                    self.trackingTableView.reloadData()
+                    self.refreshDataInView()
                     break
                 default:
                     return

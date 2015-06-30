@@ -10,7 +10,7 @@ import UIKit
 
 class TrackingStopTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var enabledSwitch : UISwitch!
+    @IBOutlet weak var enabledSwitch : UISwitch?
     
     @IBOutlet weak var serviceNumberLabel: UILabel?
     @IBOutlet weak var stopDetailsLabel : UILabel!
@@ -29,17 +29,26 @@ class TrackingStopTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func prepareSwitch() {
+        var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
+        var switchView = UISwitch(frame: CGRectZero)
+        switchView.onTintColor = trackingColor
+        
+        
+        self.enabledSwitch = switchView
+        self.enabledSwitch!.addTarget(self, action: "switchValueChanges:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        self.accessoryView = self.enabledSwitch
+    }
+    
     func updateInformationWithTrackingStop(item: TrackingStop) {
         /*if accessoryView == nil {
             accessoryView = enabledSwitch
         }*/
         trackingStop = item
-        enabledSwitch.on = item.enabled
+        enabledSwitch!.on = item.enabled
         stopDetailsLabel.text = item.stop.stopName
         
-        //var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
-        
-        //enabledSwitch.tintColor = trackingColor
         if serviceNumberLabel != nil {
             serviceNumberLabel!.text = item.timetable.line.lineNumber
             serviceNumberLabel!.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable.transportType)
@@ -55,7 +64,7 @@ class TrackingStopTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchValueChanges(sender: AnyObject) {
-        trackingStop?.enabled = enabledSwitch.on
+        trackingStop?.enabled = enabledSwitch!.on
         CoreDataStackManager.sharedInstance().saveContext()
     }
     

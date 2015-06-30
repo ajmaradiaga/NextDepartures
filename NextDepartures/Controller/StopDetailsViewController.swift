@@ -44,18 +44,11 @@ class StopDetailsViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        /*
-        NSNotificationCenter.defaultCenter().addObserverForName("timeTableComplete", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.handleTimeTableCompleteNotification(notification)
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserverForName("timeTablePartial", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.handleTimeTableCompleteNotification(notification)
-        }*/
-        
         // Do any additional setup after loading the view.
         self.navigationItem.title = String(format: "%@", selectedStop.locationName)
         self.navigationItem.titleView = Helper.titleViewWithText(selectedStop.locationName, andSubtitle: String(selectedStop.suburb))
+        
+        println("Width Title: \(self.navigationItem.titleView?.frame.width)")
         
         var transportMode = PTVClient.TransportMode.transportModeFromString(selectedStop.transportType)
         
@@ -63,9 +56,6 @@ class StopDetailsViewController: UITableViewController {
         
         self.navigationController?.navigationBar.barTintColor = color
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
-        //[self.navigationController.navigationBar
-         //   setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
@@ -83,14 +73,26 @@ class StopDetailsViewController: UITableViewController {
         sharedTransport.timeTableFetchedResultsController.performFetch(nil)
         
         if sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count < 25 {
+            self.tableView.setContentOffset(CGPointMake(0, -self.tableRefreshControl.frame.size.height), animated: true)
+            tableRefreshControl.beginRefreshing()
             fetchData(nil)
         } else {
             self.timetableElements = sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if sharedTransport.isRefreshingData {
+            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+        }
+    }
+    
     func fetchData(sender:AnyObject?) {
-        Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+        if (self.isViewLoaded() && self.view.window != nil) {
+            // viewController is visible
+            Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
+        }
         sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
             if error != nil {
                 Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
@@ -275,7 +277,9 @@ class StopDetailsViewController: UITableViewController {
                 
                 self.presentViewController(self.alertVC!, animated: true, completion: nil)
             } else {
-                Helper.raiseNotification("You should be @ \(timeTableItem.stop.stopName) in \(timeTableItem.displayTimeFromNow())", withTitle: "Get Ready", completionHandler: { () -> Void in
+                var serviceName = timeTableItem.transportType == "train" ? "" : "- \(timeTableItem.lineDirection.directionName)"
+                
+                Helper.raiseNotification("You should be @ \(timeTableItem.stop.stopName) in \(timeTableItem.displayTimeFromNow()) for service \(timeTableItem.line.lineNumber) \(serviceName)", withTitle: "Get Ready", completionHandler: { () -> Void in
                     self.tableView.editing = false
                 })
             }

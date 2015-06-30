@@ -247,8 +247,9 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     func fetchDataForStop(stop:Stops, completionHandler: CompletionHandler) {
         self.requestFetchMode = .UniqueStop
         self.timeTableStops = [stop]
-        
+        isRefreshingData = true
         PTVClient.sharedInstance().nextDeparturesForStop(stop, limit: 20) { (result, error) -> Void in
+            self.isRefreshingData = false
             if error != nil {
                 completionHandler(result: nil, error: error)
             } else {
@@ -379,9 +380,10 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
                 var item = self.trackingServiceFetchedResultsController.objectAtIndexPath(NSIndexPath(forRow: index - 1, inSection: 0)) as! TrackingService
                 
                 if Int32(item.timeTable.timeFromNow()) < item.timeInSecs {
+                    var serviceName = item.timeTable.transportType == "train" ? "" : "- \(item.timeTable.lineDirection.directionName)"
                     item.enabled = false
                     println("\(item.timeTable.timeFromNow()) - \(item.timeInSecs)")
-                    Helper.raiseNotification("You should be @ \(item.timeTable.stop.stopName) in < \(item.timeInSecs / 60) mins", withTitle: "Get Ready", completionHandler: { () -> Void in
+                    Helper.raiseNotification("You should be @ \(item.timeTable.stop.stopName) in < \(item.timeInSecs / 60) mins for service \(item.timeTable.line.lineNumber) \(serviceName)", withTitle: "Get Ready", completionHandler: { () -> Void in
                     })
                 }
             }

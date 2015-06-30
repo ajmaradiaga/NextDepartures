@@ -163,23 +163,26 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     }
     
     func showStopOptions(sender: AnyObject) {
-        
-        stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        
-        stopActions.addAction(UIAlertAction(title: "\(Int(TransportManager.Constants.MinimumDistanceFromStop))m away", style: .Default) { (alertAction) -> Void in
-            self.handleDistanceSelected(TransportManager.Constants.MinimumDistanceFromStop)
-            })
-        stopActions.addAction(UIAlertAction(title: "500m away", style: .Default) { (alertAction) -> Void in
-            self.handleDistanceSelected(500)
-            })
-        stopActions.addAction(UIAlertAction(title: "1km away", style: .Default) { (alertAction) -> Void in
-            self.handleDistanceSelected(1000)
-            })
-        
-        stopActions.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        
-        self.presentViewController(stopActions, animated: true, completion: nil)
+        if selectedAnnotation.stop.patternType == .Future {
+            stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            
+            stopActions.addAction(UIAlertAction(title: "\(Int(TransportManager.Constants.MinimumDistanceFromStop))m away", style: .Default) { (alertAction) -> Void in
+                self.handleDistanceSelected(TransportManager.Constants.MinimumDistanceFromStop)
+                })
+            stopActions.addAction(UIAlertAction(title: "500m away", style: .Default) { (alertAction) -> Void in
+                self.handleDistanceSelected(500)
+                })
+            stopActions.addAction(UIAlertAction(title: "1km away", style: .Default) { (alertAction) -> Void in
+                self.handleDistanceSelected(1000)
+                })
+            
+            stopActions.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            
+            self.presentViewController(stopActions, animated: true, completion: nil)
+        } else {
+            routeMap.deselectAnnotation(selectedAnnotation, animated: true)
+        }
     }
     
     func handleDistanceSelected(distance: Double) -> Void{

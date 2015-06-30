@@ -130,19 +130,23 @@ class Helper: NSObject {
     
     class func titleViewWithText(text: String, andSubtitle subtitle:String) -> UIView {
         
-        var titleLabel = UILabel(frame: CGRectMake(0, 0, 0, 0))
+        var width = UIScreen.mainScreen().bounds.size.width - 132
+        
+        var titleLabel = UILabel(frame: CGRectMake(0, 0, width, 16))
         titleLabel.backgroundColor = UIColor.clearColor()
         titleLabel.textColor = UIColor.whiteColor()
         titleLabel.font = UIFont.boldSystemFontOfSize(14)
         titleLabel.text = text
-        titleLabel.sizeToFit()
+        titleLabel.textAlignment = NSTextAlignment.Center
         
-        var subTitleLabel = UILabel(frame: CGRectMake(0,20, 0, 0))
+        println("Title label: \(titleLabel.frame.width) - \(UIScreen.mainScreen().bounds.size.width)")
+        
+        var subTitleLabel = UILabel(frame: CGRectMake(0,20, width, 12))
         subTitleLabel.backgroundColor = UIColor.clearColor()
         subTitleLabel.textColor = UIColor.whiteColor()
         subTitleLabel.font = UIFont.boldSystemFontOfSize(10)
         subTitleLabel.text = subtitle
-        subTitleLabel.sizeToFit()
+        subTitleLabel.textAlignment = NSTextAlignment.Center
         
         var newTitleView = UIView(frame: CGRectMake(0,0,max(subTitleLabel.frame.size.width,titleLabel.frame.size.width),30))
         newTitleView.addSubview(titleLabel)

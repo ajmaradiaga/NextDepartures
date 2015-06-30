@@ -11,7 +11,6 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
-            <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
@@ -29,7 +28,11 @@
         <scene sceneID="CyL-Nb-ddV">
             <objects>
                 <navigationController id="hAo-vc-f1j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Around" image="Arounds_NonSelected" selectedImage="Arounds_Selected" id="i8Z-s5-oIx"/>
+                    <tabBarItem key="tabBarItem" title="Around" image="Arounds_NonSelected" selectedImage="Arounds_Selected" id="i8Z-s5-oIx">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Arounds_Selected"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZX0-as-WsP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -247,8 +250,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Py-O9-xBt">
+                                <rect key="frame" x="16" y="223.5" width="568" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="XHI-yS-Liu"/>
+                                </constraints>
+                                <string key="text">No Tracking Stops added yet. Go to Around, select a Stop and Set a Destination for a Service by selecting the desired Stop to track.</string>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="20"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.28627450980000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zRf-mL-8Mc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrackingStopCell" rowHeight="57" id="R7b-JI-uLU" customClass="TrackingStopTableViewCell" customModule="NextDepartures" customModuleProvider="target">
@@ -266,24 +279,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="StopDetails" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvU-gi-dbx">
-                                                    <rect key="frame" x="68" y="8" width="454.5" height="18.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="250" constant="456" id="w4x-wq-fJU"/>
-                                                    </constraints>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="StopDetails" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvU-gi-dbx">
+                                                    <rect key="frame" x="68" y="8" width="514" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="luE-5n-1lH">
-                                                    <rect key="frame" x="533" y="13" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.66666666669999997" green="0.28627450980000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="switchValueChanges:" destination="R7b-JI-uLU" eventType="valueChanged" id="yCO-eb-siz"/>
-                                                    </connections>
-                                                </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LTB-pN-vWC">
-                                                    <rect key="frame" x="68" y="30" width="454.5" height="14.5"/>
+                                                    <rect key="frame" x="68" y="30" width="514" height="14.5"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -294,62 +297,16 @@
                                                 <constraint firstItem="LTB-pN-vWC" firstAttribute="width" secondItem="TvU-gi-dbx" secondAttribute="width" priority="750" id="9I1-HK-CcF"/>
                                                 <constraint firstItem="IuU-JK-QAX" firstAttribute="leading" secondItem="LWH-BF-rdb" secondAttribute="leadingMargin" constant="8" id="ECu-E5-eEQ"/>
                                                 <constraint firstItem="LTB-pN-vWC" firstAttribute="leading" secondItem="TvU-gi-dbx" secondAttribute="leading" id="FYP-t1-CYC"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="TvU-gi-dbx" secondAttribute="trailing" constant="10" id="GNJ-2Q-4d6"/>
                                                 <constraint firstItem="TvU-gi-dbx" firstAttribute="leading" secondItem="IuU-JK-QAX" secondAttribute="trailing" constant="10" id="NOz-ge-pK5"/>
-                                                <constraint firstItem="luE-5n-1lH" firstAttribute="leading" secondItem="TvU-gi-dbx" secondAttribute="trailing" constant="10" id="Ruk-7H-9PE"/>
-                                                <constraint firstAttribute="centerY" secondItem="luE-5n-1lH" secondAttribute="centerY" constant="0.25" id="WB2-D1-T0f"/>
                                                 <constraint firstItem="LTB-pN-vWC" firstAttribute="top" secondItem="TvU-gi-dbx" secondAttribute="bottom" constant="3" id="goe-Ta-MhY"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="luE-5n-1lH" secondAttribute="trailing" constant="10" id="lvd-ta-8nJ"/>
                                                 <constraint firstItem="TvU-gi-dbx" firstAttribute="top" secondItem="LWH-BF-rdb" secondAttribute="topMargin" id="r2M-Dy-OV5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="enabledSwitch" destination="luE-5n-1lH" id="dqa-eh-a16"/>
                                             <outlet property="serviceNumberLabel" destination="IuU-JK-QAX" id="lpr-Db-gL9"/>
                                             <outlet property="stopDetailsLabel" destination="TvU-gi-dbx" id="Xb9-JQ-JXX"/>
                                             <outlet property="trackingDistanceLabel" destination="LTB-pN-vWC" id="0hI-rC-K0U"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrackingStopCell_Small" rowHeight="57" id="StV-wF-RJE" customClass="TrackingStopTableViewCell" customModule="NextDepartures" customModuleProvider="target">
-                                        <rect key="frame" x="140" y="278" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="StV-wF-RJE" id="b9B-Sv-jul">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="StopDetails" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2UY-fH-6zs">
-                                                    <rect key="frame" x="8" y="8" width="516.5" height="18.5"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sa9-fQ-qvI">
-                                                    <rect key="frame" x="535" y="13" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.66666666666666663" green="0.28627450980392155" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="switchValueChanges:" destination="StV-wF-RJE" eventType="valueChanged" id="sJF-7K-lTz"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HG-U5-x45">
-                                                    <rect key="frame" x="8" y="29" width="516.5" height="14.5"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="8HG-U5-x45" firstAttribute="leading" secondItem="2UY-fH-6zs" secondAttribute="leading" id="1ng-SF-oUA"/>
-                                                <constraint firstItem="2UY-fH-6zs" firstAttribute="leading" secondItem="b9B-Sv-jul" secondAttribute="leadingMargin" id="Bzi-LH-Nh1"/>
-                                                <constraint firstItem="2UY-fH-6zs" firstAttribute="top" secondItem="b9B-Sv-jul" secondAttribute="topMargin" id="Ea0-af-y20"/>
-                                                <constraint firstItem="Sa9-fQ-qvI" firstAttribute="right" secondItem="b9B-Sv-jul" secondAttribute="right" constant="-16" id="K3a-fR-Nmn"/>
-                                                <constraint firstItem="8HG-U5-x45" firstAttribute="width" secondItem="2UY-fH-6zs" secondAttribute="width" priority="750" id="ohT-uO-qrd"/>
-                                                <constraint firstItem="8HG-U5-x45" firstAttribute="top" secondItem="2UY-fH-6zs" secondAttribute="bottom" constant="3" id="pi1-ml-r5C"/>
-                                                <constraint firstItem="Sa9-fQ-qvI" firstAttribute="leading" secondItem="2UY-fH-6zs" secondAttribute="trailing" constant="10" id="waM-Dr-4kl"/>
-                                                <constraint firstAttribute="centerY" secondItem="Sa9-fQ-qvI" secondAttribute="centerY" constant="0.25" id="yKt-hf-T5Q"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="enabledSwitch" destination="Sa9-fQ-qvI" id="aFs-dz-kR2"/>
-                                            <outlet property="stopDetailsLabel" destination="2UY-fH-6zs" id="lKS-Xh-Zdi"/>
-                                            <outlet property="trackingDistanceLabel" destination="8HG-U5-x45" id="eha-ZU-Ewt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -362,9 +319,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zRf-mL-8Mc" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="-16" id="IJY-em-mK7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Py-O9-xBt" secondAttribute="trailing" id="Pu8-q7-SM9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zRf-mL-8Mc" secondAttribute="trailing" constant="-16" id="Ypd-MB-XOg"/>
-                            <constraint firstItem="zRf-mL-8Mc" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="-64" id="ksm-bH-z1r"/>
-                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="zRf-mL-8Mc" secondAttribute="bottom" constant="-49" id="zln-om-i7D"/>
+                            <constraint firstItem="3Py-O9-xBt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="kOW-Bl-OFH"/>
+                            <constraint firstItem="zRf-mL-8Mc" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="ksm-bH-z1r"/>
+                            <constraint firstAttribute="centerY" secondItem="3Py-O9-xBt" secondAttribute="centerY" constant="-14" id="uS7-H3-qqh"/>
+                            <constraint firstAttribute="centerX" secondItem="3Py-O9-xBt" secondAttribute="centerX" id="yGR-WJ-weQ"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="zRf-mL-8Mc" secondAttribute="bottom" id="zln-om-i7D"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tracking Stops" id="rGO-Tf-5zq"/>
@@ -451,7 +412,7 @@
         <scene sceneID="uqP-VQ-Gtk">
             <objects>
                 <tableViewController id="UuP-k3-9Ms" customClass="StopDetailsViewController" customModule="NextDepartures" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z2-tW-23C">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z2-tW-23C">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -474,7 +435,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTc-id-qsB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="200" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="nTc-id-qsB">
                                             <rect key="frame" x="539" y="14" width="53" height="28.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="53" id="OaY-EH-Fya"/>
@@ -492,7 +453,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="GWZ-ZH-D3W">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="GWZ-ZH-D3W">
                                             <rect key="frame" x="16" y="19" width="42.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="42.5" id="pkz-zX-pef"/>
@@ -534,7 +495,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Stop Details" id="non-O2-KIH">
                         <barButtonItem key="backBarButtonItem" title="Back" id="1kq-C0-2bj"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="DW7-3b-FPW">
+                        <barButtonItem key="rightBarButtonItem" image="Favourite_NonSelected" id="DW7-3b-FPW">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshTimetable:" destination="9pv-A4-QxB" id="pmm-DH-VLy"/>
                             </connections>
@@ -557,6 +519,7 @@
     <resources>
         <image name="Arounds_NonSelected" width="25" height="24"/>
         <image name="Arounds_Selected" width="25" height="24"/>
+        <image name="Favourite_NonSelected" width="25" height="24"/>
         <image name="Tracking_NonSelected" width="19" height="25"/>
         <image name="Tracking_Selected" width="19" height="25"/>
         <image name="location" width="24" height="24"/>
