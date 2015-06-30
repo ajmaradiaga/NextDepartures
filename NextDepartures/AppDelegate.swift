@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+        UITabBar.appearance().tintColor = UIColor(red: 239/255, green: 79/255, blue: 27/255, alpha: 1.0)
+        
         //Register notifications handle by Application
         var notificationTypes : UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound;
         var settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
