@@ -347,12 +347,11 @@ class PTVClient: NSObject{
                             Stops.Keys.Longitude : value[Keys.Longitude],
                             Stops.Keys.StopId : value[Keys.StopId],
                             Stops.Keys.Suburb : value[Keys.Suburb],
-                            Stops.Keys.TransportType : value[Keys.TransportType]
+                            Stops.Keys.TransportType : value[Keys.TransportType],
+                            Stops.Keys.Line : line
                         ]
                         
                         var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
-                        
-                        stop.line = line
                         
                         resultStops.append(stop)
                         
@@ -415,7 +414,8 @@ class PTVClient: NSObject{
                                             Stops.Keys.Longitude : stop[Keys.Longitude],
                                             Stops.Keys.StopId : stop[Keys.StopId],
                                             Stops.Keys.Suburb : stop[Keys.Suburb],
-                                            Stops.Keys.TransportType : stop[Keys.TransportType]
+                                            Stops.Keys.TransportType : stop[Keys.TransportType],
+                                            Stops.Keys.Line : timeTable.line
                                         ]
                                         
                                         var _patternType : Stops.StopPatternType = .Past
@@ -429,7 +429,6 @@ class PTVClient: NSObject{
                                         
                                         var stop = Stops.retrieveStop(stopInformation, context: self.sharedContext)
                                         
-                                        stop.line = timeTable.line
                                         stop.patternType = _patternType
                                         
                                         resultStops.append(stop)

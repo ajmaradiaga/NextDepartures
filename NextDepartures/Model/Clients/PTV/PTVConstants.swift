@@ -37,6 +37,10 @@ extension PTVClient {
                     return .Bus
                 case "train":
                     return .Train
+                case "nightrider":
+                    return .NightRider
+                case "vline":
+                    return .VLine
                 default:
                     return .Tram
             }
@@ -56,6 +60,23 @@ extension PTVClient {
                 return "train"
             default:
                 return "tram"
+            }
+        }
+        
+        static func pinImageNameForTransportType(value : String) -> String {
+            switch value {
+            case "tram":
+                return "Pinpoint_tram"
+            case "bus":
+                return "Pinpoint_bus"
+            case "nightrider":
+                return "Pinpoint_bus"
+            case "train":
+                return "Pinpoint_train"
+            case "vline":
+                return "Pinpoint_train"
+            default:
+                return "Pinpoint_tram"
             }
         }
         

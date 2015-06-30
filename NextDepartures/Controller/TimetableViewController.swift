@@ -30,6 +30,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     //var currentLocation : CLLocation?
     var selectedIndex : NSIndexPath?
     var tableRefreshControl = UIRefreshControl()
+    var selectedStop : Stops?
     
     lazy var melbourneCBDLocation = CLLocation(latitude: -37.8140000, longitude: 144.9633200)
     
@@ -322,15 +323,15 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         let reuseId = "stopPin"
         
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             
             //Prepare disclosure button that will be added to the pin
-            //var disclosureButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
-            //disclosureButton.addTarget(self, action: Selector("showStopOptions:"), forControlEvents: UIControlEvents.TouchUpInside)
+            var disclosureButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            disclosureButton.addTarget(self, action: Selector("showStopDetails:"), forControlEvents: UIControlEvents.TouchUpInside)
             
-            //pinView!.rightCalloutAccessoryView = disclosureButton
+            pinView!.rightCalloutAccessoryView = disclosureButton
             
             pinView!.canShowCallout = true
             //pinView!.draggable = true
@@ -338,6 +339,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         else {
             pinView!.annotation = annotation
         }
+        
+        pinView!.image = UIImage(named: PTVClient.TransportMode.pinImageNameForTransportType((annotation as! StopAnnotation).stop.transportType))
         
         return pinView
     }
@@ -348,7 +351,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         //Check that the annotation is of type StopAnnotation
         if view.annotation is StopAnnotation {
             //Grab the stop associated to the annotation
-            var selectedStop = (view.annotation as! StopAnnotation).stop
+            selectedStop = (view.annotation as! StopAnnotation).stop
             
             /*
             self.sharedTransport.timeTableStops = [NSNumber(int: selectedStop.stopId)]
@@ -560,14 +563,21 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
     }
     
+    func showStopDetails(sender:AnyObject) {
+        self.performSegueWithIdentifier("showStopDetails", sender: sender)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showStopDetails" {
-            selectedIndex = nextDeparturesTable.indexPathForCell((sender as! StopTableViewCell))
             
             var sdVC = segue.destinationViewController as! StopDetailsViewController
             
-            sdVC.selectedStop = sharedTransport.sortedStops![selectedIndex!.row]
-            
+            if sender is StopTableViewCell {
+                selectedIndex = nextDeparturesTable.indexPathForCell((sender as! StopTableViewCell))
+                sdVC.selectedStop = sharedTransport.sortedStops![selectedIndex!.row]
+            } else if sender is UIButton {
+                sdVC.selectedStop = self.selectedStop!
+            }
         }
     }
 }

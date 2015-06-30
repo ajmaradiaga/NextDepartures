@@ -24,6 +24,7 @@ class Stops: NSManagedObject {
         static let Timetable = "timetable"
         static let Line = "line"
         static let ServicesList = "servicesList"
+        static let PatternType = "patternType"
     }
     
     @NSManaged var suburb: String
@@ -35,6 +36,7 @@ class Stops: NSManagedObject {
     @NSManaged var timetable: NSSet
     @NSManaged var line: Line
     @NSManaged var servicesList: String?
+    var patternType : StopPatternType = .Past
     
     
     var location: CLLocation? {
@@ -47,7 +49,7 @@ class Stops: NSManagedObject {
         }
     }
     
-    var patternType : StopPatternType = .Past
+    
     
     enum StopPatternType : Int32 {
         case Past = 0,
@@ -60,16 +62,19 @@ class Stops: NSManagedObject {
     }
     
     init(dictionary: [String : AnyObject?], context: NSManagedObjectContext) {
-            let entity =  NSEntityDescription.entityForName("Stops", inManagedObjectContext: context)!
-            
-            super.init(entity: entity,insertIntoManagedObjectContext: context)
-            
-            self.suburb = dictionary[Keys.Suburb] as! String
-            self.transportType = dictionary[Keys.TransportType] as! String
-            self.locationName = dictionary[Keys.LocationName] as! String
-            self.stopId = (dictionary[Keys.StopId] as! NSNumber).intValue
-            self.latitude = (dictionary[Keys.Latitude] as! NSNumber).doubleValue
-            self.longitude = (dictionary[Keys.Longitude] as! NSNumber).doubleValue
+        let entity =  NSEntityDescription.entityForName("Stops", inManagedObjectContext: context)!
+        
+        super.init(entity: entity,insertIntoManagedObjectContext: context)
+        
+        self.suburb = dictionary[Keys.Suburb] as! String
+        self.transportType = dictionary[Keys.TransportType] as! String
+        self.locationName = dictionary[Keys.LocationName] as! String
+        self.stopId = (dictionary[Keys.StopId] as! NSNumber).intValue
+        self.latitude = (dictionary[Keys.Latitude] as! NSNumber).doubleValue
+        self.longitude = (dictionary[Keys.Longitude] as! NSNumber).doubleValue
+        if dictionary[Keys.Line] != nil {
+            self.line = dictionary[Keys.Line] as! Line
+        }
     }
     
     class func retrieveStop(dictionary: [String : AnyObject?], context: NSManagedObjectContext) -> Stops {
@@ -86,6 +91,10 @@ class Stops: NSManagedObject {
         if elements != nil {
             if elements!.count > 0 {
                 var stop = elements!.last as! Stops
+                
+                if dictionary[Keys.Line] != nil {
+                    stop.line = dictionary[Keys.Line] as! Line
+                }
                 
                 return stop
             }

@@ -212,7 +212,9 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
                 fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) IN %@ )", NSDate(), timeTableStops)
             }
         } else if requestFetchMode == .UniqueStop || requestFetchMode == .Watch {
-            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) == %i )", NSDate(), (timeTableStops.objectAtIndex(0) as! Stops).stopId)
+            var stop = (timeTableStops.objectAtIndex(0) as! Stops)
+            
+            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) == %i ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.TransportType) == %@ )", NSDate(), stop.stopId, stop.transportType)
         }
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Timetable.Keys.TimeUTC, ascending: true)]
