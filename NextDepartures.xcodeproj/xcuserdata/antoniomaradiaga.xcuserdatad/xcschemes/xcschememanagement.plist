@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Glance - NextDepartures WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>NextDepartures WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>NextDepartures.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>NextDeparturesCommon.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>NextDeparturesFramework.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Notification - NextDepartures WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6B9BE2601B103EDE001A135B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B9BE2771B103EDE001A135B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B9BE2C71B103F19001A135B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BB799781B12DC8C0094E733</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BB799821B12DC8C0094E733</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BB799971B12E0EB0094E733</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BB799A11B12E0EB0094E733</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

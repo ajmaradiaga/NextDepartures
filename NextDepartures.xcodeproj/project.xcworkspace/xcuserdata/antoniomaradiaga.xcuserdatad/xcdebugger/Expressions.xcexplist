@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "static NextDepartures.Timetable.retrieveTimetable (NextDepartures.Timetable.Type)(Swift.Dictionary&lt;Swift.String, Swift.Optional&lt;Swift.AnyObject&gt;&gt;, context : ObjectiveC.NSManagedObjectContext) -&gt; NextDepartures.Timetable:Timetable.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static NextDepartures.TrackingStop.retrieveTrackingStop (NextDepartures.TrackingStop.Type)(Swift.Dictionary&lt;Swift.String, Swift.Optional&lt;Swift.AnyObject&gt;&gt;, context : ObjectiveC.NSManagedObjectContext) -&gt; NextDepartures.TrackingStop:TrackingStop.swift">
+      </ContextState>
+      <ContextState
+         contextName = "function signature specialization &lt;Arg[4] = Dead, Arg[5] = Value Promoted from InOut&gt; of NextDepartures.TimetableViewController.(locationManager (NextDepartures.TimetableViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TimetableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "placemark.country">
+            </PersistentString>
+            <PersistentString
+               value = "placemark.administrativeArea">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.StopDetailsViewController.fetchData (NextDepartures.StopDetailsViewController)(Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():StopDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedStop.transportType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.StopDetailsViewController.viewDidLoad (NextDepartures.StopDetailsViewController)() -&gt; ():StopDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count">
+            </PersistentString>
+            <PersistentString
+               value = "sharedTransport.timeTableStops">
+            </PersistentString>
+            <PersistentString
+               value = "self.parentViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TrackingStopTableViewCell.prepareSwitch (NextDepartures.TrackingStopTableViewCell)() -&gt; ():TrackingStopTableViewCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.StopDetailsViewController.(viewDidLoad (NextDepartures.StopDetailsViewController) -&gt; () -&gt; ()).(closure #1):StopDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.sharedTransport.timeTableFetchedResultsController.fetchedObjects?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TransportManager.refreshTimeTableFetchRequest (NextDepartures.TransportManager)() -&gt; ObjectiveC.NSFetchRequest:TransportManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TrackingStopTableViewCell.updateInformationWithTrackingStop (NextDepartures.TrackingStopTableViewCell)(NextDepartures.TrackingStop) -&gt; ():TrackingStopTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "item.enabled">
+            </PersistentString>
+            <PersistentString
+               value = "item.timetable">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TransportManager.locationManager (NextDepartures.TransportManager)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ():TransportManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "item.stop">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TimetableViewController.mapView (NextDepartures.TimetableViewController)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.MKMapView&gt;, didSelectAnnotationView : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.MKAnnotationView&gt;) -&gt; ():TimetableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.sharedTransport.sortedTimeTable?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TransportManager.checkTrackingService (NextDepartures.TransportManager)(ObjectiveC.NSTimer) -&gt; ():TransportManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.RouteDetailsViewController.handleDistanceSelected (NextDepartures.RouteDetailsViewController)(Swift.Double) -&gt; ():RouteDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.timeTable">
+            </PersistentString>
+            <PersistentString
+               value = "distance">
+            </PersistentString>
+            <PersistentString
+               value = "selectedAnnotation.stop.stopId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.TrackingStop.init (NextDepartures.TrackingStop.Type)(dictionary : Swift.Dictionary&lt;Swift.String, Swift.Optional&lt;Swift.AnyObject&gt;&gt;, context : ObjectiveC.NSManagedObjectContext) -&gt; NextDepartures.TrackingStop:TrackingStop.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.timetable">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
