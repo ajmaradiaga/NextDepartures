@@ -77,6 +77,32 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         favouriteStopFetchedResultsController.delegate = self
         favouriteStopFetchedResultsController.performFetch(nil)
         
+        if favouriteStopFetchedResultsController.fetchedObjects?.count > 0 {
+            var tempArray = NSMutableArray(array: self.favouriteStopFetchedResultsController.fetchedObjects!)
+            
+            tempArray.sortUsingComparator { (a, b) -> NSComparisonResult in
+                var a1 = a as! Stops
+                var b1 = b as! Stops
+                
+                if self.userCurrentLocation != nil {
+                    var a1Distance = self.userCurrentLocation?.distanceFromLocation(a1.location)
+                    var b1Distance = self.userCurrentLocation?.distanceFromLocation(b1.location)
+                    
+                    if a1Distance == b1Distance {
+                        return NSComparisonResult.OrderedSame
+                    } else if (a1Distance < b1Distance) {
+                        return NSComparisonResult.OrderedAscending
+                    }
+                    
+                    return NSComparisonResult.OrderedDescending
+                }
+                
+                return NSComparisonResult.OrderedAscending
+            }
+            
+            self.favouriteStops = tempArray as [AnyObject] as! [Stops]
+        }
+        
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("checkTrackingService:"), userInfo: nil, repeats: true)
         
         if(CLLocationManager.locationServicesEnabled()) {

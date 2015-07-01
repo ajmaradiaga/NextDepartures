@@ -48,11 +48,6 @@ class InterfaceController: WKInterfaceController {
                         row.subLabel.setText(element.stopLocationName)
                         row.secondarySubLabel.setText(element.displayTimeFromNow())
                     }
-                } else {
-                    let row = self.timetableTable.rowControllerAtIndex(0) as! TimetableRow
-                    row.mainLabel.setText("Favourite")
-                    row.transportImage.setImage(UIImage(named: "tram"))
-                    row.subLabel.setText("No data found")
                 }
             } else {
                 self.timetableTable.setNumberOfRows(1, withRowType: "TimetableRow")
