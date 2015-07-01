@@ -25,6 +25,7 @@ class Stops: NSManagedObject {
         static let Line = "line"
         static let ServicesList = "servicesList"
         static let PatternType = "patternType"
+        static let Favourite = "favourite"
     }
     
     @NSManaged var suburb: String
@@ -36,6 +37,7 @@ class Stops: NSManagedObject {
     @NSManaged var timetable: NSSet
     @NSManaged var line: Line
     @NSManaged var servicesList: String?
+    @NSManaged var favourite : Bool
     var patternType : StopPatternType = .Past
     
     
@@ -75,6 +77,10 @@ class Stops: NSManagedObject {
         if dictionary[Keys.Line] != nil {
             self.line = dictionary[Keys.Line] as! Line
         }
+        
+        if dictionary[Keys.Favourite] != nil {
+            self.favourite = dictionary[Keys.Favourite] as! Bool
+        }
     }
     
     class func retrieveStop(dictionary: [String : AnyObject?], context: NSManagedObjectContext) -> Stops {
@@ -94,6 +100,10 @@ class Stops: NSManagedObject {
                 
                 if dictionary[Keys.Line] != nil {
                     stop.line = dictionary[Keys.Line] as! Line
+                }
+                
+                if dictionary[Keys.Favourite] != nil {
+                    stop.favourite = dictionary[Keys.Favourite] as! Bool
                 }
                 
                 return stop

@@ -142,26 +142,6 @@ class PTVClient: NSObject{
                             
                             stopsResult.append(stop)
                         }
-                        /*
-                        if index > 9 {
-                            
-                            for stopItem in stopsResult {
-                                self.nextDeparturesForStop(stopItem, limit: 5, completionHandler: { (result, error) -> Void in
-                                    //println("Finished nextDepartures: \(stop.stopId)")
-                                    self.stopsProcessed += 1
-                                    
-                                    if self.stopsProcessed > 9 {
-                                        NSNotificationCenter.defaultCenter().postNotificationName("timeTableComplete", object: stopItem)
-                                    } else {
-                                        NSNotificationCenter.defaultCenter().postNotificationName("timeTablePartial", object: self.stopsProcessed)
-                                    }
-                                })
-                            }
-                            
-                            println("Finished processing all stops and timetables")
-                            completionHandler(result: stopsResult, error: nil)
-                            return
-                        }*/
                     }
                 }
                 

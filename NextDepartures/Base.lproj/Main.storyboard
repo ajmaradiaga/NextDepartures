@@ -12,8 +12,12 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
@@ -411,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJD-cF-BMW" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700" y="-290"/>
+            <point key="canvasLocation" x="2262" y="-48"/>
         </scene>
         <!--Stop Details-->
         <scene sceneID="uqP-VQ-Gtk">
@@ -503,12 +507,13 @@
                         <barButtonItem key="rightBarButtonItem" image="Favourite_NonSelected" id="DW7-3b-FPW">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="refreshTimetable:" destination="9pv-A4-QxB" id="pmm-DH-VLy"/>
+                                <action selector="favouriteTapped:" destination="UuP-k3-9Ms" id="Lgq-I2-6Hx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="0N2-ao-jpw" id="Wua-dL-XyK"/>
+                        <outlet property="favouriteButton" destination="DW7-3b-FPW" id="oEw-gL-tQ4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUd-6T-ubN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -518,12 +523,12 @@
                     <color key="color" red="0.043137254899999998" green="0.2156862745" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
             </objects>
-            <point key="canvasLocation" x="1571" y="376"/>
+            <point key="canvasLocation" x="1467" y="544"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="Yxt-Fl-G5s">
             <objects>
-                <viewController id="fON-3q-55K" customClass="TrackingStopsViewController" customModule="NextDepartures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fON-3q-55K" customClass="FavouritesViewController" customModule="NextDepartures" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7ew-ta-r3Y"/>
                         <viewControllerLayoutGuide type="bottom" id="zDL-mA-hc2"/>
@@ -538,13 +543,95 @@
                                     <constraint firstAttribute="height" constant="180" id="dpt-TK-DXT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="20"/>
-                                <color key="textColor" red="0.66666666669999997" green="0.28627450980000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.98039215686274506" green="0.81176470588235294" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <size key="shadowOffset" width="1" height="0.0"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2ev-Uk-hVs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2ev-Uk-hVs">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StopTableCell" rowHeight="75" id="Otq-Qd-UuI" customClass="StopTableViewCell" customModule="NextDepartures" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="263" width="600" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Otq-Qd-UuI" id="hSM-VW-Yx0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvc-fn-WdK">
+                                                    <rect key="frame" x="66" y="11" width="465" height="18.5"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service details" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFO-Tc-FAE">
+                                                    <rect key="frame" x="66" y="34" width="465" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="HN6-8X-1Dp"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJ9-LZ-dN9">
+                                                    <rect key="frame" x="541" y="11" width="51" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="51" id="fnJ-Rw-o6R"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="19"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="train" translatesAutoresizingMaskIntoConstraints="NO" id="KYU-tN-5th">
+                                                    <rect key="frame" x="8" y="11" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="ZUo-e2-RdJ"/>
+                                                        <constraint firstAttribute="width" constant="50" id="wQg-VZ-oRw"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="meters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5Y-Cq-wck">
+                                                    <rect key="frame" x="541" y="33" width="51" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="FgK-ys-PtZ"/>
+                                                        <constraint firstAttribute="width" constant="51" id="a6y-Nz-8Uf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="KYU-tN-5th" secondAttribute="bottom" constant="5" id="0Aa-5J-uyD"/>
+                                                <constraint firstItem="xFO-Tc-FAE" firstAttribute="leading" secondItem="hSM-VW-Yx0" secondAttribute="leading" constant="66" id="0Uf-Td-qvW"/>
+                                                <constraint firstItem="xFO-Tc-FAE" firstAttribute="leading" secondItem="KYU-tN-5th" secondAttribute="trailing" constant="8" symbolic="YES" id="36b-L3-kih"/>
+                                                <constraint firstItem="KYU-tN-5th" firstAttribute="top" secondItem="hSM-VW-Yx0" secondAttribute="topMargin" constant="3" id="3xk-zC-YDZ"/>
+                                                <constraint firstItem="xFO-Tc-FAE" firstAttribute="width" secondItem="Xvc-fn-WdK" secondAttribute="width" id="91t-RU-VVt"/>
+                                                <constraint firstItem="KYU-tN-5th" firstAttribute="leading" secondItem="hSM-VW-Yx0" secondAttribute="leadingMargin" id="FZu-wK-D6z"/>
+                                                <constraint firstItem="BJ9-LZ-dN9" firstAttribute="top" secondItem="hSM-VW-Yx0" secondAttribute="topMargin" constant="3" id="MKg-3A-Jyq"/>
+                                                <constraint firstItem="u5Y-Cq-wck" firstAttribute="trailing" secondItem="hSM-VW-Yx0" secondAttribute="trailingMargin" id="Tt4-8b-yLc"/>
+                                                <constraint firstItem="BJ9-LZ-dN9" firstAttribute="leading" secondItem="Xvc-fn-WdK" secondAttribute="trailing" constant="10" id="UIn-xg-oMx"/>
+                                                <constraint firstItem="Xvc-fn-WdK" firstAttribute="top" secondItem="hSM-VW-Yx0" secondAttribute="topMargin" constant="3" id="aSi-G5-1dF"/>
+                                                <constraint firstItem="xFO-Tc-FAE" firstAttribute="leading" secondItem="Xvc-fn-WdK" secondAttribute="leading" id="du6-rR-6aX"/>
+                                                <constraint firstItem="u5Y-Cq-wck" firstAttribute="top" secondItem="BJ9-LZ-dN9" secondAttribute="bottom" id="t15-ZZ-ERj"/>
+                                                <constraint firstItem="BJ9-LZ-dN9" firstAttribute="trailing" secondItem="hSM-VW-Yx0" secondAttribute="trailingMargin" id="wpx-Uo-rkL"/>
+                                                <constraint firstItem="xFO-Tc-FAE" firstAttribute="top" secondItem="Xvc-fn-WdK" secondAttribute="bottom" constant="5" id="xLW-Xp-d14"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="3xk-zC-YDZ"/>
+                                                    <exclude reference="0Uf-Td-qvW"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainTextLabel" destination="Xvc-fn-WdK" id="RpS-rU-3lY"/>
+                                            <outlet property="rightTextLabel" destination="u5Y-Cq-wck" id="ETR-b7-NQD"/>
+                                            <outlet property="subTextLabel" destination="xFO-Tc-FAE" id="Yev-cD-kWV"/>
+                                            <outlet property="transportationImageView" destination="KYU-tN-5th" id="Ntz-L3-zZe"/>
+                                            <outlet property="upperRightTextLabel" destination="BJ9-LZ-dN9" id="M1c-SG-w22"/>
+                                            <segue destination="UuP-k3-9Ms" kind="show" identifier="showStopDetailsFromFavourites" id="Hhf-7y-YSp"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrackingStopCell" rowHeight="57" id="fHQ-fO-glX" customClass="TrackingStopTableViewCell" customModule="NextDepartures" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="272" width="600" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -609,14 +696,16 @@
                             <constraint firstItem="2ev-Uk-hVs" firstAttribute="leading" secondItem="8AR-gi-SeZ" secondAttribute="leadingMargin" constant="-16" id="uRu-82-iqT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Favourites" id="VEl-8d-Fqp"/>
+                    <navigationItem key="navigationItem" title="Favourites" id="VEl-8d-Fqp">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Yxi-FW-7OM"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="trackingTableView" destination="2ev-Uk-hVs" id="7MM-Li-Qtq"/>
+                        <outlet property="favouritesTableView" destination="2ev-Uk-hVs" id="a0n-j5-DkC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XyB-BI-kh3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="1010"/>
+            <point key="canvasLocation" x="640" y="1342"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="YiO-no-2Vl">
@@ -637,7 +726,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNT-kA-nC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-345" y="782"/>
+            <point key="canvasLocation" x="-511" y="1438"/>
         </scene>
     </scenes>
     <resources>
@@ -651,4 +740,7 @@
         <image name="refresh" width="24" height="26"/>
         <image name="train" width="96" height="120"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Hhf-7y-YSp"/>
+    </inferredMetricsTieBreakers>
 </document>

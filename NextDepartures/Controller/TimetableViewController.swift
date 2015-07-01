@@ -352,41 +352,6 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         if view.annotation is StopAnnotation {
             //Grab the stop associated to the annotation
             selectedStop = (view.annotation as! StopAnnotation).stop
-            
-            /*
-            self.sharedTransport.timeTableStops = [NSNumber(int: selectedStop.stopId)]
-            sharedTransport.requestFetchMode = TransportManager.TimetableFetchMode.UniqueStop
-            
-            //Refresh data in FetchRequestController based on the Stop selected
-            var auxDelegate = self.sharedTransport.timeTableFetchedResultsController.delegate
-            
-            self.sharedTransport.timeTableFetchedResultsController = self.sharedTransport.refreshTimeTableFetchedResultsController()
-            
-            self.sharedTransport.timeTableFetchedResultsController.delegate = auxDelegate
-            
-            var error:NSError?
-            
-            self.sharedTransport.timeTableFetchedResultsController.performFetch(&error)
-            
-            self.sharedTransport.sortedTimeTable = self.sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
-            
-            //If there is no data for the Stop, retrieve it from the API
-            if self.sharedTransport.sortedTimeTable?.count == 0 {
-                Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
-                self.sharedTransport.fetchDataForStop(selectedStop, completionHandler: { (result, error) -> Void in
-                    //println("Retrieving data for Selected stop")
-                    if error != nil {
-                        self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
-                            self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
-                        })
-                    }
-                    
-                    self.updateTableData()
-                })
-            } else {
-                self.updateTableData()
-            }
-            */
         }
     }
     

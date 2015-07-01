@@ -154,6 +154,32 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         }()
     
+    lazy var favouriteStopFetchRequest : NSFetchRequest = {
+        let fetchRequest = NSFetchRequest(entityName: "Stops")
+        
+        fetchRequest.predicate = NSPredicate(format: "\(Stops.Keys.Favourite) == true")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Stops.Keys.StopId, ascending: true)]
+        
+        return fetchRequest
+        }()
+    
+    lazy var favouriteStopFetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = self.favouriteStopFetchRequest
+        
+        //println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+        }()
+    
+    
     lazy var trackingStopFetchRequest : NSFetchRequest = {
         let fetchRequest = NSFetchRequest(entityName: "TrackingStop")
         

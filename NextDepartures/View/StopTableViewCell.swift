@@ -31,16 +31,12 @@ class StopTableViewCell: UITableViewCell {
     }
     
     func updateInformationWithStop(item: Stops, FromLocation location: CLLocation) {
-        //lineNumberLabel.text = item.line.lineNumber
+        stopItem = item
         
         subTextLabel.text = item.servicesList != nil ? item.servicesList : ""
         mainTextLabel.text = item.locationName
         
         transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))
-        
-        stopItem = item
-        
-        //var displayTime = item.displayTimeFromNow()
         
         let distance = item.location!.distanceFromLocation(location)
         

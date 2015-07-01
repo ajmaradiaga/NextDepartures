@@ -12,6 +12,7 @@ import CoreData
 class StopDetailsViewController: UITableViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var favouriteButton: UIBarButtonItem!
     
     var selectedStop: Stops!
     
@@ -48,6 +49,13 @@ class StopDetailsViewController: UITableViewController {
         self.navigationItem.title = String(format: "%@", selectedStop.locationName)
         self.navigationItem.titleView = Helper.titleViewWithText(selectedStop.locationName, andSubtitle: String(selectedStop.suburb))
         
+        let i = self.navigationController?.viewControllers!.count
+        var previousVC = self.navigationController?.viewControllers[i! - 2] as! UIViewController
+        
+        if previousVC is FavouritesViewController {
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        }
+        
         println("Width Title: \(self.navigationItem.titleView?.frame.width)")
         
         var transportMode = PTVClient.TransportMode.transportModeFromString(selectedStop.transportType)
@@ -79,6 +87,11 @@ class StopDetailsViewController: UITableViewController {
         } else {
             self.timetableElements = sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        updateFavouriteButtonImage()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -166,6 +179,27 @@ class StopDetailsViewController: UITableViewController {
             Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: false)
             self.tableView.reloadData()
             self.tableRefreshControl.endRefreshing()
+        }
+    }
+    
+    
+    @IBAction func favouriteTapped(sender: AnyObject) {
+        if self.selectedStop.favourite {
+            self.selectedStop.favourite = false
+        } else {
+            self.selectedStop.favourite = true
+        }
+        
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        updateFavouriteButtonImage()
+    }
+    
+    func updateFavouriteButtonImage() {
+        if self.selectedStop.favourite {
+            favouriteButton.image = UIImage(named: "Favourite_Selected")
+        } else {
+            favouriteButton.image = UIImage(named: "Favourite_NonSelected")
         }
     }
 
