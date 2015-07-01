@@ -663,7 +663,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service details" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFO-Tc-FAE">
-                                                    <rect key="frame" x="66" y="30.5" width="465" height="32"/>
+                                                    <rect key="frame" x="66" y="30" width="465" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="HN6-8X-1Dp"/>
                                                     </constraints>
@@ -837,7 +837,7 @@
         <image name="V-Line_circle" width="54" height="54"/>
         <image name="location" width="24" height="24"/>
         <image name="refresh" width="24" height="26"/>
-        <image name="train" width="96" height="120"/>
+        <image name="train" width="38" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OZB-lF-AlU"/>

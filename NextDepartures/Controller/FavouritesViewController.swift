@@ -15,7 +15,6 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var scheduledTimer = NSTimer()
     var favouriteActions : UIAlertController!
-    var favouriteStops = [Stops]()
     var favouriteColor = UIColor(red: 250/255.0, green: 207/255, blue: 55/255, alpha: 1.0)
     
     override func viewDidLoad() {
@@ -44,7 +43,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     func refreshDataInView() {
         if sharedTransport.favouriteStopFetchedResultsController.fetchedObjects!.count == 0 {
             self.favouritesTableView.hidden = true
-            self.favouriteStops = [Stops]()
+            sharedTransport.favouriteStops = [Stops]()
         } else {
             self.favouritesTableView.hidden = false
             
@@ -66,7 +65,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
                 return NSComparisonResult.OrderedDescending
             }
             
-            self.favouriteStops = tempArray as [AnyObject] as! [Stops]
+            sharedTransport.favouriteStops = tempArray as [AnyObject] as! [Stops]
             
         }
         favouritesTableView.reloadData()
@@ -77,12 +76,12 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.favouriteStops.count
+        return sharedTransport.favouriteStops.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var item = favouriteStops[indexPath.row]
+        var item = sharedTransport.favouriteStops[indexPath.row]
         
         let reuseIdentifier = "StopTableCell"
         
@@ -153,7 +152,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
-        var item = self.favouriteStops[indexPath.row]
+        var item = sharedTransport.favouriteStops[indexPath.row]
         var actions = NSMutableArray()
         
         
@@ -190,7 +189,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             var sdVC = segue.destinationViewController as! StopDetailsViewController
             
             if sender is StopTableViewCell {
-                sdVC.selectedStop = self.favouriteStops[self.favouritesTableView.indexPathForSelectedRow()!.row]
+                sdVC.selectedStop = sharedTransport.favouriteStops[self.favouritesTableView.indexPathForSelectedRow()!.row]
             } else {
                 println("Someone else is calling")
             }

@@ -14,6 +14,9 @@ public class DataExchange: NSObject {
         public static let Request = "Request"
         public static let Response = "Response"
         public static let TimetableData = "TimetableData"
+        public static let Error = "Error"
+        public static let UserLocationLatitude = "UserLocationLatitude"
+        public static let UserLocationLongitude = "UserLocationLongitude"
     }
 
 }

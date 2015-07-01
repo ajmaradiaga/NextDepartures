@@ -161,10 +161,10 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         sharedTransport.sortedStops = stopsArray as NSArray as? [Stops]
         
         if annotationsInMap.count < 10 {
-            return Stops.stopIdsInArray(stopsArray)
+            return stopsArray
         }
         
-        return Stops.stopIdsInArray(stopsArray.subarrayWithRange(NSMakeRange(0, min(10,stopsArray.count))))
+        return stopsArray.subarrayWithRange(NSMakeRange(0, min(10,stopsArray.count)))
     }
     
     
@@ -258,7 +258,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func fetchData(sender:AnyObject) {
         Helper.updateCurrentView(self.view, withActivityIndicator: self.activityIndicator, andAnimate: true)
         self.sharedTransport.fetchDataForLocation(.Default, location: CLLocation(latitude: stopsMapView.centerCoordinate.latitude, longitude: stopsMapView.centerCoordinate.longitude), andStops: stopsShownInMap()) { (result, error) -> Void in
-            self.sharedTransport.timeTableStops = self.stopsShownInMap()
+            self.sharedTransport.timeTableStops = self.stopsShownInMap() as! [NSNumber]
             if error != nil {
                 self.alertVC = Helper.raiseInformationalAlert(inViewController: self, withTitle: "Error", message: error!.description, completionHandler: { (alertAction) -> Void in
                     self.alertVC!.dismissViewControllerAnimated(true, completion: nil)

@@ -54,40 +54,56 @@
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="NextDepartures_WatchKit_App" customModuleProvider="target">
+                <glanceController spacing="0.0" topTemplateType="groupLeftSmall" id="0uZ-2p-rRc" customClass="GlanceController" customModule="NextDepartures_WatchKit_App" customModuleProvider="target">
                     <items>
                         <group alignment="left" layout="vertical" id="t8f-Gd-c4y">
                             <items>
-                                <group width="1" height="29" alignment="left" id="dDC-9S-RFR">
-                                    <items>
-                                        <imageView width="30" height="30" alignment="left" id="N2e-PZ-xYH"/>
-                                        <label width="136" height="32" alignment="left" numberOfLines="2" id="nQl-CZ-qcZ">
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <label alignment="left" minimumScaleFactor="0.80000000000000004" id="uQT-mZ-bc5">
-                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                </label>
+                                <imageView height="31" alignment="left" id="hgT-mw-vNe"/>
                             </items>
                         </group>
-                        <group alignment="left" id="uCw-4Q-Ouw">
+                        <label alignment="left" text="Label" id="qNc-Xn-uaY"/>
+                        <label alignment="left" text="Label" id="OG8-Ay-3a2"/>
+                        <label alignment="left" text="Label" id="ZzT-nO-Ja5"/>
+                        <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
-                                <map height="100" alignment="left" id="9sb-48-uz2"/>
+                                <separator alignment="left" id="GHI-5M-sAE"/>
+                                <label width="136" height="14" alignment="left" text="Label" id="SUh-cC-afU">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="136" height="11" alignment="left" text="Label" id="svb-1q-Pi0">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label width="136" height="14" alignment="left" text="Label" id="6jK-Wj-hoP">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="136" height="11" alignment="left" text="Label" id="ZeS-rb-RRq">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label width="136" height="14" alignment="left" text="Label" id="Eo2-bI-AWx">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="136" height="11" alignment="left" text="Label" id="ScD-Bx-Ff3">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
                             </items>
                         </group>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                     <connections>
-                        <outlet property="glanceMapView" destination="9sb-48-uz2" id="T4O-1C-lgn"/>
-                        <outlet property="mainTextLabel" destination="nQl-CZ-qcZ" id="4jk-lI-n5Y"/>
-                        <outlet property="subTextLabel" destination="uQT-mZ-bc5" id="vJC-1l-4uC"/>
-                        <outlet property="transportTypeImageView" destination="N2e-PZ-xYH" id="wKV-CV-RR8"/>
+                        <outlet property="distanceLabel" destination="ZzT-nO-Ja5" id="msl-cx-kcf"/>
+                        <outlet property="mainTextLabel" destination="qNc-Xn-uaY" id="sNY-Dn-ksQ"/>
+                        <outlet property="service1Details" destination="SUh-cC-afU" id="aNx-ho-339"/>
+                        <outlet property="service1Time" destination="svb-1q-Pi0" id="uZc-JW-zgv"/>
+                        <outlet property="service2Details" destination="6jK-Wj-hoP" id="RZr-Oq-DjR"/>
+                        <outlet property="service2Time" destination="ZeS-rb-RRq" id="eof-XX-0Z6"/>
+                        <outlet property="service3Details" destination="Eo2-bI-AWx" id="vyr-jm-oTF"/>
+                        <outlet property="service3Time" destination="ScD-Bx-Ff3" id="zmT-3R-Ps1"/>
+                        <outlet property="subTextLabel" destination="OG8-Ay-3a2" id="59D-fQ-sxn"/>
+                        <outlet property="transportTypeImageView" destination="hgT-mw-vNe" id="bpd-d7-3lj"/>
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="235" y="672"/>
+            <point key="canvasLocation" x="235" y="647"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

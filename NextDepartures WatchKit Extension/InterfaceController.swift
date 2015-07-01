@@ -32,40 +32,51 @@ class InterfaceController: WKInterfaceController {
         
         let requestInfo: [NSObject:AnyObject] = [DataExchange.Keys.Request:"Interface.NextDepartures"]
         
-        self.showActivityIndicator(true)
-        
         WKInterfaceController.openParentApplication(requestInfo, reply: { (replyInfo, error) -> Void in
-            if error == nil {
+            var replyError: AnyObject? = replyInfo[DataExchange.Keys.Error]
+            if replyError == nil {
                 self.timeTableData = (NSKeyedUnarchiver.unarchiveObjectWithData(replyInfo[DataExchange.Keys.TimetableData] as! NSData) as! [TimetableCommon])
                 
                 if self.timeTableData!.count > 0 {
-                
-                self.timetableTable.setNumberOfRows(self.timeTableData!.count, withRowType: "TimetableRow")
-                
-                for (index,element) in enumerate(self.timeTableData!){
-                    let row = self.timetableTable.rowControllerAtIndex(index) as! TimetableRow
-                    row.mainLabel.setText("\(element.lineNumber) - \(element.lineDirectionName)")
-                    row.transportImage.setImage(UIImage(named: element.transportType))
-                    row.subLabel.setText(element.stopLocationName)
-                    row.secondarySubLabel.setText(element.displayTimeFromNow())
+                    
+                    self.timetableTable.setNumberOfRows(self.timeTableData!.count, withRowType: "TimetableRow")
+                    
+                    for (index,element) in enumerate(self.timeTableData!){
+                        let row = self.timetableTable.rowControllerAtIndex(index) as! TimetableRow
+                        row.mainLabel.setText("\(element.lineNumber) - \(element.lineDirectionName)")
+                        row.transportImage.setImage(UIImage(named: element.transportType))
+                        row.subLabel.setText(element.stopLocationName)
+                        row.secondarySubLabel.setText(element.displayTimeFromNow())
                     }
+                } else {
+                    let row = self.timetableTable.rowControllerAtIndex(0) as! TimetableRow
+                    row.mainLabel.setText("Favourite")
+                    row.transportImage.setImage(UIImage(named: "tram"))
+                    row.subLabel.setText("No data found")
                 }
+            } else {
+                self.timetableTable.setNumberOfRows(1, withRowType: "TimetableRow")
                 
-                self.showActivityIndicator(false)
+                let row = self.timetableTable.rowControllerAtIndex(0) as! TimetableRow
+                row.mainLabel.setText("Favourite")
+                row.transportImage.setImage(UIImage(named: "tram"))
+                row.subLabel.setText("Go to iPhone")
+                row.secondarySubLabel.setText("and add Favourite")
             }
         })
     }
     
+    /*
     func showActivityIndicator(show:Bool) {
         if show {
             activityIndicatorImage.setHidden(false)
-            activityIndicatorImage.setImageNamed("spinner")
+            activityIndicatorImage.setImageNamed("spinner1")
             activityIndicatorImage.startAnimating()
         } else {
             activityIndicatorImage.setHidden(true)
             activityIndicatorImage.stopAnimating()
         }
-    }
+    }*/
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         selectedTimetableDetail = self.timeTableData![rowIndex]

@@ -113,21 +113,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         
+        transportManager.favouriteStopFetchedResultsController.performFetch(nil)
+        
         transportManager.requestFetchMode = .Watch
         
-        transportManager.timeTableFetchedResultsController = transportManager.refreshTimeTableFetchedResultsController()
+        var request = userInfo?[DataExchange.Keys.Request] as! String
+        var response = Dictionary<String, AnyObject>()
         
-        transportManager.timeTableFetchedResultsController.performFetch(nil)
+        response[DataExchange.Keys.Request] = request
+        response[DataExchange.Keys.UserLocationLatitude] = transportManager.userCurrentLocation?.coordinate.latitude
+        response[DataExchange.Keys.UserLocationLongitude] = transportManager.userCurrentLocation?.coordinate.longitude
         
-        if transportManager.shouldUpdateData(.Watch) {
+        if transportManager.favouriteStops.count == 0 {
+            response[DataExchange.Keys.Error] = "Add favourite stop in app."
+            reply(response)
+        } else {
             
-            transportManager.fetchDataForLocation(.Watch, location: transportManager.userCurrentLocation, andStops: nil) { (result, error) -> Void in
-                var request = userInfo?[DataExchange.Keys.Request] as! String
-                var response = Dictionary<String, AnyObject>()
+            if request == "Glance.NextDeparture" {
+                transportManager.timeTableStops = [NSNumber(int: transportManager.favouriteStops[0].stopId)]
+                transportManager.uniqueStopObject = transportManager.favouriteStops[0]
+            } else {
+                transportManager.requestFetchMode = .WatchInterface
+                transportManager.timeTableStops = Stops.stopIdsInArray(transportManager.favouriteStops) as! [NSNumber]
+            }
+            
+            transportManager.timeTableFetchedResultsController = transportManager.refreshTimeTableFetchedResultsController()
+            
+            transportManager.timeTableFetchedResultsController.performFetch(nil)
+            
+            if transportManager.shouldUpdateData(.Watch) {
                 
+                transportManager.fetchDataForLocation(.Watch, location: transportManager.userCurrentLocation, andStops: nil) { (result, error) -> Void in
+                    
+                    var timeTableData = [TimetableCommon]()
+                    
+                    for timeTableItem in self.transportManager.timeTableFetchedResultsController.fetchedObjects! {
+                        timeTableData.append((timeTableItem as! Timetable).convertToTimetableCommon())
+                    }
+                    
+                    response[DataExchange.Keys.TimetableData] = NSKeyedArchiver.archivedDataWithRootObject(timeTableData)
+                    
+                    reply(response)
+                }
+            } else {
                 var timeTableData = [TimetableCommon]()
-                
-                response[DataExchange.Keys.Request] = request
                 
                 for timeTableItem in self.transportManager.timeTableFetchedResultsController.fetchedObjects! {
                     timeTableData.append((timeTableItem as! Timetable).convertToTimetableCommon())
@@ -137,24 +166,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 reply(response)
             }
-        } else {
-            var request = userInfo?[DataExchange.Keys.Request] as! String
-            
-            var response = Dictionary<String, AnyObject>()
-            
-            response[DataExchange.Keys.Request] = request
-            
-            var timeTableData = [TimetableCommon]()
-            
-            for timeTableItem in self.transportManager.timeTableFetchedResultsController.fetchedObjects! {
-                timeTableData.append((timeTableItem as! Timetable).convertToTimetableCommon())
-            }
-            
-            response[DataExchange.Keys.TimetableData] = NSKeyedArchiver.archivedDataWithRootObject(timeTableData)
-            
-            reply(response)
-        }
         
+        }
         
     }
     

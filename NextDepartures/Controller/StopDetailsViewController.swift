@@ -73,7 +73,8 @@ class StopDetailsViewController: UITableViewController {
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
         
         sharedTransport.requestFetchMode = .UniqueStop
-        sharedTransport.timeTableStops = [selectedStop]
+        sharedTransport.timeTableStops = [NSNumber(int:selectedStop.stopId)]
+        sharedTransport.uniqueStopObject = selectedStop
         
         sharedTransport.timeTableFetchedResultsController = sharedTransport.refreshTimeTableFetchedResultsController()
         sharedTransport.timeTableFetchedResultsController.performFetch(nil)

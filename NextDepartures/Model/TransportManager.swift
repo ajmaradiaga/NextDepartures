@@ -17,7 +17,8 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     var initialised : Bool = false
     
     var isRefreshingData : Bool = false
-    var timeTableStops : NSArray = [NSNumber]()
+    var timeTableStops = [NSNumber]()
+    var uniqueStopObject : Stops?
     
     var locationManager = CLLocationManager()
     var centerLocation : CLLocation?
@@ -32,6 +33,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     
     var sortedTimeTable : [Timetable]?
     var sortedStops : [Stops]?
+    var favouriteStops = [Stops]()
     var trackingStops : [TrackingStop] = [TrackingStop]()
     
     var scheduledTimer = NSTimer()
@@ -41,7 +43,8 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     enum TimetableFetchMode : Int32 {
         case Default = 0,
         UniqueStop = 1,
-        Watch = 2
+        Watch = 2,
+        WatchInterface = 3
     }
     
     struct Constants {
@@ -70,6 +73,9 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         trackingServiceFetchedResultsController.delegate = self
         trackingServiceFetchedResultsController.performFetch(nil)
+
+        favouriteStopFetchedResultsController.delegate = self
+        favouriteStopFetchedResultsController.performFetch(nil)
         
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("checkTrackingService:"), userInfo: nil, repeats: true)
         
@@ -154,7 +160,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         }()
     
-    lazy var favouriteStopFetchRequest : NSFetchRequest = {
+    var favouriteStopFetchRequest : NSFetchRequest = {
         let fetchRequest = NSFetchRequest(entityName: "Stops")
         
         fetchRequest.predicate = NSPredicate(format: "\(Stops.Keys.Favourite) == true")
@@ -231,16 +237,14 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         
         fetchRequest.fetchLimit = 50
         
-        if requestFetchMode == .Default {
+        if requestFetchMode == .Default || requestFetchMode == .WatchInterface {
             if timeTableStops.count == 0 {
                 fetchRequest.predicate = NSPredicate(format: "\(Timetable.Keys.TimeUTC) > %@", NSDate())
             } else {
                 fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) IN %@ )", NSDate(), timeTableStops)
             }
         } else if requestFetchMode == .UniqueStop || requestFetchMode == .Watch {
-            var stop = (timeTableStops.objectAtIndex(0) as! Stops)
-            
-            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) == %i ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.TransportType) == %@ )", NSDate(), stop.stopId, stop.transportType)
+            fetchRequest.predicate = NSPredicate(format: "( \(Timetable.Keys.TimeUTC ) > %@ ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.StopId) == %i ) AND ( \(Timetable.Keys.Stop).\(Stops.Keys.TransportType) == %@ )", NSDate(), uniqueStopObject!.stopId, uniqueStopObject!.transportType)
         }
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Timetable.Keys.TimeUTC, ascending: true)]
@@ -272,7 +276,9 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
     
     func fetchDataForStop(stop:Stops, completionHandler: CompletionHandler) {
         self.requestFetchMode = .UniqueStop
-        self.timeTableStops = [stop]
+        self.timeTableStops = [NSNumber(int:stop.stopId)]
+        self.uniqueStopObject = stop
+        
         isRefreshingData = true
         PTVClient.sharedInstance().nextDeparturesForStop(stop, limit: 20) { (result, error) -> Void in
             self.isRefreshingData = false
@@ -290,7 +296,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         self.requestFetchMode = requestMode
         
         if stops != nil {
-            self.timeTableStops = stops!
+            self.timeTableStops = Stops.stopIdsInArray(stops!) as! [NSNumber]
         }
         
         if isRefreshingData == false {
@@ -318,7 +324,8 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
                 
                 //Set TimetableStops when Fetch mode is Watch, this is to handle the scenario when the User Location is different than the location from the map center
                 if self.requestFetchMode == .Watch && stopsRetrieved.count > 0 {
-                    self.timeTableStops = Stops.stopIdsInArray(stopsRetrieved)
+                    self.timeTableStops = Stops.stopIdsInArray(stopsRetrieved) as! [(NSNumber)]
+                    self.uniqueStopObject = stopsRetrieved[0]
                     println("Retrieve stops - Watch")
                 }
                 

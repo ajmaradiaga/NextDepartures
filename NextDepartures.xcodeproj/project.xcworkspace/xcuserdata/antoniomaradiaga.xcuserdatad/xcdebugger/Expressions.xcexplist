@@ -12,10 +12,10 @@
          contextName = "function signature specialization &lt;Arg[4] = Dead, Arg[5] = Value Promoted from InOut&gt; of NextDepartures.TimetableViewController.(locationManager (NextDepartures.TimetableViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TimetableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "placemark.country">
+               value = "placemark.administrativeArea">
             </PersistentString>
             <PersistentString
-               value = "placemark.administrativeArea">
+               value = "placemark.country">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -24,6 +24,14 @@
          <PersistentStrings>
             <PersistentString
                value = "selectedStop.transportType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NextDepartures.AppDelegate.application (NextDepartures.AppDelegate)(ObjectiveC.UIApplication, handleWatchKitExtensionRequest : Swift.Optional&lt;Swift.Dictionary&lt;ObjectiveC.NSObject, Swift.AnyObject&gt;&gt;, reply : Swift.ImplicitlyUnwrappedOptional&lt;(Swift.ImplicitlyUnwrappedOptional&lt;Swift.Dictionary&lt;ObjectiveC.NSObject, Swift.AnyObject&gt;&gt;) -&gt; ()&gt;) -&gt; ():AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "transportManager.favouriteStops">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
