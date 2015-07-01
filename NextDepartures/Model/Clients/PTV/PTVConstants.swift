@@ -53,11 +53,11 @@ extension PTVClient {
             case "bus":
                 return "bus"
             case "nightrider":
-                return "bus"
+                return "nightrider"
             case "train":
                 return "train"
             case "vline":
-                return "train"
+                return "V-Line"
             default:
                 return "tram"
             }
@@ -80,6 +80,17 @@ extension PTVClient {
             }
         }
         
+        static func getImageForTransportMode(value: TransportMode) -> UIImage{
+            switch value {
+            case .Train:
+                return UIImage(named: "train_circle")!
+            case .VLine:
+                return UIImage(named: "V-Line_circle")!
+            default:
+                return PTVClient.sharedInstance().clearCircle
+            }
+        }
+        
         static func colorForTransportType(value : String) -> UIColor {
             switch value {
             case "tram":
@@ -87,11 +98,11 @@ extension PTVClient {
             case "bus":
                 return UIColor(red: 253/255, green: 160/255, blue: 34/255, alpha: 1)
             case "nightrider":
-                return UIColor(red: 253/255, green: 160/255, blue: 34/255, alpha: 1)
+                return UIColor(red: 217/255, green: 71/255, blue: 49/255, alpha: 1)
             case "train":
                 return UIColor(red: 20/255, green: 155/255, blue: 234/255, alpha: 1)
             case "vline":
-                return UIColor.brownColor()
+                return UIColor(red: 119/255, green: 41/255, blue: 125/255, alpha: 1)
             default:
                 return UIColor.greenColor()
             }

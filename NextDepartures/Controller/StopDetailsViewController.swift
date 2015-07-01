@@ -56,8 +56,6 @@ class StopDetailsViewController: UITableViewController {
             self.navigationItem.rightBarButtonItem?.enabled = false
         }
         
-        println("Width Title: \(self.navigationItem.titleView?.frame.width)")
-        
         var transportMode = PTVClient.TransportMode.transportModeFromString(selectedStop.transportType)
         
         var color = PTVClient.TransportMode.colorForTransportType(selectedStop.transportType)
@@ -228,8 +226,9 @@ class StopDetailsViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var item = timetableElements![indexPath.row]
+        var tm = PTVClient.TransportMode.transportModeFromString(item.transportType)
         
-        let reuseIdentifier = "DepartureCellStandard"
+        let reuseIdentifier = (tm == .Train || tm == .VLine ? "DepartureCellTrain" : "DepartureCellStandard")
         
         var cell : DepartureTableViewCell
         
@@ -385,7 +384,7 @@ class StopDetailsViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        if segue.identifier == "showRouteDetails" {
+        if segue.identifier == "showRouteDetails" || segue.identifier == "showRouteDetailsTrain" {
             selectedIndex = self.tableView.indexPathForCell((sender as! DepartureTableViewCell))
             
             var sdVC = segue.destinationViewController as! RouteDetailsViewController

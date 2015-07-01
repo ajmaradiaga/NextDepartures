@@ -15,6 +15,7 @@ class TrackingStopTableViewCell: UITableViewCell {
     @IBOutlet weak var serviceNumberLabel: UILabel?
     @IBOutlet weak var stopDetailsLabel : UILabel!
     @IBOutlet weak var trackingDistanceLabel : UILabel!
+    @IBOutlet weak var circleImage: UIImageView!
     
     var trackingStop : TrackingStop?
     
@@ -49,10 +50,24 @@ class TrackingStopTableViewCell: UITableViewCell {
         enabledSwitch!.on = item.enabled
         stopDetailsLabel.text = item.stop.stopName
         
-        if serviceNumberLabel != nil {
+        var tm = PTVClient.TransportMode.transportModeFromString(item.timetable.transportType)
+        
+        if tm == .Train || tm == .VLine {
+            serviceNumberLabel!.text = Helper.getInitials(item.timetable.line.lineNumber)
+            serviceNumberLabel!.textColor = UIColor.whiteColor()
+        } else {
             serviceNumberLabel!.text = item.timetable.line.lineNumber
             serviceNumberLabel!.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable.transportType)
         }
+        
+        if circleImage != nil {
+            circleImage!.image = PTVClient.TransportMode.getImageForTransportMode(tm)
+        }
+        /*
+        if serviceNumberLabel != nil {
+            serviceNumberLabel!.text = item.timetable.line.lineNumber
+            serviceNumberLabel!.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable.transportType)
+        }*/
         
         var currentDistanceString =  ""
         

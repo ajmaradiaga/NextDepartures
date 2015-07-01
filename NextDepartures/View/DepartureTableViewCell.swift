@@ -16,6 +16,7 @@ class DepartureTableViewCell: UITableViewCell {
     @IBOutlet weak var upperRightTextLabel: UILabel!
     @IBOutlet weak var rightTextLabel: UILabel!
     @IBOutlet weak var serviceNumber: UILabel!
+    @IBOutlet weak var circleImage: UIImageView!
     
     var timetableItem : Timetable?
     
@@ -31,12 +32,27 @@ class DepartureTableViewCell: UITableViewCell {
     }
     
     func updateInformationWithTimetable(item: Timetable, FromLocation location: CLLocation) {
-        serviceNumber.text = item.line.lineNumber
+        var tm = PTVClient.TransportMode.transportModeFromString(item.transportType)
         
-        serviceNumber.textColor = PTVClient.TransportMode.colorForTransportType(item.transportType)
-        
+        if tm == .Train || tm == .VLine {
+            mainTextLabel.text = item.line.lineNumber
+            serviceNumber.text = Helper.getInitials(item.line.lineNumber)
+            
+            if circleImage != nil {
+                if tm == .Train {
+                    circleImage!.image = UIImage(named: "train_circle")!
+                } else {
+                    circleImage!.image = UIImage(named: "V-Line_circle")!
+                }
+            }
+        } else {
+            mainTextLabel.text = item.lineDirection.directionName
+            serviceNumber.text = item.line.lineNumber
+            serviceNumber.textColor = PTVClient.TransportMode.colorForTransportType(item.transportType)
+        }
+
         subTextLabel.text = String(format:"to \(item.destinationName)")
-        mainTextLabel.text = item.lineDirection.directionName
+        
         
         //transportationImageView.image = UIImage(named: PTVClient.TransportMode.imageNameForTransportType(item.transportType))
         

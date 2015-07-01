@@ -46,10 +46,13 @@ class PTVClient: NSObject{
     /* Shared session */
     var session: NSURLSession
     var stopsProcessed = 0
+    var clearCircle : UIImage
     
     override init() {
         session = NSURLSession.sharedSession()
+        clearCircle = PTVClient.getImageWithColor(UIColor.clearColor(), size: CGSizeMake(56, 56))
         super.init()
+        
     }
     
     var sharedContext: NSManagedObjectContext {
@@ -460,5 +463,15 @@ class PTVClient: NSObject{
         }
         
         return Singleton.sharedInstance
+    }
+    
+    class func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        var rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

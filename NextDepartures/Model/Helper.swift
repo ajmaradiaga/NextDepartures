@@ -139,7 +139,7 @@ class Helper: NSObject {
         titleLabel.text = text
         titleLabel.textAlignment = NSTextAlignment.Center
         
-        println("Title label: \(titleLabel.frame.width) - \(UIScreen.mainScreen().bounds.size.width)")
+        //println("Title label: \(titleLabel.frame.width) - \(UIScreen.mainScreen().bounds.size.width)")
         
         var subTitleLabel = UILabel(frame: CGRectMake(0,20, width, 14))
         subTitleLabel.backgroundColor = UIColor.clearColor()
@@ -165,6 +165,17 @@ class Helper: NSObject {
         }
         
         return newTitleView
+    }
+    
+    class func getInitials(text:String) -> String {
+        var initials = ""
+        var components = text.componentsSeparatedByString(" ")
+        
+        for item in components {
+            initials += item.substringToIndex(advance(item.startIndex, 1))
+        }
+        
+        return initials
     }
     
 }
