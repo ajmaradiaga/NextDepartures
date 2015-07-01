@@ -1,16 +1,18 @@
 # NextDepartures
 
-Project created as part of Udacity iOS Nanodegree - Final Project
+Next Departures lets you check the closest public transport stops from where you are. You can save your favourite stops and track when you are about to arrive to your target destination.
+
+The app currently only consumes PTV (Public Transport Victoria) data - https://www.data.vic.gov.au/data/dataset/ptv-timetable-api.
 
 Submitted: 2015-07-02
 
 ## Next Departures Functionality
-Next Departures lets you check the closest public transport stops from where you are. The app currently only consumes PTV (Public Transport Victoria) data - https://www.data.vic.gov.au/data/dataset/ptv-timetable-api.
 
 The app lets you achieve the following tasks:
 - A user is able to retrieve the different public transport stops nearby. 
 - Check the stop nearby in a map and distance from current location.
 - Get the next available public transport services stopping at a specific stop by just tapping the stop in the map.
+- The information displayed to the user is realtime when available.
 - Select a service to see the complete route.
   - When viewing the route of a service, you can tap on a stop and select if you want to be notified when you are close to it (tracking stop).
 - Stop tracking
