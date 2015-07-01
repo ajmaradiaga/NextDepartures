@@ -22,8 +22,6 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
         sharedTransport.favouriteStopFetchedResultsController.delegate = self
         sharedTransport.favouriteStopFetchedResultsController.performFetch(nil)
         
@@ -39,6 +37,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = favouriteColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Gotham Medium", size: 17)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
         refreshDataInView()
     }
     

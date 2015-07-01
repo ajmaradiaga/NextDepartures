@@ -23,10 +23,6 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
-        self.navigationController?.navigationBar.barTintColor = trackingColor
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
         sharedTransport.trackingStopFetchedResultsController.delegate = self
         sharedTransport.trackingStopFetchedResultsController.performFetch(nil)
         
@@ -41,6 +37,8 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Gotham Medium", size: 17)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController?.navigationBar.barTintColor = trackingColor
         refreshDataInView()
     }
     

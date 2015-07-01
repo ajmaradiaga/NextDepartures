@@ -135,16 +135,16 @@ class Helper: NSObject {
         var titleLabel = UILabel(frame: CGRectMake(0, 0, width, 16))
         titleLabel.backgroundColor = UIColor.clearColor()
         titleLabel.textColor = UIColor.whiteColor()
-        titleLabel.font = UIFont.boldSystemFontOfSize(14)
+        titleLabel.font = UIFont(name: "Gotham Medium", size: 12)
         titleLabel.text = text
         titleLabel.textAlignment = NSTextAlignment.Center
         
         println("Title label: \(titleLabel.frame.width) - \(UIScreen.mainScreen().bounds.size.width)")
         
-        var subTitleLabel = UILabel(frame: CGRectMake(0,20, width, 12))
+        var subTitleLabel = UILabel(frame: CGRectMake(0,20, width, 14))
         subTitleLabel.backgroundColor = UIColor.clearColor()
         subTitleLabel.textColor = UIColor.whiteColor()
-        subTitleLabel.font = UIFont.boldSystemFontOfSize(10)
+        subTitleLabel.font = UIFont(name: "Gotham", size: 11)
         subTitleLabel.text = subtitle
         subTitleLabel.textAlignment = NSTextAlignment.Center
         

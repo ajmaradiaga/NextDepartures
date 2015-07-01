@@ -57,17 +57,6 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        /*
-        
-        NSNotificationCenter.defaultCenter().addObserverForName("timeTableComplete", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.handleTimeTableCompleteNotification(notification)
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserverForName("timeTablePartial", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.handleTimeTableCompleteNotification(notification)
-        }
-*/
-    
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
         
@@ -104,41 +93,6 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
             stopsMapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Latitude), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Longitude)), MKCoordinateSpanMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LatitudeDelta), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LongitudeDelta))), animated: false)
         }
     }
-    
-    /*
-    func handleTimeTableCompleteNotification(notification: NSNotification) -> Void {
-        //println("Notification received")
-        if self.sharedTransport.timeTableStops.count == 0 && self.sharedTransport.requestFetchMode == .Default {
-            self.sharedTransport.timeTableStops = self.stopsShownInMap()
-        }
-        
-        //If the request is done by the Watch, set the region of the map to User Location
-        if self.sharedTransport.requestFetchMode == .Watch {
-            Helper.setMapRegion(self.stopsMapView, withCoordinates: self.sharedTransport.userCurrentLocation!.coordinate, delta: nil, animated: true)
-        }
-        
-        var auxDelegate = self.sharedTransport.timeTableFetchedResultsController.delegate
-        
-        self.sharedTransport.timeTableFetchedResultsController = self.sharedTransport.refreshTimeTableFetchedResultsController()
-        
-        self.sharedTransport.timeTableFetchedResultsController.delegate = auxDelegate
-        
-        var error:NSError?
-        
-        self.sharedTransport.timeTableFetchedResultsController.performFetch(&error)
-        
-        self.sharedTransport.sortedTimeTable = self.sharedTransport.timeTableFetchedResultsController.fetchedObjects as? [Timetable]
-        
-        self.updateTableData()
-    }
-    
-    func handleTimeTablePartialNotification(notification: NSNotification) -> Void {
-        var stopProcessed = notification.object as! Int
-        
-        if stopProcessed < 4 {
-            handleTimeTableCompleteNotification(notification)
-        }
-    }*/
     
     @IBAction func refreshTimetable(sender: AnyObject) {
         fetchData(sender)
@@ -220,7 +174,8 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 221/255, green: 66/255, blue: 46/255, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Gotham Medium", size: 17)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         if selectedIndex != nil {
             self.nextDeparturesTable.deselectRowAtIndexPath(selectedIndex!, animated: false)
