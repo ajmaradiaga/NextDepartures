@@ -10,6 +10,8 @@
 		6B288B271B39742100480108 /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B261B39742100480108 /* TrackingService.swift */; };
 		6B288B291B3C9F9E00480108 /* StopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B281B3C9F9E00480108 /* StopTableViewCell.swift */; };
 		6B288B2B1B3D67B400480108 /* StopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */; };
+		6B2FEE3B1B47CD69003EA6B8 /* TutorialContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */; };
+		6B2FEE3D1B47DB96003EA6B8 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */; };
 		6B4811301B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */; };
 		6B4811351B119A2200FD4A7F /* TimetableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4811341B119A2200FD4A7F /* TimetableRow.swift */; };
 		6B9BE2671B103EDE001A135B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9BE2661B103EDE001A135B /* AppDelegate.swift */; };
@@ -140,6 +142,8 @@
 		6B288B261B39742100480108 /* TrackingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
 		6B288B281B3C9F9E00480108 /* StopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTableViewCell.swift; sourceTree = "<group>"; };
 		6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDetailsViewController.swift; sourceTree = "<group>"; };
+		6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContentViewController.swift; sourceTree = "<group>"; };
+		6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MelbourneCBDtoStKilda.gpx; sourceTree = "<group>"; };
 		6B4811331B1053AF00FD4A7F /* MelbourneCBD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MelbourneCBD.gpx; sourceTree = "<group>"; };
 		6B4811341B119A2200FD4A7F /* TimetableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableRow.swift; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 				6B9BE28B1B103EFA001A135B /* TrackingStopsViewController.swift */,
 				6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */,
 				6BC3C1051B434B6100BC226F /* FavouritesViewController.swift */,
+				6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */,
+				6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -724,6 +730,7 @@
 				6B9BE2AC1B103EFA001A135B /* Stops.swift in Sources */,
 				6B288B291B3C9F9E00480108 /* StopTableViewCell.swift in Sources */,
 				6B9BE2A71B103EFA001A135B /* PTVConstants.swift in Sources */,
+				6B2FEE3D1B47DB96003EA6B8 /* TutorialViewController.swift in Sources */,
 				6B288B271B39742100480108 /* TrackingService.swift in Sources */,
 				6B9BE2B21B103EFA001A135B /* StopAnnotation.swift in Sources */,
 				6B9BE2A81B103EFA001A135B /* CoreDataStackManager.swift in Sources */,
@@ -736,6 +743,7 @@
 				6B9BE2B31B103EFA001A135B /* TrackingStopTableViewCell.swift in Sources */,
 				6B9BE2A31B103EFA001A135B /* TimetableViewController.swift in Sources */,
 				6B9BE2B01B103EFA001A135B /* TransportModel.xcdatamodeld in Sources */,
+				6B2FEE3B1B47CD69003EA6B8 /* TutorialContentViewController.swift in Sources */,
 				6B9BE2AF1B103EFA001A135B /* TransportManager.swift in Sources */,
 				6B288B2B1B3D67B400480108 /* StopDetailsViewController.swift in Sources */,
 				6B9BE2A41B103EFA001A135B /* TrackingStopsViewController.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+import UIKit
 import Foundation
 import NextDeparturesFramework
 
@@ -102,8 +103,28 @@ class GlanceController: WKInterfaceController {
                 }
             } else {
                 //error is a String
+                
+                //Clear image in transportView
+                var rect = CGRectMake(0, 0, 31, 31)
+                UIGraphicsBeginImageContextWithOptions(CGSizeMake(31, 31), false, 0)
+                UIColor.clearColor().setFill()
+                UIRectFill(rect)
+                var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                self.transportTypeImageView.setImage(image)
+                
                 self.mainTextLabel.setText("Error")
                 self.distanceLabel.setText(replyError as? String)
+                
+                self.service1Details.setText("")
+                self.service1Time!.setText("")
+                
+                self.service2Details.setText("")
+                self.service2Time!.setText("")
+                
+                self.service3Details.setText("")
+                self.service3Time!.setText("")
             }
         })
     }
