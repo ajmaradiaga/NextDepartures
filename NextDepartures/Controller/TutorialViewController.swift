@@ -33,10 +33,16 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func skitButtonTapped(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "ShownTutorial")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func initialise() {
         pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TutorialPageVC") as! UIPageViewController
         
         self.pageViewController.dataSource = self
+        self.pageViewController.delegate = self
         
         for var i = 0; i < mainTexts.count; i++ {
             var vc = viewControllerAtIndex(i)!
@@ -44,10 +50,12 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         }
         
         //let pageContentViewController = self.viewControllerAtIndex(0)
-        self.pageViewController.setViewControllers([self.viewControllers.objectAtIndex(0)], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        self.pageViewController.setViewControllers([self.viewControllers.objectAtIndex(0)], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        
+        self.view.backgroundColor = self.colours[0]
         
         /* We are substracting 30 because we have a start again button whose height is 30*/
-        self.pageViewController.view.frame = CGRectMake(0, 30, self.view.frame.width, self.view.frame.height)
+        self.pageViewController.view.frame = CGRectMake(0, 60, self.view.frame.width, self.view.frame.height - 60)
         self.addChildViewController(pageViewController)
         self.view.addSubview(pageViewController.view)
         self.pageViewController.didMoveToParentViewController(self)
@@ -71,6 +79,20 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         }
         index--
         return viewControllers.objectAtIndex(index) as? UIViewController
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+        
+        
+        if pendingViewControllers.count > 0 {
+            var index = (pendingViewControllers[0] as! TutorialContentViewController).pageIndex!
+            
+            self.view.backgroundColor = self.colours[index]
+        }
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        println(finished)
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {

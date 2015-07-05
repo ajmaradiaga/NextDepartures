@@ -31,6 +31,7 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
     var selectedIndex : NSIndexPath?
     var tableRefreshControl = UIRefreshControl()
     var selectedStop : Stops?
+    var tutorialVC : TutorialViewController?
     
     lazy var melbourneCBDLocation = CLLocation(latitude: -37.8140000, longitude: 144.9633200)
     
@@ -91,6 +92,13 @@ class TimetableViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         if NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Latitude) != 0 {
             stopsMapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Latitude), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.Longitude)), MKCoordinateSpanMake(NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LatitudeDelta), NSUserDefaults.standardUserDefaults().doubleForKey(MapKeys.LongitudeDelta))), animated: false)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if NSUserDefaults.standardUserDefaults().boolForKey("ShownTutorial") == false {
+            tutorialVC = self.storyboard?.instantiateViewControllerWithIdentifier("TutorialVC") as? TutorialViewController
+            self.navigationController?.presentViewController(tutorialVC!, animated: true, completion: nil)
         }
     }
     

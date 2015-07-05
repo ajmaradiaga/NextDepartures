@@ -104,6 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.transportManager.locationManager.requestAlwaysAuthorization();
         }
         self.transportManager.locationManager.startMonitoringSignificantLocationChanges();
+
     }
     
     func applicationWillTerminate(application: UIApplication) {
