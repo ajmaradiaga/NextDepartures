@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import MapKit
 
-class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     var timeTable : Timetable!
     var selectedAnnotation : StopAnnotation!
@@ -18,6 +18,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     var locationManager = CLLocationManager()
     var alertVC : UIAlertController?
     var fetchForFirstTime = false
+    
+    var mapIsVisible = false
     
     var sessionTask : NSURLSessionTask?
     
@@ -29,7 +31,10 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         return TransportManager.sharedInstance();
     }
     
-    @IBOutlet weak var routeMap: MKMapView!
+    @IBOutlet var routeTable: UITableView!
+    @IBOutlet var routeMap: MKMapView!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var mapListButton: UIBarButtonItem!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var currentLocation : CLLocation?
@@ -56,6 +61,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                     for item in (result as! [Stops]) {
                         Helper.addStopPin(item, ToMap: self.routeMap)
                     }
+                    
+                    self.routeTable.reloadData()
                 }
             }
             dispatch_async(dispatch_get_main_queue()) {
@@ -162,8 +169,39 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         }
     }
     
+    
+    @IBAction func toggleMapTableView(sender: AnyObject) {
+        if mapIsVisible == true {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                self.routeMap.alpha = 0
+                self.locationButton.alpha = 0
+                self.routeTable.alpha = 1.0
+                self.mapListButton.image = UIImage(named: "ListIcon")
+                }, completion: { (completed) -> Void in
+                    self.mapIsVisible = !self.mapIsVisible
+            })
+        } else {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                self.routeMap.alpha = 1.0
+                self.locationButton.alpha = 1.0
+                self.routeTable.alpha = 0
+                self.mapListButton.image = UIImage(named: "MapIcon")
+                }, completion: { (completed) -> Void in
+                    self.mapIsVisible = !self.mapIsVisible
+            })
+        }
+    }
+    
     func showStopOptions(sender: AnyObject) {
-        if selectedAnnotation.stop.patternType == .Future {
+        var stop : Stops
+        
+        if sender is Stops {
+            stop = sender as! Stops
+        } else {
+            stop = selectedAnnotation.stop
+        }
+        
+        if stop.patternType == .Future {
             stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)
             
             
@@ -181,7 +219,10 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             
             self.presentViewController(stopActions, animated: true, completion: nil)
         } else {
-            routeMap.deselectAnnotation(selectedAnnotation, animated: true)
+            //Called by the Map
+            if !(sender is Stops) {
+                routeMap.deselectAnnotation(selectedAnnotation, animated: true)
+            }
         }
     }
     
@@ -216,103 +257,142 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext!
     }
-    /*
-    lazy var stopFetchRequest : NSFetchRequest = {
-        let fetchRequest = NSFetchRequest(entityName: "Stops")
-        
-        fetchRequest.predicate = NSPredicate(format: "\(Stops.Keys.Line).\(Line.Keys.LineId) == %i", self.timeTable.line.lineId)
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Stops.Keys.StopId, ascending: true)]
-        
-        return fetchRequest
-    }()
     
-    //MARK: NSFetchedResults Delegate
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        
-        let fetchRequest = self.stopFetchRequest
-        
-        //println("Objects in Stops: \(self.sharedContext.countForFetchRequest(fetchRequest, error:nil))")
-        
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-            managedObjectContext: self.sharedContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        
-        return fetchedResultsController
-        
-        }()
+    // MARK: - Table view data source
     
-    func controller(controller: NSFetchedResultsController,
-        didChangeObject anObject: AnyObject,
-        atIndexPath indexPath: NSIndexPath?,
-        forChangeType type: NSFetchedResultsChangeType,
-        newIndexPath: NSIndexPath?) {
-            
-            var timeTable = anObject as! Timetable
-            
-            switch type {
-            case .Insert:
-                println("Insert item")
-                //addPinToMap(location)
-            default:
-                return
-            }
-    }*/
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
     
-    //MARK: TableViewDataSource
-    /*
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.sharedContext.countForFetchRequest(stopFetchRequest, error: nil) > 0 {
-            return self.fetchedResultsController.fetchedObjects!.count
+        // Return the number of rows in the section.
+        if self.stopsOnLine == nil {
+            return 0
         }
         
-        return 0
+        return self.stopsOnLine!.count
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Timetable
+        var item = self.stopsOnLine![indexPath.row]
+        var tm = PTVClient.TransportMode.transportModeFromString(item.transportType)
         
-        let reuseIdentifier = "DepartureCell"
+        let reuseIdentifier = "RouteStop"
         
-        var cell : DepartureTableViewCell
+        var cell : RouteStopTableViewCell
         
-        if let tempCell: DepartureTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? DepartureTableViewCell {
+        if let tempCell: RouteStopTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? RouteStopTableViewCell {
             
             cell = tempCell
         } else {
-            cell = DepartureTableViewCell()
+            cell = RouteStopTableViewCell()
         }
         
-        //cell.lineNumberLabel.text = item.line.lineNumber
-        cell.subTextLabel.text = item.line.lineName
-        cell.mainTextLabel.text = item.destinationName
-        
-        var displayTime = ""
-        var timeSince = item.timeUTC.timeIntervalSinceDate(NSDate())
-        
-        var timeValue : Double = 0
-        var timeDescription : String = "secs"
-        
-        if timeSince < 60 && timeSince > 0 {
-            timeValue = timeSince
-        } else if timeSince > 60 && timeSince < 3600 {
-            timeValue = timeSince / 60
-            timeDescription = "mins"
-        } else if timeSince > 3600 {
-            timeValue = timeSince / 3600
-            timeDescription = "hours"
-        } else {
-            displayTime = "0"
+        if sharedTransport.userCurrentLocation != nil {
+            cell.updateInformationWithStop(item, FromLocation: self.sharedTransport.userCurrentLocation!)
         }
-        
-        displayTime = String(format: "%0.0f %@", timeValue, timeDescription)
-        
-        cell.upperRightTextLabel.text = displayTime
-        let distance = item.stop.location!.distanceFromLocation(currentLocation!)
-        cell.rightTextLabel.text = String(format:"%.1f m", distance)
         
         return cell
-    }*/
+    }
+    
+    //MARK: TableViewDelegate
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        /*
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        
+        let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
+        
+        let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        shareMenu.addAction(twitterAction)
+        shareMenu.addAction(cancelAction)
+        
+        
+        self.presentViewController(shareMenu, animated: true, completion: nil)
+        })
+        */
+        
+        var actions = NSMutableArray()
+        
+        
+        var reminderAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Reminder" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            var stop = self.stopsOnLine![indexPath.row]
+            
+            self.showStopOptions(stop)
+            
+            var timeDifference = timeTableItem.timeFromNow()
+            
+            if timeDifference > 360 {
+                self.alertVC = UIAlertController(title: nil, message: "Notify Me", preferredStyle: .ActionSheet)
+                
+                let fiveMinutesAction = UIAlertAction(title: "5 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                    self.setReminder(timeTableItem, seconds: 300)
+                }
+                let fifteenMinutesAction = UIAlertAction(title: "15 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                    self.setReminder(timeTableItem, seconds: 900)
+                }
+                
+                let thirtyMinutesAction = UIAlertAction(title: "30 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                    self.setReminder(timeTableItem, seconds: 1800)
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alertAction) -> Void in
+                    self.tableView.editing = false
+                })
+                
+                self.alertVC!.addAction(fiveMinutesAction)
+                
+                if timeDifference > 900 {
+                    self.alertVC!.addAction(fifteenMinutesAction)
+                }
+                
+                if timeDifference > 1800 {
+                    self.alertVC!.addAction(thirtyMinutesAction)
+                }
+                self.alertVC!.addAction(cancelAction)
+                
+                
+                self.presentViewController(self.alertVC!, animated: true, completion: nil)
+            } else {
+                var serviceName = timeTableItem.transportType == "train" ? "" : "- \(timeTableItem.lineDirection.directionName)"
+                
+                Helper.raiseNotification("You should be @ \(timeTableItem.stop.stopName) in \(timeTableItem.displayTimeFromNow()) for service \(timeTableItem.line.lineNumber) \(serviceName)", withTitle: "Get Ready", completionHandler: { () -> Void in
+                    self.tableView.editing = false
+                })
+            }
+        })
+        
+        reminderAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)
+        
+        var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            var timeTableItem = self.timetableElements![indexPath.row]
+            
+            self.performSegueWithIdentifier("showRouteDetails", sender: self.tableView.cellForRowAtIndexPath(indexPath))
+        })
+        
+        setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
+        
+        actions.addObject(setDestinationAction)
+        actions.addObject(reminderAction)
+        
+        return actions as [AnyObject]?
+    }
+    
+    func setReminder(timeTableItem: Timetable, seconds: Int32) {
+        self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
+        println("Set Reminder: \(seconds) before.")
+        TransportManager.sharedInstance().addTrackingService(timeTableItem, withSeconds: seconds)
+        self.tableView.editing = false
+    }
 }
