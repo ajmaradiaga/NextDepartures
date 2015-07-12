@@ -42,13 +42,18 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         //var imageTopValue :CGFloat = topImageConstraint.constant
         var imageWidthHeight : CGFloat = imageWidthConstraint.constant
         
+        println(UIScreen.mainScreen().bounds.size.width)
+        println(UIScreen.mainScreen().bounds.size.height)
         
-        if (UIScreen.mainScreen().bounds.size.width <= 480.0) {
+        if (UIScreen.mainScreen().bounds.size.width > 375.0) {
+            labelValue = 50.0
+        } else if (UIScreen.mainScreen().bounds.size.width < 375.0) {
             labelValue = 10.0
         //    imageTopValue = 28.0
         }
         
-        if (UIScreen.mainScreen().bounds.size.height <= 480.0) {
+        //Handle < iPhone 6
+        if (UIScreen.mainScreen().bounds.size.height < 559.0) {
             imageWidthHeight = 143.0
         }
         

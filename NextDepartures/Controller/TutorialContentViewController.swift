@@ -38,8 +38,27 @@ class TutorialContentViewController: UIViewController {
         contentSubText.alpha = 0
         
         self.contentImage.image = image
-        self.contentMainText.text = mainText
-        self.contentSubText.text = subText
+        
+        let font:UIFont? = UIFont(name: "Gotham Medium", size: 23.0)
+        
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        paragraphStyle.alignment = .Center
+        
+        var attrString = NSMutableAttributedString(string: mainText)
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham Medium", size: 23.0)!], range: NSMakeRange(0, attrString.length))
+        
+        self.contentMainText.attributedText = attrString
+        
+        attrString = NSMutableAttributedString(string: subText)
+        
+        paragraphStyle.lineSpacing = 3
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham", size: 14.0)!], range: NSMakeRange(0, attrString.length))
+        
+        
+        self.contentSubText.attributedText = attrString
         
         if pageIndex == 3 {
             var letsGoColour = UIColor(red: 224/255, green: 65/255, blue: 38/255, alpha: 1.0)
@@ -64,12 +83,16 @@ class TutorialContentViewController: UIViewController {
         var imageTopValue :CGFloat = topImageConstraint.constant
         var imageWidthHeight : CGFloat = imageWidthConstraint.constant
         
-        if (UIScreen.mainScreen().bounds.size.width <= 480.0) {
+        //Handle > iPhone 6
+        if (UIScreen.mainScreen().bounds.size.width > 375.0) {
+            labelValue = 65.0
+        } else if (UIScreen.mainScreen().bounds.size.width < 375.0) {
             labelValue = 20.0
             imageTopValue = 28.0
         }
         
-        if (UIScreen.mainScreen().bounds.size.height <= 480.0) {
+        //Handle < iPhone 6
+        if (UIScreen.mainScreen().bounds.size.height < 559.0) {
             imageWidthHeight = 143.0
         }
         

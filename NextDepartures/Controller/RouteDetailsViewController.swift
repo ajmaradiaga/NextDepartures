@@ -144,11 +144,11 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         switch pinStop.patternType {
         case .Past:
-            pinView!.pinColor = MKPinAnnotationColor.Red
+            pinView!.image = UIImage(named: "Stop_passed")!
         case .Present:
-            pinView!.pinColor = MKPinAnnotationColor.Purple
+            pinView!.image = UIImage(named: "Stop_current")!
         default:
-            pinView!.pinColor = MKPinAnnotationColor.Green
+            pinView!.image = UIImage(named: "\(timeTable.stop.transportType)_future")!
         }
         
         return pinView

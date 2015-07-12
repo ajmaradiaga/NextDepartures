@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NextDepartures/Controller/TutorialContentViewController.swift"
-            timestampString = "458258528.872172"
+            timestampString = "458378049.666694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "letsGoButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -320,6 +320,38 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "initialise()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NextDepartures/Controller/FavouritesViewController.swift"
+            timestampString = "458372378.602857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "updateViewConstraints()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NextDepartures/Controller/FavouritesViewController.swift"
+            timestampString = "458372326.54402"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "updateViewConstraints()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -423,19 +423,19 @@
                                     <constraint firstAttribute="height" constant="243" id="uNC-UC-Za1"/>
                                 </constraints>
                             </imageView>
-                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="kun-am-4nl">
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Next Departures" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="kun-am-4nl">
                                 <rect key="frame" x="66" y="361" width="468" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="E6V-fF-bCN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="23"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gK5-mh-0xp">
-                                <rect key="frame" x="66" y="427" width="468" height="48"/>
+                                <rect key="frame" x="66" y="427" width="468" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="sT0-48-fW1"/>
+                                    <constraint firstAttribute="height" constant="55" id="sT0-48-fW1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -460,7 +460,7 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="kun-am-4nl" secondAttribute="trailing" constant="50" id="4mG-4a-z3Q"/>
                             <constraint firstItem="gK5-mh-0xp" firstAttribute="leading" secondItem="fAX-GG-zVm" secondAttribute="leadingMargin" constant="50" id="FsT-bg-twc"/>
-                            <constraint firstItem="2gh-md-XYz" firstAttribute="top" secondItem="gK5-mh-0xp" secondAttribute="bottom" constant="20" id="MaW-8h-TD9"/>
+                            <constraint firstItem="2gh-md-XYz" firstAttribute="top" secondItem="gK5-mh-0xp" secondAttribute="bottom" constant="13" id="MaW-8h-TD9"/>
                             <constraint firstItem="SrX-LR-9Re" firstAttribute="top" secondItem="HLy-2w-rW6" secondAttribute="bottom" constant="68" id="Ngr-Xh-f22"/>
                             <constraint firstItem="kun-am-4nl" firstAttribute="top" secondItem="SrX-LR-9Re" secondAttribute="bottom" constant="30" id="aKs-fg-OVq"/>
                             <constraint firstAttribute="centerX" secondItem="SrX-LR-9Re" secondAttribute="centerX" constant="-1.5" id="def-2n-gXP"/>
