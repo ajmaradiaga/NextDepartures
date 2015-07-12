@@ -70,11 +70,11 @@ extension PTVClient {
             case "bus":
                 return "Pinpoint_bus"
             case "nightrider":
-                return "Pinpoint_bus"
+                return "Pinpoint_nightrider"
             case "train":
                 return "Pinpoint_train"
             case "vline":
-                return "Pinpoint_train"
+                return "Pinpoint_vline"
             default:
                 return "Pinpoint_tram"
             }
@@ -98,7 +98,7 @@ extension PTVClient {
             case "bus":
                 return UIColor(red: 253/255, green: 160/255, blue: 34/255, alpha: 1)
             case "nightrider":
-                return UIColor(red: 217/255, green: 71/255, blue: 49/255, alpha: 1)
+                return UIColor(red: 81/255, green: 75/255, blue: 137/255, alpha: 1)
             case "train":
                 return UIColor(red: 20/255, green: 155/255, blue: 234/255, alpha: 1)
             case "vline":

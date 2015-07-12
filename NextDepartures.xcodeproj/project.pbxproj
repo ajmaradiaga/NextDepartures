@@ -11,6 +11,7 @@
 		6B288B291B3C9F9E00480108 /* StopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B281B3C9F9E00480108 /* StopTableViewCell.swift */; };
 		6B288B2B1B3D67B400480108 /* StopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */; };
 		6B2FCAF41B4C81DF0059B4F7 /* RouteStopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FCAF31B4C81DF0059B4F7 /* RouteStopTableViewCell.swift */; };
+		6B2FCAF61B50ED830059B4F7 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FCAF51B50ED830059B4F7 /* TutorialPageViewController.swift */; };
 		6B2FEE3B1B47CD69003EA6B8 /* TutorialContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */; };
 		6B2FEE3D1B47DB96003EA6B8 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */; };
 		6B4811301B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */; };
@@ -144,6 +145,7 @@
 		6B288B281B3C9F9E00480108 /* StopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTableViewCell.swift; sourceTree = "<group>"; };
 		6B288B2A1B3D67B400480108 /* StopDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDetailsViewController.swift; sourceTree = "<group>"; };
 		6B2FCAF31B4C81DF0059B4F7 /* RouteStopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteStopTableViewCell.swift; sourceTree = "<group>"; };
+		6B2FCAF51B50ED830059B4F7 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContentViewController.swift; sourceTree = "<group>"; };
 		6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6B48112F1B10406900FD4A7F /* MelbourneCBDtoStKilda.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MelbourneCBDtoStKilda.gpx; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				6BC3C1051B434B6100BC226F /* FavouritesViewController.swift */,
 				6B2FEE3A1B47CD69003EA6B8 /* TutorialContentViewController.swift */,
 				6B2FEE3C1B47DB96003EA6B8 /* TutorialViewController.swift */,
+				6B2FCAF51B50ED830059B4F7 /* TutorialPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 			files = (
 				6BC3C1061B434B6100BC226F /* FavouritesViewController.swift in Sources */,
 				6B9BE2B11B103EFA001A135B /* DepartureTableViewCell.swift in Sources */,
+				6B2FCAF61B50ED830059B4F7 /* TutorialPageViewController.swift in Sources */,
 				6B9BE2A51B103EFA001A135B /* NetworkHelper.swift in Sources */,
 				6B9BE2AC1B103EFA001A135B /* Stops.swift in Sources */,
 				6B288B291B3C9F9E00480108 /* StopTableViewCell.swift in Sources */,

@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             self.transportManager.locationManager.startMonitoringSignificantLocationChanges()
         }
-        
+
         return true
     }
     

@@ -15,6 +15,13 @@ class TutorialContentViewController: UIViewController {
     @IBOutlet weak var contentSubText: UILabel!
     @IBOutlet weak var letsGoButton: UIButton!
     
+    @IBOutlet weak var leftMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftSubTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightSubTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     
     var pageIndex: Int?
     
@@ -48,6 +55,34 @@ class TutorialContentViewController: UIViewController {
     @IBAction func letsGoButtonTapped(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "ShownTutorial")
         self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        var labelValue :CGFloat = leftMainTextConstraint.constant
+        var imageTopValue :CGFloat = topImageConstraint.constant
+        var imageWidthHeight : CGFloat = imageWidthConstraint.constant
+        
+        if (UIScreen.mainScreen().bounds.size.width <= 480.0) {
+            labelValue = 20.0
+            imageTopValue = 28.0
+        }
+        
+        if (UIScreen.mainScreen().bounds.size.height <= 480.0) {
+            imageWidthHeight = 143.0
+        }
+        
+        leftMainTextConstraint.constant = labelValue
+        rightMainTextConstraint.constant = labelValue
+        
+        leftSubTextConstraint.constant = labelValue
+        rightSubTextConstraint.constant = labelValue
+
+        topImageConstraint.constant = imageTopValue
+        
+        imageHeightConstraint.constant = imageWidthHeight
+        imageWidthConstraint.constant = imageWidthHeight
     }
     
     override func viewDidAppear(animated: Bool) {

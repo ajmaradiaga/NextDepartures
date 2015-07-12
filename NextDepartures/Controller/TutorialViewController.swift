@@ -15,7 +15,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     var viewControllers = NSMutableArray()
     
     let mainTexts = ["Welcome to Next Departures", "Never miss a stop with tracking", "Know your location wherever you are","Saving your favourite stop is super easy"]
-    let subTexts = ["Easily search, track and get notification for available public transport around you in real time", "Just swipe and select your desired destination point. we will notify you when it’s near", "Push that little blue button when you are lost, it will show your current location on map","Life is a little bit simpler with favourite. Just save your favourite stop and get an instant access"]
+    let subTexts = ["Easily search, track and get notification for available public transport around you in real time", "Just swipe and select your desired destination point. we will notify you when it’s near", "Push that little blue button when you are lost, it will show your current location on map","Life is a little bit simpler with favourites. Just save your favourite stop and get an instant access"]
     let images = ["WelcomeImage","NeverMissStop", "KnowYourLocation", "SuperEasyFavourites"]
     let colours = [UIColor(red: 53/255, green: 192/255, blue: 124/255, alpha: 1.0), UIColor(red: 180/255, green: 85/255, blue: 194/255, alpha: 1.0), UIColor(red: 22/255, green: 166/255, blue: 238/255, alpha: 1.0), UIColor(red: 248/255, green: 206/255, blue: 49/255, alpha: 1.0)]
     
@@ -26,6 +26,10 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
 
         // Do any additional setup after loading the view.
         initialise()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,11 +58,13 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         
         self.view.backgroundColor = self.colours[0]
         
+        
         /* We are substracting 30 because we have a start again button whose height is 30*/
         self.pageViewController.view.frame = CGRectMake(0, 60, self.view.frame.width, self.view.frame.height - 60)
         self.addChildViewController(pageViewController)
         self.view.addSubview(pageViewController.view)
         self.pageViewController.didMoveToParentViewController(self)
+    
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
@@ -92,7 +98,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        println(finished)
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {

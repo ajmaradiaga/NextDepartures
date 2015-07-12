@@ -13,6 +13,13 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var favouritesTableView: UITableView!
     
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeigthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftSubTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightSubTextConstraint: NSLayoutConstraint!
+    
     var scheduledTimer = NSTimer()
     var favouriteActions : UIAlertController!
     var favouriteColor = UIColor(red: 250/255.0, green: 207/255, blue: 55/255, alpha: 1.0)
@@ -27,6 +34,35 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
     }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        var labelValue :CGFloat = leftMainTextConstraint.constant
+        //var imageTopValue :CGFloat = topImageConstraint.constant
+        var imageWidthHeight : CGFloat = imageWidthConstraint.constant
+        
+        
+        if (UIScreen.mainScreen().bounds.size.width <= 480.0) {
+            labelValue = 10.0
+        //    imageTopValue = 28.0
+        }
+        
+        if (UIScreen.mainScreen().bounds.size.height <= 480.0) {
+            imageWidthHeight = 143.0
+        }
+        
+        
+        leftMainTextConstraint.constant = labelValue
+        rightMainTextConstraint.constant = labelValue
+        
+        leftSubTextConstraint.constant = labelValue
+        rightSubTextConstraint.constant = labelValue
+        
+        imageHeigthConstraint.constant = imageWidthHeight
+        imageWidthConstraint.constant = imageWidthHeight
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

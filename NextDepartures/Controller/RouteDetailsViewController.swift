@@ -14,6 +14,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
 
     var timeTable : Timetable!
     var selectedAnnotation : StopAnnotation!
+    var selectedStop : Stops!
     //Helper.formatDistanceToString(distance)var trackingStops : [Stops] = [Stops]()
     var locationManager = CLLocationManager()
     var alertVC : UIAlertController?
@@ -24,6 +25,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     var sessionTask : NSURLSessionTask?
     
     var stopsOnLine : [Stops]?
+    var presentStopIndex = 0
     
     var stopActions : UIAlertController!
     
@@ -58,11 +60,20 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             if result != nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.stopsOnLine = result as? [Stops]
-                    for item in (result as! [Stops]) {
+                    
+                    
+                    
+                    for (index, item) in enumerate(result as! [Stops]) {
                         Helper.addStopPin(item, ToMap: self.routeMap)
+                        
+                        if item.patternType == .Present {
+                            self.presentStopIndex = index
+                        }
                     }
                     
                     self.routeTable.reloadData()
+                    
+                    self.routeTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.presentStopIndex, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
                 }
             }
             dispatch_async(dispatch_get_main_queue()) {
@@ -148,12 +159,14 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             
             selectedAnnotation = view.annotation as! StopAnnotation
             
-            var distance = selectedAnnotation.stop.location?.distanceFromLocation(sharedTransport.userCurrentLocation)
+            selectedStop = selectedAnnotation.stop
+            
+            var distance = selectedStop.location?.distanceFromLocation(sharedTransport.userCurrentLocation)
             
             if view is MKPinAnnotationView {
                 var enableDisclosureButton = true
                 
-                if distance < TransportManager.Constants.MinimumDistanceFromStop || selectedAnnotation.stop.patternType != .Future {
+                if distance < TransportManager.Constants.MinimumDistanceFromStop || selectedStop.patternType != .Future {
                     enableDisclosureButton = false
                 }
                 
@@ -229,16 +242,22 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     func handleDistanceSelected(distance: Double) -> Void{
         //stopActions.dismissViewControllerAnimated(true, completion: nil)
         
-        var targetStopLocation = selectedAnnotation.stop.location
+        var targetStopLocation = selectedStop.location
         
         var userLocation = routeMap.userLocation.location
         
-        sharedTransport.addTrackingStop(selectedAnnotation.stop, forService: self.timeTable!, withDistance: distance)
+        sharedTransport.addTrackingStop(selectedStop, forService: self.timeTable!, withDistance: distance)
         
         CoreDataStackManager.sharedInstance().saveContext()
             
-            println("Added \(selectedAnnotation.stop.stopName) stop to trackingStops")
-        routeMap.deselectAnnotation(selectedAnnotation, animated: false)
+            println("Added \(selectedStop.stopName) stop to trackingStops")
+        
+        if mapIsVisible {
+            routeMap.deselectAnnotation(selectedAnnotation, animated: false)
+        } else {
+            routeTable.editing = false
+        }
+        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -292,7 +311,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         }
         
         if sharedTransport.userCurrentLocation != nil {
-            cell.updateInformationWithStop(item, FromLocation: self.sharedTransport.userCurrentLocation!)
+            cell.updateInformationWithStop(item, fromLocation: self.sharedTransport.userCurrentLocation!, itemIndex: indexPath.row, presentIndex: self.presentStopIndex, lastIndex: self.stopsOnLine!.count - 1)
         }
         
         return cell
@@ -323,68 +342,32 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         var actions = NSMutableArray()
         
-        
+        /*
         var reminderAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Reminder" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
             var stop = self.stopsOnLine![indexPath.row]
             
             self.showStopOptions(stop)
-            
-            var timeDifference = timeTableItem.timeFromNow()
-            
-            if timeDifference > 360 {
-                self.alertVC = UIAlertController(title: nil, message: "Notify Me", preferredStyle: .ActionSheet)
-                
-                let fiveMinutesAction = UIAlertAction(title: "5 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-                    self.setReminder(timeTableItem, seconds: 300)
-                }
-                let fifteenMinutesAction = UIAlertAction(title: "15 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-                    self.setReminder(timeTableItem, seconds: 900)
-                }
-                
-                let thirtyMinutesAction = UIAlertAction(title: "30 minutes", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-                    self.setReminder(timeTableItem, seconds: 1800)
-                }
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alertAction) -> Void in
-                    self.tableView.editing = false
-                })
-                
-                self.alertVC!.addAction(fiveMinutesAction)
-                
-                if timeDifference > 900 {
-                    self.alertVC!.addAction(fifteenMinutesAction)
-                }
-                
-                if timeDifference > 1800 {
-                    self.alertVC!.addAction(thirtyMinutesAction)
-                }
-                self.alertVC!.addAction(cancelAction)
-                
-                
-                self.presentViewController(self.alertVC!, animated: true, completion: nil)
-            } else {
-                var serviceName = timeTableItem.transportType == "train" ? "" : "- \(timeTableItem.lineDirection.directionName)"
-                
-                Helper.raiseNotification("You should be @ \(timeTableItem.stop.stopName) in \(timeTableItem.displayTimeFromNow()) for service \(timeTableItem.line.lineNumber) \(serviceName)", withTitle: "Get Ready", completionHandler: { () -> Void in
-                    self.tableView.editing = false
-                })
-            }
         })
         
         reminderAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)
+        */
         
         var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
-            var timeTableItem = self.timetableElements![indexPath.row]
+            self.selectedStop = self.stopsOnLine![indexPath.row]
             
-            self.performSegueWithIdentifier("showRouteDetails", sender: self.tableView.cellForRowAtIndexPath(indexPath))
+            if self.selectedStop.patternType == .Future {
+                self.showStopOptions(self.selectedStop)
+            }
+            
         })
         
         setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
         
+        //actions.addObject(reminderAction)
         actions.addObject(setDestinationAction)
-        actions.addObject(reminderAction)
+        
         
         return actions as [AnyObject]?
     }
@@ -393,6 +376,6 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         self.alertVC!.dismissViewControllerAnimated(true, completion: nil)
         println("Set Reminder: \(seconds) before.")
         TransportManager.sharedInstance().addTrackingService(timeTableItem, withSeconds: seconds)
-        self.tableView.editing = false
+        //self.tableView.editing = false
     }
 }
