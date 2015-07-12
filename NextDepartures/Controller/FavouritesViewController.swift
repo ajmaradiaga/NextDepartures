@@ -20,6 +20,9 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var leftSubTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightSubTextConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var favouriteEmptyStateMainText: UILabel!
+    @IBOutlet weak var favouriteEmptyStateSubText: UILabel!
+    
     var scheduledTimer = NSTimer()
     var favouriteActions : UIAlertController!
     var favouriteColor = UIColor(red: 250/255.0, green: 207/255, blue: 55/255, alpha: 1.0)
@@ -35,6 +38,25 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
+        
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        paragraphStyle.alignment = .Center
+        
+        var attrString = NSMutableAttributedString(string: favouriteEmptyStateMainText.text!)
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham Medium", size: 19.0)!], range: NSMakeRange(0, attrString.length))
+        
+        self.favouriteEmptyStateMainText.attributedText = attrString
+        
+        attrString = NSMutableAttributedString(string: favouriteEmptyStateSubText.text!)
+        
+        paragraphStyle.lineSpacing = 3
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham", size: 14.0)!], range: NSMakeRange(0, attrString.length))
+        
+        
+        self.favouriteEmptyStateSubText.attributedText = attrString
     }
     
     override func updateViewConstraints() {

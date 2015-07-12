@@ -189,7 +189,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 self.routeMap.alpha = 0
                 self.locationButton.alpha = 0
                 self.routeTable.alpha = 1.0
-                self.mapListButton.image = UIImage(named: "ListIcon")
+                self.mapListButton.image = UIImage(named: "MapIcon")
                 }, completion: { (completed) -> Void in
                     self.mapIsVisible = !self.mapIsVisible
             })
@@ -198,7 +198,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 self.routeMap.alpha = 1.0
                 self.locationButton.alpha = 1.0
                 self.routeTable.alpha = 0
-                self.mapListButton.image = UIImage(named: "MapIcon")
+                self.mapListButton.image = UIImage(named: "ListIcon")
                 }, completion: { (completed) -> Void in
                     self.mapIsVisible = !self.mapIsVisible
             })

@@ -290,9 +290,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get peace of mind with Stop Tracking,  You can track your desired stop by set your destination in Arounds" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="eqe-3u-0i6">
-                                <rect key="frame" x="46" y="453" width="508" height="48"/>
+                                <rect key="frame" x="46" y="453" width="508" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="DoN-O3-UWE"/>
+                                    <constraint firstAttribute="height" constant="55" id="DoN-O3-UWE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                 <color key="textColor" red="0.80392156859999997" green="0.80784313730000001" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -407,6 +407,8 @@
                         <outlet property="leftSubTextConstraint" destination="JIo-kl-QHd" id="chn-q2-M5U"/>
                         <outlet property="rightMainTextConstraint" destination="9Ss-ya-548" id="KXY-25-719"/>
                         <outlet property="rightSubTextConstraint" destination="ZXb-wM-0oq" id="3bZ-3e-xds"/>
+                        <outlet property="trackingEmptyStateMainText" destination="jbj-9j-QAg" id="szh-OF-Q5v"/>
+                        <outlet property="trackingEmptyStateSubText" destination="eqe-3u-0i6" id="dUA-Jx-yyn"/>
                         <outlet property="trackingTableView" destination="zRf-mL-8Mc" id="0TG-L8-oag"/>
                     </connections>
                 </viewController>
@@ -916,9 +918,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your favourite stops easily! Just hit that star button on upper right corner to add your favourite stop" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="QzC-mO-ett">
-                                <rect key="frame" x="46" y="453" width="508" height="48"/>
+                                <rect key="frame" x="46" y="453" width="508" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="4P4-Qp-xL0"/>
+                                    <constraint firstAttribute="height" constant="55" id="4P4-Qp-xL0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                 <color key="textColor" red="0.80392156862745101" green="0.80784313725490198" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
@@ -1080,6 +1082,8 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Yxi-FW-7OM"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="favouriteEmptyStateMainText" destination="lE7-mY-a8t" id="Be9-lh-e4o"/>
+                        <outlet property="favouriteEmptyStateSubText" destination="QzC-mO-ett" id="vaW-BG-Daj"/>
                         <outlet property="favouritesTableView" destination="2ev-Uk-hVs" id="a0n-j5-DkC"/>
                         <outlet property="imageHeigthConstraint" destination="W7Z-ku-y54" id="9Gt-yM-JKC"/>
                         <outlet property="imageWidthConstraint" destination="lTj-4t-bPB" id="i3X-mR-jac"/>

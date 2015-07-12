@@ -20,6 +20,9 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var leftSubTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightSubTextConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var trackingEmptyStateMainText: UILabel!
+    @IBOutlet weak var trackingEmptyStateSubText: UILabel!
+    
     var scheduledTimer = NSTimer()
     var trackingActions : UIAlertController!
     var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
@@ -33,23 +36,40 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
         
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
+        
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        paragraphStyle.alignment = .Center
+        
+        var attrString = NSMutableAttributedString(string: trackingEmptyStateMainText.text!)
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham Medium", size: 19.0)!], range: NSMakeRange(0, attrString.length))
+        
+        self.trackingEmptyStateMainText.attributedText = attrString
+        
+        attrString = NSMutableAttributedString(string: trackingEmptyStateSubText.text!)
+        
+        paragraphStyle.lineSpacing = 3
+        
+        attrString.addAttributes([NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:UIFont(name: "Gotham", size: 14.0)!], range: NSMakeRange(0, attrString.length))
+        
+        
+        self.trackingEmptyStateSubText.attributedText = attrString
     }
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
         var labelValue :CGFloat = leftMainTextConstraint.constant
-        //var imageTopValue :CGFloat = topImageConstraint.constant
         var imageWidthHeight : CGFloat = imageWidthConstraint.constant
         
-        println(UIScreen.mainScreen().bounds.size.width)
-        println(UIScreen.mainScreen().bounds.size.height)
+        //println(UIScreen.mainScreen().bounds.size.width)
+        //println(UIScreen.mainScreen().bounds.size.height)
         
         if (UIScreen.mainScreen().bounds.size.width > 375.0) {
             labelValue = 50.0
         } else if (UIScreen.mainScreen().bounds.size.width < 375.0) {
             labelValue = 10.0
-            //    imageTopValue = 28.0
         }
         
         //Handle < iPhone 6
