@@ -24,6 +24,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     var favouriteActions : UIAlertController!
     var favouriteColor = UIColor(red: 250/255.0, green: 207/255, blue: 55/255, alpha: 1.0)
     
+    var stopActions : UIAlertController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -138,12 +140,41 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return cell
     }
-    /*
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var item = favouriteStops[indexPath.row]
+    
+    func showStopOptions(sender: AnyObject) {
+        var stop : Stops
         
-        self.performSegueWithIdentifier("showStopDetailsFromFavourites", sender: tableView.cellForRowAtIndexPath(indexPath))
-    }*/
+        stop = sender as! Stops
+        
+        stopActions = UIAlertController(title: "Notify", message: "Notify when selected stop is: ", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        
+        stopActions.addAction(UIAlertAction(title: "\(Int(TransportManager.Constants.MinimumDistanceFromStop))m away", style: .Default) { (alertAction) -> Void in
+            self.handleDistanceSelected(stop, distance:TransportManager.Constants.MinimumDistanceFromStop)
+            })
+        stopActions.addAction(UIAlertAction(title: "500m away", style: .Default) { (alertAction) -> Void in
+            self.handleDistanceSelected(stop, distance:500)
+            })
+        stopActions.addAction(UIAlertAction(title: "1km away", style: .Default) { (alertAction) -> Void in
+            self.handleDistanceSelected(stop, distance:1000)
+            })
+        
+        stopActions.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+            self.favouritesTableView.editing = false
+        })
+        
+        self.presentViewController(stopActions, animated: true, completion: nil)
+        
+    }
+    
+    func handleDistanceSelected(stop: Stops, distance: Double) -> Void{
+        sharedTransport.addTrackingStop(stop, forService: nil, withDistance: distance)
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        println("Added \(stop.stopName) stop to trackingStops")
+        
+        self.favouritesTableView.editing = false
+    }
     
     func refreshTableViewCells(timer:NSTimer) {
         if sharedTransport.centerLocation == nil {
@@ -196,6 +227,15 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         var item = sharedTransport.favouriteStops[indexPath.row]
         var actions = NSMutableArray()
         
+        var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            var selectedStop = self.sharedTransport.favouriteStops[indexPath.row]
+            
+            self.showStopOptions(selectedStop)
+            
+        })
+        
+        setDestinationAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)//UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
         
         var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
@@ -220,6 +260,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         deleteAction.backgroundColor = UIColor(red: 243/255, green: 78/255, blue: 12/255, alpha: 1.0)
     
         actions.addObject(deleteAction)
+        actions.addObject(setDestinationAction)
         
         return actions as [AnyObject]?
     }

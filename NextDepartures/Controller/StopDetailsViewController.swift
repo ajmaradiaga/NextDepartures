@@ -100,6 +100,11 @@ class StopDetailsViewController: UITableViewController {
         }
     }
     
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+    }
+    
+    
     func fetchData(sender:AnyObject?) {
         if (self.isViewLoaded() && self.view.window != nil) {
             // viewController is visible
@@ -321,6 +326,8 @@ class StopDetailsViewController: UITableViewController {
         
         reminderAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)
         
+        /*
+        
         var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
             var timeTableItem = self.timetableElements![indexPath.row]
@@ -328,9 +335,11 @@ class StopDetailsViewController: UITableViewController {
             self.performSegueWithIdentifier("showRouteDetails", sender: self.tableView.cellForRowAtIndexPath(indexPath))
         })
 
-        setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
+        setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8) 
+        
+        */
 
-        actions.addObject(setDestinationAction)
+        //actions.addObject(setDestinationAction)
         actions.addObject(reminderAction)
         
         return actions as [AnyObject]?

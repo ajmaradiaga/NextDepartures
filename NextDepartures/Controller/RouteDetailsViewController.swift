@@ -324,34 +324,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
-        /*
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-        
-        let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
-        
-        let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        
-        shareMenu.addAction(twitterAction)
-        shareMenu.addAction(cancelAction)
-        
-        
-        self.presentViewController(shareMenu, animated: true, completion: nil)
-        })
-        */
         
         var actions = NSMutableArray()
-        
-        /*
-        var reminderAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Reminder" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            var stop = self.stopsOnLine![indexPath.row]
-            
-            self.showStopOptions(stop)
-        })
-        
-        reminderAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)
-        */
         
         var setDestinationAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Set Destination" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
@@ -363,11 +337,9 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             
         })
         
-        setDestinationAction.backgroundColor = UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
+        setDestinationAction.backgroundColor = UIColor(red: 171/255, green: 73/255, blue: 188/255, alpha: 1.0)//UIColor(red: 240/255, green: 79/255, blue: 27/255, alpha: 0.8)
         
-        //actions.addObject(reminderAction)
         actions.addObject(setDestinationAction)
-        
         
         return actions as [AnyObject]?
     }

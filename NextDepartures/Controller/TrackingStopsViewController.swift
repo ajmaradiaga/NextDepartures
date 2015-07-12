@@ -13,6 +13,13 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBOutlet weak var trackingTableView: UITableView!
     
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightMainTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftSubTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightSubTextConstraint: NSLayoutConstraint!
+    
     var scheduledTimer = NSTimer()
     var trackingActions : UIAlertController!
     var trackingColor = UIColor(red: 170/255.0, green: 74/255, blue: 188/255, alpha: 1.0)
@@ -26,6 +33,39 @@ class TrackingStopsViewController: UIViewController, UITableViewDelegate, UITabl
         
         //Timer that refresh the time value in the TableView
         self.scheduledTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("refreshTableViewCells:"), userInfo: nil, repeats: true)
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        var labelValue :CGFloat = leftMainTextConstraint.constant
+        //var imageTopValue :CGFloat = topImageConstraint.constant
+        var imageWidthHeight : CGFloat = imageWidthConstraint.constant
+        
+        println(UIScreen.mainScreen().bounds.size.width)
+        println(UIScreen.mainScreen().bounds.size.height)
+        
+        if (UIScreen.mainScreen().bounds.size.width > 375.0) {
+            labelValue = 50.0
+        } else if (UIScreen.mainScreen().bounds.size.width < 375.0) {
+            labelValue = 10.0
+            //    imageTopValue = 28.0
+        }
+        
+        //Handle < iPhone 6
+        if (UIScreen.mainScreen().bounds.size.height < 559.0) {
+            imageWidthHeight = 143.0
+        }
+        
+        
+        leftMainTextConstraint.constant = labelValue
+        rightMainTextConstraint.constant = labelValue
+        
+        leftSubTextConstraint.constant = labelValue
+        rightSubTextConstraint.constant = labelValue
+        
+        imageHeightConstraint.constant = imageWidthHeight
+        imageWidthConstraint.constant = imageWidthHeight
     }
 
     override func didReceiveMemoryWarning() {

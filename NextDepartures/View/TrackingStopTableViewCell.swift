@@ -16,6 +16,10 @@ class TrackingStopTableViewCell: UITableViewCell {
     @IBOutlet weak var stopDetailsLabel : UILabel!
     @IBOutlet weak var trackingDistanceLabel : UILabel!
     @IBOutlet weak var circleImage: UIImageView!
+    @IBOutlet weak var transportImage: UIImageView!
+    
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     var trackingStop : TrackingStop?
     
@@ -50,19 +54,35 @@ class TrackingStopTableViewCell: UITableViewCell {
         enabledSwitch!.on = item.enabled
         stopDetailsLabel.text = item.stop.stopName
         
-        var tm = PTVClient.TransportMode.transportModeFromString(item.timetable.transportType)
-        
-        if tm == .Train || tm == .VLine {
-            serviceNumberLabel!.text = Helper.getInitials(item.timetable.line.lineNumber)
-            serviceNumberLabel!.textColor = UIColor.whiteColor()
+        if item.timetable != nil {
+            
+            circleImage!.hidden = false
+            transportImage!.hidden = true
+            transportImage!.image = PTVClient.sharedInstance().clearCircle
+            
+            var tm = PTVClient.TransportMode.transportModeFromString(item.timetable!.transportType)
+            if tm == .Train || tm == .VLine {
+                serviceNumberLabel!.text = Helper.getInitials(item.timetable!.line.lineNumber)
+                serviceNumberLabel!.textColor = UIColor.whiteColor()
+            } else {
+                serviceNumberLabel!.text = item.timetable!.line.lineNumber
+                serviceNumberLabel!.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable!.transportType)
+            }
+            
+            if circleImage != nil {
+                circleImage!.image = PTVClient.TransportMode.getImageForTransportMode(tm)
+            }
         } else {
-            serviceNumberLabel!.text = item.timetable.line.lineNumber
-            serviceNumberLabel!.textColor = PTVClient.TransportMode.colorForTransportType(item.timetable.transportType)
+            serviceNumberLabel!.text = ""
+            serviceNumberLabel!.textColor = UIColor.whiteColor()
+            
+            circleImage!.hidden = true
+            circleImage!.image = PTVClient.sharedInstance().clearCircle
+            
+            transportImage!.hidden = false
+            transportImage!.image = UIImage(named:PTVClient.TransportMode.imageNameForTransportType(item.stop.transportType))
         }
         
-        if circleImage != nil {
-            circleImage!.image = PTVClient.TransportMode.getImageForTransportMode(tm)
-        }
         /*
         if serviceNumberLabel != nil {
             serviceNumberLabel!.text = item.timetable.line.lineNumber

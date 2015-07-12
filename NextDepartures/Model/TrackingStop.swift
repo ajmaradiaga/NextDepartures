@@ -20,7 +20,7 @@ class TrackingStop : NSManagedObject, Printable {
         static let Enabled = "enabled"
     }
     
-    @NSManaged var timetable : Timetable
+    @NSManaged var timetable : Timetable?
     @NSManaged var stop : Stops
     @NSManaged var trackingDistance : Double
     @NSManaged var enabled : Bool
@@ -38,7 +38,7 @@ class TrackingStop : NSManagedObject, Printable {
         self.trackingDistance = (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue
         self.enabled = (dictionary[Keys.Enabled] as! Bool)
         self.stop = dictionary[Keys.Stop] as! Stops
-        self.timetable = dictionary[Keys.Timetable] as! Timetable
+        self.timetable = dictionary[Keys.Timetable] as? Timetable
     }
     
     class func retrieveTrackingStop(dictionary: [String : AnyObject?], context: NSManagedObjectContext) -> TrackingStop {
@@ -46,15 +46,20 @@ class TrackingStop : NSManagedObject, Printable {
         let fetchRequest = NSFetchRequest(entityName: "TrackingStop")
         var error : NSError?
         
-        fetchRequest.predicate = NSPredicate(format: "\(Keys.TrackingDistance) == %f and \(Keys.Stop).\(Stops.Keys.StopId) == %i and \(Keys.Timetable).\(Timetable.Keys.RunId) == %i", (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue,(dictionary[Keys.Stop] as! Stops).stopId, (dictionary[Keys.Timetable] as! Timetable).runId)
+        if dictionary[Keys.Timetable] is Timetable {
+            fetchRequest.predicate = NSPredicate(format: "\(Keys.TrackingDistance) == %f and \(Keys.Stop).\(Stops.Keys.StopId) == %i and \(Keys.Timetable).\(Timetable.Keys.RunId) == %i", (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue,(dictionary[Keys.Stop] as! Stops).stopId, (dictionary[Keys.Timetable] as! Timetable).runId)
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "\(Keys.Stop).\(Stops.Keys.StopId) == %i and \(Keys.Timetable) == nil", (dictionary[Keys.Stop] as! Stops).stopId)
+        }
         
         //println(context.countForFetchRequest(fetchRequest, error: &error))
         
         if context.countForFetchRequest(fetchRequest, error: &error) > 0 {
             var retVal = context.executeFetchRequest(fetchRequest, error: &error)!.last as! TrackingStop
-            retVal.timetable = dictionary[Keys.Timetable] as! Timetable
+            retVal.timetable = dictionary[Keys.Timetable] as? Timetable
             retVal.enabled = (dictionary[Keys.Enabled] as! Bool)
             retVal.stop = (dictionary[Keys.Stop] as! Stops)
+            retVal.trackingDistance = (dictionary[Keys.TrackingDistance] as! NSNumber).doubleValue
         
             return retVal
         } else {

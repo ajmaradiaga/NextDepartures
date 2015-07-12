@@ -415,7 +415,7 @@ class TransportManager: NSObject, CLLocationManagerDelegate, NSFetchedResultsCon
         return newTrackingSvc
     }
     
-    func addTrackingStop(stop: Stops, forService service: Timetable, withDistance distance: Double) -> TrackingStop {
+    func addTrackingStop(stop: Stops, forService service: Timetable?, withDistance distance: Double) -> TrackingStop {
         let trackingStopInformation: [String: AnyObject?] = [
             TrackingStop.Keys.Stop : stop,
             TrackingStop.Keys.TrackingDistance : distance,
