@@ -228,7 +228,9 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 self.handleDistanceSelected(1000)
                 })
             
-            stopActions.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            stopActions.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+                self.setViewInNormalState()
+            })
             
             self.presentViewController(stopActions, animated: true, completion: nil)
         } else {
@@ -250,14 +252,20 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         CoreDataStackManager.sharedInstance().saveContext()
             
-            println("Added \(selectedStop.stopName) stop to trackingStops")
+        println("Added \(selectedStop.stopName) stop to trackingStops")
         
+        setViewInNormalState()
+    }
+    
+    func setViewInNormalState() {
         if mapIsVisible {
             routeMap.deselectAnnotation(selectedAnnotation, animated: false)
         } else {
             routeTable.editing = false
+            if routeTable.indexPathForSelectedRow() != nil {
+                routeTable.deselectRowAtIndexPath(routeTable.indexPathForSelectedRow()!, animated: true)
+            }
         }
-        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -315,6 +323,10 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.showStopOptions(self.stopsOnLine![indexPath.row])
     }
     
     //MARK: TableViewDelegate
