@@ -326,7 +326,9 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.showStopOptions(self.stopsOnLine![indexPath.row])
+        self.selectedStop = self.stopsOnLine![indexPath.row]
+        
+        self.showStopOptions(self.selectedStop)
     }
     
     //MARK: TableViewDelegate
